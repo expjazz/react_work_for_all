@@ -8,7 +8,7 @@ const signUpUser = createAsyncThunk('user/signup', async thunkAPI => {
     withCredentials: true,
     data: {
       user: {
-        email: 'thetokenworkshaha@gmail.com',
+        email: 'thetoke?asdad@gmail.com',
         password: 'foobar',
       },
       candidate: {
