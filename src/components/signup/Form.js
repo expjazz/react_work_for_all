@@ -67,7 +67,7 @@ const Form = () => {
   });
   return (
     <StyledForm onSubmit={formik.handleSubmit}>
-      {redirect ? <Redirect to={`/users/${currentUser.id}`} /> : ''}
+      {redirect ? <Redirect to="/users/user" /> : ''}
       <div className="mb-4">
         <label htmlFor="name">Name</label>
         <input type="text" id="name" onChange={formik.handleChange} value={formik.values.name} />
