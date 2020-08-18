@@ -15,11 +15,9 @@ const StyledUserPage = styled.div.attrs({
   className: 'grid',
 })``;
 const UserPage = () => {
-  const { path, url } = useRouteMatch();
-  console.log(path);
+  const { path } = useRouteMatch();
 
   const currentUser = useSelector(state => state.users.currentUser);
-  const match = useRouteMatch();
   const [currentFocus, setCurrentFocus] = useState({ first: true, second: false });
   const handleFocus = val => {
     if (val.target.innerText === 'Look for Jobs') {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { Link, useRouteMatch } from 'react-router-dom';
@@ -27,17 +27,17 @@ const SideNav = props => {
   return (
     <StyledSideNav>
       <div className="linkList">
-        <div className={first ? 'one' : ''} onClick={handleFocus}>
+        <div className={first ? 'one' : ''}>
 
-          <Link to="/users/user">
+          <Link to="/users/user" onClick={handleFocus}>
             <p>
               {currentUser.email}
             </p>
           </Link>
         </div>
-        <div className={second ? 'one' : ''} onClick={handleFocus}>
+        <div className={second ? 'one' : ''}>
 
-          <Link to={`${url}/rendering`}>
+          <Link to={`${url}/rendering`} onClick={handleFocus}>
             Look for Jobs
           </Link>
         </div>
