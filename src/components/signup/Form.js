@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import usersActions from '../../actions/users';
 
 const StyledForm = styled.form.attrs({
@@ -25,6 +26,8 @@ const StyledForm = styled.form.attrs({
   }
 `;
 const Form = () => {
+  const currentUser = useSelector(state => state.users.currentUser);
+  const [redirect, setRedirect] = useState(false);
   const { signUpUser } = usersActions;
   const dispatch = useDispatch();
   const formik = useFormik({
@@ -59,10 +62,12 @@ const Form = () => {
 
       };
       dispatch(signUpUser(newObj));
+      setRedirect(true);
     },
   });
   return (
     <StyledForm onSubmit={formik.handleSubmit}>
+      {redirect ? <Redirect to={`/users/${currentUser.id}`} /> : ''}
       <div className="mb-4">
         <label htmlFor="name">Name</label>
         <input type="text" id="name" onChange={formik.handleChange} value={formik.values.name} />
