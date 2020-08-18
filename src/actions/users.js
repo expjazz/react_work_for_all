@@ -30,7 +30,6 @@ const checkLoggedUser = createAsyncThunk('user/checkloggeduser', async thunkAPI 
   };
 
   const data = await axios(options);
-  console.log(data.data);
   return data.data;
 });
 

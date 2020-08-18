@@ -6,7 +6,7 @@ const { signUpUser, checkLoggedUser } = usersActions;
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
-    email: '',
+    currentUser: '',
     status: 'idlee',
   },
   reducers: {
@@ -19,7 +19,7 @@ export const userSlice = createSlice({
 
     [checkLoggedUser.pending]: (state, action) => { state.status = 'loading'; },
 
-    [checkLoggedUser.fulfilled]: (state, action) => ({ ...state, status: 'fullfiled', current: action.payload }),
+    [checkLoggedUser.fulfilled]: (state, action) => ({ ...state, status: 'fullfiled', currentUser: { ...action.payload } }),
   },
 });
 
