@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import tw from 'tailwind.macro';
 import SearchForm from './SearchForm';
+import SignButtons from './SignButtons';
 
 const StyledInner = styled.div.attrs({
   className: 'w-100 grid h-full',
@@ -46,6 +47,7 @@ export default function InnerJumbotrom() {
         </div>
       </div>
       <SearchForm />
+      <SignButtons />
     </StyledInner>
   );
 }
