@@ -1,20 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const signUpUser = createAsyncThunk('user/signup', async thunkAPI => {
+const signUpUser = createAsyncThunk('user/signup', async (args, thunkAPI) => {
+  console.log(args);
   const options = {
     method: 'POST',
     url: 'http://localhost:3000/signup',
     withCredentials: true,
-    data: {
-      user: {
-        email: 'rickss@gmail.com',
-        password: 'foobar',
-      },
-      admin: {
-        name: 'Rick Sanchez',
-      },
-    },
+    data: args,
   };
   const data = await axios(options);
   return data;

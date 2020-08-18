@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import usersActions from '../../actions/users';
 
 const StyledForm = styled.form.attrs({
   className: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4',
@@ -23,6 +25,8 @@ const StyledForm = styled.form.attrs({
   }
 `;
 const Form = () => {
+  const { signUpUser } = usersActions;
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -43,6 +47,18 @@ const Form = () => {
     }),
     onSubmit: values => {
       console.log(values);
+      const { email, name, password } = values;
+      const newObj = {
+        user: {
+          email,
+          password,
+        },
+        candidate: {
+          name,
+        },
+
+      };
+      dispatch(signUpUser(newObj));
     },
   });
   return (
