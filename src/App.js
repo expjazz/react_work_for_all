@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import signUpUser from './actions/users';
+import usersActions from './actions/users';
 
 const StyledApp = styled.div.attrs({
   className: 'w-full bg-red-800',
@@ -9,9 +9,11 @@ const StyledApp = styled.div.attrs({
 
 `;
 function App() {
+  const { signUpUser, checkLoggedUser } = usersActions;
+
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(signUpUser.signUpUser());
+    dispatch(checkLoggedUser());
   }, [dispatch]);
   return <StyledApp className="App">test</StyledApp>;
 }

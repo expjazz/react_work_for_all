@@ -8,11 +8,11 @@ const signUpUser = createAsyncThunk('user/signup', async thunkAPI => {
     withCredentials: true,
     data: {
       user: {
-        email: 'thetoke?asdad@gmail.com',
+        email: 'rickss@gmail.com',
         password: 'foobar',
       },
-      candidate: {
-        name: 'postman',
+      admin: {
+        name: 'Rick Sanchez',
       },
     },
   };
@@ -20,4 +20,18 @@ const signUpUser = createAsyncThunk('user/signup', async thunkAPI => {
   return data;
 });
 
-export default { signUpUser };
+const checkLoggedUser = createAsyncThunk('user/checkloggeduser', async thunkAPI => {
+  const options = {
+
+    method: 'GET',
+    url: 'http://localhost:3000/loggeduser',
+    withCredentials: true,
+
+  };
+
+  const data = await axios(options);
+  console.log(data.data);
+  return data.data;
+});
+
+export default { signUpUser, checkLoggedUser };
