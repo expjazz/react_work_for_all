@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import tw from 'tailwind.macro';
+import SearchForm from './SearchForm';
 
 const StyledInner = styled.div.attrs({
   className: 'w-100 grid h-full',
@@ -44,6 +45,7 @@ export default function InnerJumbotrom() {
           </p>
         </div>
       </div>
+      <SearchForm />
     </StyledInner>
   );
 }
