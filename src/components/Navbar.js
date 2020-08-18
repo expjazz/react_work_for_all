@@ -1,16 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const StyledNav = styled.nav.attrs({
-  className: 'w-100',
+  className: 'w-100 px-64',
 })`
-  background: ${props => props.theme.green};
+  background: ${props => props.theme.white};
 `;
 
 export default function Navbar() {
   return (
     <StyledNav>
-      Navbar
+      <div className="right">
+        <Link to="/">
+          About Us
+        </Link>
+        <Link to="/">
+          Candidate
+        </Link>
+        <Link to="/">
+          Company
+        </Link>
+      </div>
     </StyledNav>
   );
 }

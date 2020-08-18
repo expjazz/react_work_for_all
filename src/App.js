@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import styled, { ThemeProvider } from 'styled-components';
 import usersActions from './actions/users';
 import RouteFile from './components/RouteFile';
-import Navbar from './components/Navbar';
 import theme from './components/theme';
 
 const StyledApp = styled.div.attrs({
@@ -24,7 +23,6 @@ function App() {
     <StyledApp className="App">
       <ThemeProvider theme={theme}>
 
-        <Navbar />
         <RouteFile />
       </ThemeProvider>
     </StyledApp>
