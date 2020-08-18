@@ -7,6 +7,10 @@ const StyledRight = styled.div.attrs({})`
 & {
   .top {
     ${tw`flex justify-center content-center flex-col items-center`}
+    .title {
+      ${tw`text-3xl text-center`}
+    }
+
     p {
       ${tw`relative`}
       :before {
@@ -33,7 +37,13 @@ const StyledRight = styled.div.attrs({})`
 const Right = () => (
   <StyledRight>
     <div className="top">
-      <h3 className="title">Sign up to find your  dream job</h3>
+      <h3 className="title">
+        Sign up
+        {' '}
+        <br />
+        {' '}
+        to find your  dream job
+      </h3>
       <p>or</p>
     </div>
     <Form />

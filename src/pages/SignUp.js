@@ -4,7 +4,7 @@ import Left from '../components/signup/Left';
 import Right from '../components/signup/Right';
 
 const StyledSignUp = styled.div.attrs({
-  className: 'w-full grid grid-flow-col h-screen',
+  className: 'w-full grid grid-flow-col grid-cols-2 h-screen',
 })`
 
 `;
