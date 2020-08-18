@@ -25,7 +25,7 @@ const SignButtons = () => (
       Log in for more
     </Link>
 
-    <Link to="/">
+    <Link to="/signup">
       Sign Up
     </Link>
   </StyledCont>
