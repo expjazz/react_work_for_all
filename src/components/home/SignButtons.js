@@ -28,6 +28,7 @@ const SignButtons = () => (
     <Link to="/signup">
       Sign Up
     </Link>
+
   </StyledCont>
 );
 

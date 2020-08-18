@@ -17,6 +17,10 @@ const StyledForm = styled.form.attrs({
       ${tw`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
     }
   }
+
+  button {
+    ${tw`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+  }
 `;
 const Form = () => {
   const formik = useFormik({
@@ -42,23 +46,48 @@ const Form = () => {
     },
   });
   return (
-    <StyledForm>
+    <StyledForm onSubmit={formik.handleSubmit}>
       <div className="mb-4">
         <label htmlFor="name">Name</label>
         <input type="text" id="name" onChange={formik.handleChange} value={formik.values.name} />
+        {formik.errors.name ? (
+          <div>
+            {formik.errors.name}
+          </div>
+        ) : ''}
       </div>
       <div className="mb-4">
-        <label htmlFor="name">Email</label>
+        <label htmlFor="email">Email</label>
         <input type="email" id="email" onChange={formik.handleChange} value={formik.values.email} />
+        {formik.errors.email ? (
+          <div>
+            {formik.errors.email}
+          </div>
+        ) : ''}
+
       </div>
       <div className="mb-4">
         <label htmlFor="name">Password</label>
         <input type="password" id="password" onChange={formik.handleChange} value={formik.values.password} />
+        {formik.errors.password ? (
+          <div>
+            {formik.errors.password}
+          </div>
+        ) : ''}
+
       </div>
       <div className="mb-4">
         <label htmlFor="passwordConfirmation">Confirm Password</label>
         <input type="password" id="passwordConfirmation" onChange={formik.handleChange} value={formik.values.passwordConfirmation} />
+        {formik.errors.passwordConfirmation ? (
+          <div>
+            {formik.errors.passwordConfirmation}
+          </div>
+        ) : ''}
+
       </div>
+      <button type="submit">Submit</button>
+
     </StyledForm>
   );
 };
