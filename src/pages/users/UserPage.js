@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { useSelector } from 'react-redux';
@@ -20,23 +20,28 @@ const UserPage = () => {
 
   const currentUser = useSelector(state => state.users.currentUser);
   const match = useRouteMatch();
-  console.log(`${path}/:components`);
+  const [currentFocus, setCurrentFocus] = useState({ first: true, second: false });
+  const handleFocus = val => {
+    if (val.target.innerText === 'Look for Jobs') {
+      setCurrentFocus({ first: false, second: true });
+    } else {
+      setCurrentFocus({ first: true, second: false });
+    }
+  };
 
   return (
     <div>
       <StyledUserPage>
-        <SideNav>
+        <SideNav focus={currentFocus} handleFocus={handleFocus}>
           haha
         </SideNav>
 
         <Switch>
           <Route exact path={`${path}/`}>
-            <div className="content col-start-4 col-end-12">
+            <div className="content col-start-3 col-end-12">
 
-              {currentUser.email}
-              <Link to={`${url}/rendering`}>
-                Curriculumasd
-              </Link>
+              some content
+
             </div>
           </Route>
           <Route path={`${path}/:topicId`}>
