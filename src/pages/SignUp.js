@@ -1,12 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import Left from '../components/signup/Left';
+import Right from '../components/signup/Right';
 
 const StyledSignUp = styled.div.attrs({
-  className: 'w-full',
-})``;
+  className: 'w-full grid grid-flow-col h-screen',
+})`
+
+`;
 const SignUp = () => (
   <StyledSignUp>
-    signed  up
+    <Left />
+    <Right />
   </StyledSignUp>
 );
 
