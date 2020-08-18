@@ -1,16 +1,19 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import usersActions from './actions/users';
 import RouteFile from './components/RouteFile';
 import Navbar from './components/Navbar';
+import theme from './components/theme';
 
 const StyledApp = styled.div.attrs({
   className: 'w-full',
 })`
 
 `;
+
 function App() {
+  console.log(theme);
   const { checkLoggedUser } = usersActions;
 
   const dispatch = useDispatch();
@@ -19,8 +22,11 @@ function App() {
   }, [dispatch]);
   return (
     <StyledApp className="App">
-      <Navbar />
-      <RouteFile />
+      <ThemeProvider theme={theme}>
+
+        <Navbar />
+        <RouteFile />
+      </ThemeProvider>
     </StyledApp>
   );
 }
