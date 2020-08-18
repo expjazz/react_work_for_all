@@ -6,12 +6,14 @@ import {
   Switch,
   Route,
   Link,
-  useParams,
   useRouteMatch,
 } from 'react-router-dom';
 import Curriculum from './Curriculum';
+import SideNav from '../../components/user/SideNav';
 
-const StyledUserPage = styled.div.attrs({})``;
+const StyledUserPage = styled.div.attrs({
+  className: 'grid',
+})``;
 const UserPage = () => {
   const { path, url } = useRouteMatch();
   console.log(path);
@@ -23,18 +25,25 @@ const UserPage = () => {
   return (
     <div>
       <StyledUserPage>
-        {currentUser.email}
-        <Link to={`${url}/rendering`}>
-          Curriculumasd
-        </Link>
+        <SideNav>
+          haha
+        </SideNav>
+
+        <Switch>
+          <Route exact path={`${path}/`}>
+            <div className="content col-start-4 col-end-12">
+
+              {currentUser.email}
+              <Link to={`${url}/rendering`}>
+                Curriculumasd
+              </Link>
+            </div>
+          </Route>
+          <Route path={`${path}/:topicId`}>
+            <Curriculum />
+          </Route>
+        </Switch>
       </StyledUserPage>
-
-      <Switch>
-
-        <Route path={`${path}/:topicId`}>
-          <Curriculum />
-        </Route>
-      </Switch>
     </div>
   );
 };
