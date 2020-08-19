@@ -32,8 +32,10 @@ const StyledUserInfo = styled.div.attrs({
 `;
 const UserInfo = props => {
   const { currentUser } = props;
+
+  console.log('here');
   const { personalArr, addressArr } = useSelector(state => state.users.infoArrays);
-  const { curriculum } = currentUser;
+  const { curriculum } = useSelector(state => state.users);
   console.log(curriculum);
   return (
     <StyledUserInfo>
@@ -57,7 +59,7 @@ const UserInfo = props => {
         </div>
         <div className="infoList">
           <p>personal info</p>
-          { currentUser ? personalArr.map((info => (
+          { curriculum ? personalArr.map((info => (
             <p key={info}>
               {info}
               {' '}
@@ -69,7 +71,7 @@ const UserInfo = props => {
           <p>
             address
           </p>
-          { currentUser ? addressArr.map(info => (
+          { curriculum ? addressArr.map(info => (
             <p key={info}>
               {info}
               {' '}

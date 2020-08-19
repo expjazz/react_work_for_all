@@ -26,7 +26,9 @@ export const userSlice = createSlice({
 
     [checkLoggedUser.pending]: (state, action) => { state.status = 'loading'; },
 
-    [checkLoggedUser.fulfilled]: (state, action) => ({ ...state, status: 'fullfiled', currentUser: { user: action.payload.user, curriculum: action.payload.curriculum } }),
+    [checkLoggedUser.fulfilled]: (state, action) => ({
+      ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, curriculum: action.payload.curriculum,
+    }),
 
     [createCurriculum.pending]: (state, action) => { state.status = 'loading'; },
     [createCurriculum.fulfilled]: (state, action) => ({ ...state, status: 'fullfiled', curriculum: action.payload }),

@@ -16,6 +16,9 @@ const StyledUserPage = styled.div.attrs({
   className: 'grid',
 })``;
 const UserPage = () => {
+  const { curriculum } = useSelector(state => state.users);
+  console.log(curriculum);
+
   const { path } = useRouteMatch();
 
   const currentUser = useSelector(state => state.users.currentUser);
@@ -37,7 +40,7 @@ const UserPage = () => {
 
         <Switch>
           <Route exact path={`${path}/`}>
-            { currentUser.curriculum ? <UserInfo currentUser={currentUser} /> : <p>no curriculum</p> }
+            { curriculum.personal ? <UserInfo currentUser={currentUser} /> : <p>no curriculum</p> }
 
           </Route>
           <Route path={`${path}/edit`}>
