@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { useFormik } from 'formik';
@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import usersActions from '../../actions/users';
 import Input from '../common/Input';
+import PastJobs from './PastJobs';
 
 const StyledCurriculumForm = styled.form.attrs({
   className: 'bg-white rounded px-8 pt-6 pb-8 mb-4',
@@ -25,11 +26,29 @@ const StyledCurriculumForm = styled.form.attrs({
     ${tw`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
   }
 `;
+
+const StyledPastJobs = styled.div`
+
+      background: red;
+
+`;
 const CurriculumForm = () => {
   const currentUser = useSelector(state => state.users.currentUser);
   const [redirect, setRedirect] = useState(false);
   const { signUpUser } = usersActions;
   const dispatch = useDispatch();
+  const [pastJobsState, setPastJobsState] = useState([]);
+  const [allRefs, setAllRefs] = useState([]);
+  const addNewJob = () => {
+    const inputs = {
+      start: '',
+      end: '',
+      name: '',
+    };
+    const newRef = React.createRef();
+    setAllRefs([...allRefs, newRef]);
+    setPastJobsState([...pastJobsState, inputs]);
+  };
   const formik = useFormik({
     initialValues: {
       about_me: '',
@@ -95,6 +114,11 @@ const CurriculumForm = () => {
         <Input label={field} key={field} id={field} onChange={formik.handleChange} labelValue={field} value={formik.values[field]} errors={formik.errors[field]} />
 
       ))}
+
+      <button type="button" onClick={addNewJob}> Add a new past job</button>
+      <StyledPastJobs>
+        {pastJobsState.map((pJ, index) => <PastJobs ref={allRefs[index]} key={`input${index}`} inputs={pJ} />)}
+      </StyledPastJobs>
 
       <div className="title">
         <h4>
