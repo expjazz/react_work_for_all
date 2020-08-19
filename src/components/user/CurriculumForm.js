@@ -14,7 +14,8 @@ const StyledCurriculumForm = styled.form.attrs({
       ${tw`block text-gray-700 text-sm font-bold mb-2`}
     }
 
-    input {
+    input,
+    textarea {
       ${tw`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
     }
   }
@@ -30,42 +31,67 @@ const CurriculumForm = () => {
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
-      name: '',
-      email: '',
-      password: '',
-      passwordConfirmation: '',
+      about_me: '',
+      children: 'data',
+      married: 'data',
+      cpf: 'data',
+      race: 'race',
+      nationality: 'data',
+      country: 'data',
+      cep: 'data',
+      state: 'data',
+      city: 'data',
+      hood: 'data',
+      street: 'data',
+      cel: 'data',
+      jobs: [],
     },
     validationSchema: Yup.object({
-      name: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
-      email: Yup.string().email('It needs to be a valid email').required('Please Enter your email'),
-      password: Yup.string().min(1, 'Needs to be bigger than 2 characters').required('Please Enter your password')
-        .matches(
-          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-          'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character',
-        ),
-      passwordConfirmation: Yup.string()
-        .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+      cpf: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
+      state: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
+      city: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
+      street: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
+      cell: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
+
     }),
     onSubmit: values => {
       console.log(values);
-      const { email, name, password } = values;
-      const newObj = {
-        user: {
-          email,
-          password,
-        },
-        candidate: {
-          name,
-        },
+      // const { email, name, password } = values;
+      // const newObj = {
+      //   user: {
+      //     email,
+      //     password,
+      //   },
+      //   candidate: {
+      //     name,
+      //   },
 
-      };
-      dispatch(signUpUser(newObj));
-      setRedirect(true);
+      // };
+      // dispatch(signUpUser(newObj));
+      // setRedirect(true);
     },
   });
   return (
-    <StyledCurriculumForm>
-      fomr
+    <StyledCurriculumForm onSubmit={formik.handleSubmit}>
+      <div className="mb-4">
+        <label htmlFor="about_me">About Me</label>
+        <textarea type="text-area" id="about_me" rows="4" cols="50" onChange={formik.handleChange} value={formik.values.about_me} />
+        {formik.errors.name ? (
+          <div>
+            {formik.errors.name}
+          </div>
+        ) : ''}
+      </div>
+
+      <div className="mb-4">
+        <label htmlFor="children">children</label>
+        <input type="text" id="children" onChange={formik.handleChange} value={formik.values.children} />
+        {formik.errors.name ? (
+          <div>
+            {formik.errors.name}
+          </div>
+        ) : ''}
+      </div>
     </StyledCurriculumForm>
   );
 };
