@@ -10,6 +10,24 @@ const StyledUserInfo = styled.div.attrs({
       ${tw`text-4xl`}
     }
   }
+
+  .middlebutton {
+    background: ${props => props.theme.green};
+    ${tw` rounded-full w-48 h-16 text-center flex items-center relative`}
+    :after {
+      content: '';
+      bottom: -12px;
+      left: 50%;
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      border-top: 12px solid ${props => props.theme.green};
+      position: absolute;
+    }
+
+    p {
+      ${tw`m-auto`}
+    }
+  }
 `;
 const UserInfo = props => {
   const { currentUser } = props;
@@ -28,7 +46,11 @@ const UserInfo = props => {
         some offer
       </div>
       <div className="bottom">
-        bottom
+        <div className="middlebutton">
+          <p>
+            Your Profile
+          </p>
+        </div>
       </div>
     </StyledUserInfo>
   );
