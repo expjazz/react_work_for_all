@@ -14,6 +14,7 @@ export const userSlice = createSlice({
     infoArrays: {
       personalArr: ['children', 'married', 'cpf', 'race', 'nationality'],
       addressArr: ['country', 'cep', 'state', 'city', 'hood', 'street', 'cel'],
+      compPersonalArr: ['cnpj', 'aboutUs', 'size'],
     },
   },
   reducers: {

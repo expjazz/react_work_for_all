@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
-import Form from './FormC';
+import FormC from './FormC';
 
 const StyledRight = styled.div.attrs({})`
 & {
@@ -46,7 +46,7 @@ const RightC = () => (
       </h3>
       <p>or</p>
     </div>
-    <Form />
+    <FormC />
   </StyledRight>
 );
 

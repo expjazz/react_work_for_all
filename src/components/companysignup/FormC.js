@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import usersActions from '../../actions/users';
+import Input from '../common/Input';
 
 const StyledForm = styled.form.attrs({
   className: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4',
@@ -47,17 +47,25 @@ const StyledForm = styled.form.attrs({
 //   }
 // }
 const FormC = () => {
-  const currentUser = useSelector(state => state.users.currentUser);
-  const { addressArr } = useSelector(state => state.users.infoArrays);
-  const [redirect, setRedirect] = useState(false);
-  const { signUpUser } = usersActions;
-  const dispatch = useDispatch();
+  const { addressArr, compPersonalArr } = useSelector(state => state.users.infoArrays);
+
   const formik = useFormik({
     initialValues: {
       name: '',
       email: '',
       password: '',
       passwordConfirmation: '',
+      header: '',
+      country: '',
+      cep: '',
+      state: '',
+      city: '',
+      hood: '',
+      street: '',
+      cel: '',
+      cnpj: '',
+      size: '',
+      aboutUs: '',
     },
     validationSchema: Yup.object({
       name: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
@@ -83,13 +91,13 @@ const FormC = () => {
         },
 
       };
-      dispatch(signUpUser(newObj));
-      setRedirect(true);
+      // dispatch(signUpUser(newObj));
+      // setRedirect(true);
     },
   });
   return (
     <StyledForm onSubmit={formik.handleSubmit}>
-      {redirect ? <Redirect to="/users/user" /> : ''}
+      {/* {redirect ? <Redirect to="/users/user" /> : ''} */}
       <div className="mb-4">
         <label htmlFor="name">Name</label>
         <input type="text" id="name" onChange={formik.handleChange} value={formik.values.name} />
@@ -129,6 +137,14 @@ const FormC = () => {
         ) : ''}
 
       </div>
+
+      {addressArr.map(field => (
+        <Input label={field} key={field} id={field} onChange={formik.handleChange} labelValue={field} value={formik.values[field]} errors={formik.errors[field]} />
+      ))}
+
+      {compPersonalArr.map(field => (
+        <Input label={field} key={field} id={field} onChange={formik.handleChange} labelValue={field} value={formik.values[field]} errors={formik.errors[field]} />
+      ))}
       <button type="submit">Submit</button>
 
     </StyledForm>
