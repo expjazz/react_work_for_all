@@ -91,6 +91,33 @@ const CurriculumForm = () => {
       // setRedirect(true);
     },
   });
+  const addJobChange = (e, curRef) => {
+    console.log('here');
+    console.log(e);
+    const y = allRefs.forEach((ref, ind) => {
+      if (ref === curRef) {
+        const copy = [...pastJobsState];
+        console.log(curRef.current);
+        const fields = curRef.current.querySelectorAll('input');
+        copy[ind] = {
+          start: fields[0].value,
+          end: fields[1].value,
+          name: fields[2].value,
+        };
+        setPastJobsState([...copy]);
+      }
+    });
+    // if (e.target.name === 'start') {
+    //   const newIn = { ...inputValues, start: e.target.value };
+    //   setInputValues(newIn);
+    // } else if (e.target.name === 'end') {
+    //   const newIn = { ...inputValues, end: e.target.value };
+    //   setInputValues(newIn);
+    // } else {
+    //   const newIn = { ...inputValues, name: e.target.value };
+    //   setInputValues(newIn);
+    // }
+  };
   const personalArr = ['children', 'married', 'cpf', 'race', 'nationality'];
   const addressArr = ['country', 'cep', 'state', 'city', 'hood', 'street', 'cel'];
   return (
@@ -117,7 +144,7 @@ const CurriculumForm = () => {
 
       <button type="button" onClick={addNewJob}> Add a new past job</button>
       <StyledPastJobs>
-        {pastJobsState.map((pJ, index) => <PastJobs ref={allRefs[index]} key={`input${index}`} inputs={pJ} />)}
+        {pastJobsState.map((pJ, index) => <PastJobs onChange={addJobChange} ref={allRefs[index]} key={`input${index}`} inputs={pJ} />)}
       </StyledPastJobs>
 
       <div className="title">
