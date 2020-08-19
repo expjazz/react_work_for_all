@@ -56,7 +56,7 @@ const UserInfo = props => {
           </p>
         </div>
         <div className="infoList">
-          <p>placeholder</p>
+          <p>personal info</p>
           { currentUser ? personalArr.map((info => (
             <p key={info}>
               {info}
@@ -64,6 +64,21 @@ const UserInfo = props => {
               {curriculum.personal[info]}
             </p>
           ))) : 'loading' }
+        </div>
+        <div className="addressList">
+          <p>
+            address
+          </p>
+          { currentUser ? addressArr.map(info => (
+            <p key={info}>
+              {info}
+              {' '}
+              :
+              {' '}
+              {curriculum.address[info]}
+              {' '}
+            </p>
+          )) : 'loading'}
         </div>
       </div>
     </StyledUserInfo>
