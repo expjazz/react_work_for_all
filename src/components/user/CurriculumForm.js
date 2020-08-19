@@ -1,0 +1,73 @@
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import tw from 'tailwind.macro';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import usersActions from '../../actions/users';
+
+const StyledCurriculumForm = styled.form.attrs({
+  className: 'bg-white rounded px-8 pt-6 pb-8 mb-4',
+})`
+  & {
+    label {
+      ${tw`block text-gray-700 text-sm font-bold mb-2`}
+    }
+
+    input {
+      ${tw`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+    }
+  }
+
+  button {
+    ${tw`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+  }
+`;
+const CurriculumForm = () => {
+  const currentUser = useSelector(state => state.users.currentUser);
+  const [redirect, setRedirect] = useState(false);
+  const { signUpUser } = usersActions;
+  const dispatch = useDispatch();
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      email: '',
+      password: '',
+      passwordConfirmation: '',
+    },
+    validationSchema: Yup.object({
+      name: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
+      email: Yup.string().email('It needs to be a valid email').required('Please Enter your email'),
+      password: Yup.string().min(1, 'Needs to be bigger than 2 characters').required('Please Enter your password')
+        .matches(
+          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+          'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character',
+        ),
+      passwordConfirmation: Yup.string()
+        .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+    }),
+    onSubmit: values => {
+      console.log(values);
+      const { email, name, password } = values;
+      const newObj = {
+        user: {
+          email,
+          password,
+        },
+        candidate: {
+          name,
+        },
+
+      };
+      dispatch(signUpUser(newObj));
+      setRedirect(true);
+    },
+  });
+  return (
+    <StyledCurriculumForm>
+      fomr
+    </StyledCurriculumForm>
+  );
+};
+
+export default CurriculumForm;

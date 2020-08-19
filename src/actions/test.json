@@ -1,24 +1,25 @@
-{"curriculum": {"candidateAddress": {
-  "country": "data",
-  "cep": "data",
-  "state": "data",
-  "city": "data",
-  "hood": "data",
-  "street": "data",
-  "cel": "data"
-
+{
+  "curriculum": {
+    "candidate_address": {
+      "country": "data",
+      "cep": "data",
+      "state": "data",
+      "city": "data",
+      "hood": "data",
+      "street": "data",
+      "cel": "data"
+    },
+    "candidate_personal": {
+      "children": "data",
+      "married": "data",
+      "cpf": "data",
+      "race": "race",
+      "nationality": "data"
+    },
+    "jobs": [
+      { "start": "somedate", "end": "somedate", "name": "sumefuncion" },
+      { "start": "two", "end": "two", "name": "two" }
+    ],
+    "about_me": "not much"
+  }
 }
-,
-"candidatePersonals": {
-"children": "data",
-"married": "data",
-"cpf": "data",
-"race": "race",
-"nationality": "data"
-},
-"jobs": [
-{"start": "somedate",
-"end": "somedate",
-"name": "sumefuncion"}
-]
-}}
