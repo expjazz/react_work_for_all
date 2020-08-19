@@ -22,6 +22,7 @@ const UserPage = () => {
   const { path } = useRouteMatch();
 
   const currentUser = useSelector(state => state.users.currentUser);
+  console.log(currentUser);
   const [currentFocus, setCurrentFocus] = useState({ first: true, second: false });
   const handleFocus = val => {
     if (val.target.innerText === 'Look for Jobs') {

@@ -18,7 +18,7 @@ export default function Navbar() {
         <Link to="/users/user">
           Candidate
         </Link>
-        <Link to="/">
+        <Link to="/companysignup">
           Company
         </Link>
       </div>

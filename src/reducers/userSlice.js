@@ -22,7 +22,7 @@ export const userSlice = createSlice({
   extraReducers: {
     [signUpUser.pending]: (state, action) => { state.status = 'loading'; },
 
-    [signUpUser.fulfilled]: (state, action) => ({ ...state, status: 'fullfiled', current: action.payload }),
+    [signUpUser.fulfilled]: (state, action) => ({ ...state, status: 'fullfiled', currentUser: { user: action.payload } }),
 
     [checkLoggedUser.pending]: (state, action) => { state.status = 'loading'; },
 

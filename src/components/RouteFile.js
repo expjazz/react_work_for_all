@@ -4,6 +4,7 @@ import Home from '../pages/Home';
 import SignUp from '../pages/SignUp';
 import UserPage from '../pages/users/UserPage';
 import Curriculum from '../pages/users/Curriculum';
+import CompanySignUp from '../pages/CompanySignUp';
 
 export default function RouteFile() {
   return (
@@ -15,6 +16,9 @@ export default function RouteFile() {
         </Route>
         <Route path="/signup">
           <SignUp />
+        </Route>
+        <Route path="/companysignup">
+          <CompanySignUp />
         </Route>
         <Route path="/users/user">
           <UserPage />
