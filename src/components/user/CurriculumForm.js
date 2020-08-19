@@ -73,8 +73,14 @@ const CurriculumForm = () => {
     },
   });
   const personalArr = ['children', 'married', 'cpf', 'race', 'nationality'];
+  const addressArr = ['country', 'cep', 'state', 'city', 'hood', 'street', 'cel'];
   return (
     <StyledCurriculumForm onSubmit={formik.handleSubmit}>
+      <div className="title">
+        <h4>
+          Personal info
+        </h4>
+      </div>
       <div className="mb-4">
         <label htmlFor="about_me">About Me</label>
         <textarea type="text-area" id="about_me" rows="4" cols="50" onChange={formik.handleChange} value={formik.values.about_me} />
@@ -86,6 +92,17 @@ const CurriculumForm = () => {
       </div>
 
       {personalArr.map(field => (
+        <Input label={field} key={field} id={field} onChange={formik.handleChange} labelValue={field} value={formik.values[field]} errors={formik.errors[field]} />
+
+      ))}
+
+      <div className="title">
+        <h4>
+          Address
+        </h4>
+      </div>
+
+      {addressArr.map(field => (
         <Input label={field} key={field} id={field} onChange={formik.handleChange} labelValue={field} value={formik.values[field]} errors={formik.errors[field]} />
 
       ))}
