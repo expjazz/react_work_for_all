@@ -12,6 +12,17 @@ const signUpUser = createAsyncThunk('user/signup', async (args, thunkAPI) => {
   return data;
 });
 
+const signUpUserCompany = createAsyncThunk('user/signup', async (args, thunkAPI) => {
+  const options = {
+    method: 'POST',
+    url: 'http://localhost:3000/company_details',
+    withCredentials: true,
+    data: args,
+  };
+  const data = await axios(options);
+  return data;
+});
+
 const checkLoggedUser = createAsyncThunk('user/checkloggeduser', async thunkAPI => {
   const options = {
 
@@ -25,4 +36,4 @@ const checkLoggedUser = createAsyncThunk('user/checkloggeduser', async thunkAPI 
   return data.data;
 });
 
-export default { signUpUser, checkLoggedUser };
+export default { signUpUser, checkLoggedUser, signUpUserCompany };

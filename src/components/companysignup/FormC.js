@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import userActions from '../../actions/users';
 import Input from '../common/Input';
 
 const StyledForm = styled.form.attrs({
@@ -25,28 +25,9 @@ const StyledForm = styled.form.attrs({
   }
 `;
 
-// {
-//   "user": {"email": "newroutsde23d2@gmail.com",
-//            "password": "foobar@2" },
-//   "company": {
-//       "name": "firstLOL",
-//       "header": "some general info",
-//       "company_address": {
-//           "country": "data",
-//       "cep": "data",
-//       "state": "data",
-//       "city": "data",
-//       "hood": "data",
-//       "street": "data",
-//       "cel": "data"
-//       }, "company_personal": {
-//           "cnpj": "data",
-//           "size": "size",
-//           "aboutUs": "data"
-//       }
-//   }
-// }
 const FormC = () => {
+  const { signUpUserCompany } = userActions;
+  const dispatch = useDispatch();
   const { addressArr, compPersonalArr } = useSelector(state => state.users.infoArrays);
 
   const formik = useFormik({
@@ -67,32 +48,46 @@ const FormC = () => {
       size: '',
       aboutUs: '',
     },
-    validationSchema: Yup.object({
-      name: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
-      email: Yup.string().email('It needs to be a valid email').required('Please Enter your email'),
-      password: Yup.string().min(1, 'Needs to be bigger than 2 characters').required('Please Enter your password')
-        .matches(
-          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-          'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character',
-        ),
-      passwordConfirmation: Yup.string()
-        .oneOf([Yup.ref('password'), null], 'Passwords must match'),
-    }),
+    // validationSchema: Yup.object({
+    //   name: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
+    //   email: Yup.string().email('It needs to be a valid email').required('Please Enter your email'),
+    //   password: Yup.string().min(1, 'Needs to be bigger than 2 characters').required('Please Enter your password')
+    //     .matches(
+    //       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+    //       'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character',
+    //     ),
+    //   passwordConfirmation: Yup.string()
+    //     .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+    // }),
     onSubmit: values => {
-      console.log(values);
-      const { email, name, password } = values;
+      const {
+        name, header, country, cep, state, city, hood, street, cel, cnpj, size, aboutUs, email, password,
+      } = values;
       const newObj = {
         user: {
           email,
           password,
         },
-        candidate: {
+        company: {
           name,
+          header,
+          company_address: {
+            country,
+            cep,
+            state,
+            city,
+            hood,
+            street,
+            cel,
+          },
+          company_personal: {
+            cnpj,
+            size,
+            aboutUs,
+          },
         },
-
       };
-      // dispatch(signUpUser(newObj));
-      // setRedirect(true);
+      dispatch(signUpUserCompany());
     },
   });
   return (

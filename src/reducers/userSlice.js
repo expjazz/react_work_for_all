@@ -4,7 +4,7 @@ import usersActions from '../actions/users';
 import curriculumActions from '../actions/curriculum';
 
 const { createCurriculum } = curriculumActions;
-const { signUpUser, checkLoggedUser } = usersActions;
+const { signUpUser, checkLoggedUser, signUpUserCompany } = usersActions;
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
@@ -29,6 +29,12 @@ export const userSlice = createSlice({
 
     [checkLoggedUser.fulfilled]: (state, action) => ({
       ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, curriculum: action.payload.curriculum,
+    }),
+
+    [signUpUserCompany.pending]: (state, action) => { state.status = 'loading'; },
+
+    [signUpUserCompany.fulfilled]: (state, action) => ({
+      ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, company: action.payload.curriculum,
     }),
 
     [createCurriculum.pending]: (state, action) => { state.status = 'loading'; },
