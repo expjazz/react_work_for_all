@@ -37,8 +37,7 @@ const UserPage = () => {
 
         <Switch>
           <Route exact path={`${path}/`}>
-
-            <UserInfo currentUser={currentUser} />
+            { currentUser.curriculum ? <UserInfo currentUser={currentUser} /> : <p>no curriculum</p> }
 
           </Route>
           <Route path={`${path}/edit`}>

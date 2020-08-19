@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
+import { useSelector } from 'react-redux';
 
 const StyledUserInfo = styled.div.attrs({
   className: 'content col-start-3 col-end-12 pt-10',
@@ -31,6 +32,9 @@ const StyledUserInfo = styled.div.attrs({
 `;
 const UserInfo = props => {
   const { currentUser } = props;
+  const { personalArr, addressArr } = useSelector(state => state.users.infoArrays);
+  const { curriculum } = currentUser;
+  console.log(curriculum);
   return (
     <StyledUserInfo>
       <div className="title">
@@ -50,6 +54,16 @@ const UserInfo = props => {
           <p>
             Your Profile
           </p>
+        </div>
+        <div className="infoList">
+          <p>placeholder</p>
+          { currentUser ? personalArr.map((info => (
+            <p key={info}>
+              {info}
+              {' '}
+              {curriculum.personal[info]}
+            </p>
+          ))) : 'loading' }
         </div>
       </div>
     </StyledUserInfo>
