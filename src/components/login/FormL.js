@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
@@ -45,8 +46,15 @@ const FormL = () => {
       passwordConfirmation: Yup.string()
         .oneOf([Yup.ref('password'), null], 'Passwords must match'),
     }),
-    onSubmit: values => {
-      console.log(values);
+    onSubmit: ({ email, password }) => {
+      const newObj = {
+        user: {
+          email,
+          password,
+        },
+      };
+      console.log(newObj);
+      dispatch(loginUser(newObj));
     },
   });
 
@@ -66,7 +74,7 @@ const FormL = () => {
 
       </div>
       <div className="mb-4">
-        <label htmlFor="name">Password</label>
+        <label htmlFor="password">Password</label>
         <input type="password" id="password" onChange={formik.handleChange} value={formik.values.password} />
         {formik.errors.password ? (
           <div>
