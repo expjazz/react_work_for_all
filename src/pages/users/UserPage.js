@@ -42,8 +42,11 @@ const UserPage = () => {
 
             </div>
           </Route>
-          <Route path={`${path}/:topicId`}>
+          <Route path={`${path}/edit`}>
             <Curriculum />
+          </Route>
+          <Route path={`${path}/:topicId`}>
+            <h2>haha</h2>
           </Route>
         </Switch>
       </StyledUserPage>

@@ -1,13 +1,16 @@
 /* eslint-disable import/prefer-default-export */
 import { createSlice } from '@reduxjs/toolkit';
 import usersActions from '../actions/users';
+import curriculumActions from '../actions/curriculum';
 
+const { createCurriculum } = curriculumActions;
 const { signUpUser, checkLoggedUser } = usersActions;
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
     currentUser: '',
     status: 'idlee',
+    curriculum: {},
   },
   reducers: {
 
@@ -19,7 +22,10 @@ export const userSlice = createSlice({
 
     [checkLoggedUser.pending]: (state, action) => { state.status = 'loading'; },
 
-    [checkLoggedUser.fulfilled]: (state, action) => ({ ...state, status: 'fullfiled', currentUser: { ...action.payload } }),
+    [checkLoggedUser.fulfilled]: (state, action) => ({ ...state, status: 'fullfiled', currentUser: { user: action.payload.user, curriculum: action.payload.curriculum } }),
+
+    [createCurriculum.pending]: (state, action) => { state.status = 'loading'; },
+    [createCurriculum.fulfilled]: (state, action) => ({ ...state, status: 'fullfiled', curriculum: action.payload }),
   },
 });
 

@@ -15,7 +15,7 @@ export default function Navbar() {
         <Link to="/">
           About Us
         </Link>
-        <Link to="/">
+        <Link to="/users/user">
           Candidate
         </Link>
         <Link to="/">

@@ -1,24 +1,18 @@
-{"curriculum": {"candidateAddress": {
-  "country": "data",
-  "cep": "data",
-  "state": "data",
-  "city": "data",
-  "hood": "data",
-  "street": "data",
-  "cel": "data"
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-}
-,
-"candidatePersonals": {
-"children": "data",
-"married": "data",
-"cpf": "data",
-"race": "race",
-"nationality": "data"
-},
-"jobs": [
-{"start": "somedate",
-"end": "somedate",
-"name": "sumefuncion"}
-]
-}}
+const createCurriculum = createAsyncThunk('curriculum/create', async (args, thunkAPI) => {
+  console.log(args);
+  const options = {
+    method: 'POST',
+    url: 'http://localhost:3000/curriculums',
+    withCredentials: true,
+    data: args,
+  };
+
+  const data = await axios(options);
+  console.log(data);
+  return data;
+});
+
+export default { createCurriculum };

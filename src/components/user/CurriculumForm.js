@@ -7,9 +7,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import usersActions from '../../actions/users';
 import Input from '../common/Input';
 import PastJobs from './PastJobs';
+import curriculumActions from '../../actions/curriculum';
 
 const StyledCurriculumForm = styled.form.attrs({
-  className: 'bg-white rounded px-8 pt-6 pb-8 mb-4',
+  className: 'bg-white rounded px-8 pt-6 pb-8 mb-4 w-full',
 })`
   & {
     label {
@@ -33,9 +34,8 @@ const StyledPastJobs = styled.div`
 
 `;
 const CurriculumForm = () => {
-  const currentUser = useSelector(state => state.users.currentUser);
+  const { createCurriculum } = curriculumActions;
   const [redirect, setRedirect] = useState(false);
-  const { signUpUser } = usersActions;
   const dispatch = useDispatch();
   const [pastJobsState, setPastJobsState] = useState([]);
   const [allRefs, setAllRefs] = useState([]);
@@ -104,6 +104,7 @@ const CurriculumForm = () => {
       console.log('here');
       console.log(values);
       console.log(newCurr);
+      dispatch(createCurriculum(newCurr));
       // const { email, name, password } = values;
       // const newObj = {
       //   user: {

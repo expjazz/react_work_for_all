@@ -31,15 +31,24 @@ const SideNav = props => {
 
           <Link to="/users/user" onClick={handleFocus}>
             <p>
-              {currentUser.email}
+              {currentUser.user.name}
             </p>
           </Link>
         </div>
+
         <div className={second ? 'one' : ''}>
 
-          <Link to={`${url}/rendering`} onClick={handleFocus}>
+          <Link to={`${url}/edit`} onClick={handleFocus}>
+            Edit your information
+          </Link>
+
+        </div>
+        <div className={second ? 'one' : ''}>
+
+          <Link to={`${url}/searchjobs`} onClick={handleFocus}>
             Look for Jobs
           </Link>
+
         </div>
 
       </div>
