@@ -21,7 +21,7 @@ const StyledCont = styled.div.attrs({
 `;
 const SignButtons = () => (
   <StyledCont>
-    <Link to="/">
+    <Link to="/login">
       Log in for more
     </Link>
 

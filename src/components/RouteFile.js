@@ -5,6 +5,7 @@ import SignUp from '../pages/SignUp';
 import UserPage from '../pages/users/UserPage';
 import Curriculum from '../pages/users/Curriculum';
 import CompanySignUp from '../pages/CompanySignUp';
+import Login from '../pages/Login';
 
 export default function RouteFile() {
   return (
@@ -16,6 +17,9 @@ export default function RouteFile() {
         </Route>
         <Route path="/signup">
           <SignUp />
+        </Route>
+        <Route path="/login">
+          <Login />
         </Route>
         <Route path="/companysignup">
           <CompanySignUp />

@@ -12,14 +12,15 @@ const signUpUser = createAsyncThunk('user/signup', async (args, thunkAPI) => {
   return data;
 });
 
-const signUpUserCompany = createAsyncThunk('user/signup', async (args, thunkAPI) => {
+const signUpUserCompany = createAsyncThunk('user/signupcompany', async (args, thunkAPI) => {
   const options = {
     method: 'POST',
     url: 'http://localhost:3000/company_details',
     withCredentials: true,
     data: args,
   };
-  const data = await axios(options);
+  const res = await axios(options);
+  const { data } = res;
   return data;
 });
 

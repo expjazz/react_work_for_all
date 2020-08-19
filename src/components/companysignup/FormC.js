@@ -87,7 +87,7 @@ const FormC = () => {
           },
         },
       };
-      dispatch(signUpUserCompany());
+      dispatch(signUpUserCompany(newObj));
     },
   });
   return (

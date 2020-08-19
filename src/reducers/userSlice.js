@@ -27,14 +27,23 @@ export const userSlice = createSlice({
 
     [checkLoggedUser.pending]: (state, action) => { state.status = 'loading'; },
 
-    [checkLoggedUser.fulfilled]: (state, action) => ({
-      ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, curriculum: action.payload.curriculum,
-    }),
+    [checkLoggedUser.fulfilled]: (state, action) => {
+      console.log(action.payload);
+      if (action.payload.companyInfo) {
+        return ({
+          ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, company: action.payload.companyInfo,
+        });
+      } if (action.payload.curriculum) {
+        return ({
+          ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, curriculum: action.payload.curriculum,
+        });
+      }
+    },
 
     [signUpUserCompany.pending]: (state, action) => { state.status = 'loading'; },
 
     [signUpUserCompany.fulfilled]: (state, action) => ({
-      ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, company: action.payload.curriculum,
+      ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, company: action.payload.companyInfo,
     }),
 
     [createCurriculum.pending]: (state, action) => { state.status = 'loading'; },
