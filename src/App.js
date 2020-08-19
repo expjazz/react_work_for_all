@@ -12,13 +12,13 @@ const StyledApp = styled.div.attrs({
 `;
 
 function App() {
-  console.log(theme);
   const { checkLoggedUser } = usersActions;
 
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log('a');
     dispatch(checkLoggedUser());
-  }, [dispatch]);
+  }, [dispatch, checkLoggedUser]);
   return (
     <StyledApp className="App">
       <ThemeProvider theme={theme}>

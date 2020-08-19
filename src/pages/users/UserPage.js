@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom';
 import Curriculum from './Curriculum';
 import SideNav from '../../components/user/SideNav';
+import UserInfo from '../../components/user/UserInfo';
 
 const StyledUserPage = styled.div.attrs({
   className: 'grid',
@@ -36,11 +37,9 @@ const UserPage = () => {
 
         <Switch>
           <Route exact path={`${path}/`}>
-            <div className="content col-start-3 col-end-12">
 
-              some content
+            <UserInfo currentUser={currentUser} />
 
-            </div>
           </Route>
           <Route path={`${path}/edit`}>
             <Curriculum />

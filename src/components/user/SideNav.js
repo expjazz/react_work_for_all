@@ -5,9 +5,10 @@ import { Link, useRouteMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const StyledSideNav = styled.div.attrs({
-  className: 'col-start-1 col-end-3 grid',
+  className: 'col-start-1 col-end-3 grid items-center min-h-screen content-center h-full',
 })`
   .linkList {
+    ${tw``}
     div {
       ${tw`p-3`}
     }
@@ -31,7 +32,7 @@ const SideNav = props => {
 
           <Link to="/users/user" onClick={handleFocus}>
             <p>
-              {currentUser.user.name}
+              {currentUser ? currentUser.user.name : 'loading'}
             </p>
           </Link>
         </div>
