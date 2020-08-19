@@ -8,10 +8,13 @@ const PastJobs = React.forwardRef((props, ref) => {
   const labels = ['start', 'end', ' name'];
 
   return (
-    <div ref={ref}>
-      {labels.map(label => <Input key={label} label={label} id={label} onChange={e => onChange(e, ref)} value={inputs[label]} />)}
+    <>
+      <h3>A job</h3>
+      <div ref={ref}>
+        {labels.map(label => <Input key={label} label={label} labelValue={label} id={label} onChange={e => onChange(e, ref)} value={inputs[label]} />)}
 
-    </div>
+      </div>
+    </>
   );
 });
 

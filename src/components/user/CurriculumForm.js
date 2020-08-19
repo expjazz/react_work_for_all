@@ -29,7 +29,7 @@ const StyledCurriculumForm = styled.form.attrs({
 
 const StyledPastJobs = styled.div`
 
-      background: red;
+      background: '';
 
 `;
 const CurriculumForm = () => {
@@ -67,15 +67,43 @@ const CurriculumForm = () => {
       jobs: [],
     },
     validationSchema: Yup.object({
-      cpf: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
-      state: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
-      city: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
-      street: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
-      cell: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
+      // cpf: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
+      // state: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
+      // city: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
+      // street: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
+      // cell: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
 
     }),
     onSubmit: values => {
+      values.jobs = pastJobsState;
+      const {
+        about_me, country, cep, state, city, hood, street, cel, children, married, cpf, race, nationality, jobs,
+      } = values;
+      const newCurr = {
+        curriculum: {
+          candidate_address: {
+            country,
+            cep,
+            state,
+            city,
+            hood,
+            street,
+            cel,
+          },
+          candidate_personal: {
+            children,
+            married,
+            cpf,
+            race,
+            nationality,
+          },
+          jobs,
+          about_me,
+        },
+      };
+      console.log('here');
       console.log(values);
+      console.log(newCurr);
       // const { email, name, password } = values;
       // const newObj = {
       //   user: {
@@ -92,12 +120,9 @@ const CurriculumForm = () => {
     },
   });
   const addJobChange = (e, curRef) => {
-    console.log('here');
-    console.log(e);
     const y = allRefs.forEach((ref, ind) => {
       if (ref === curRef) {
         const copy = [...pastJobsState];
-        console.log(curRef.current);
         const fields = curRef.current.querySelectorAll('input');
         copy[ind] = {
           start: fields[0].value,
@@ -144,6 +169,7 @@ const CurriculumForm = () => {
 
       <button type="button" onClick={addNewJob}> Add a new past job</button>
       <StyledPastJobs>
+        <h3>Old Jobs</h3>
         {pastJobsState.map((pJ, index) => <PastJobs onChange={addJobChange} ref={allRefs[index]} key={`input${index}`} inputs={pJ} />)}
       </StyledPastJobs>
 
@@ -157,6 +183,7 @@ const CurriculumForm = () => {
         <Input label={field} key={field} id={field} onChange={formik.handleChange} labelValue={field} value={formik.values[field]} errors={formik.errors[field]} />
 
       ))}
+      <button type="submit">Submit</button>
 
     </StyledCurriculumForm>
   );
