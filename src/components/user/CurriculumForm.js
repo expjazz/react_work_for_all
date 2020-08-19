@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import usersActions from '../../actions/users';
+import Input from '../common/Input';
 
 const StyledCurriculumForm = styled.form.attrs({
   className: 'bg-white rounded px-8 pt-6 pb-8 mb-4',
@@ -32,18 +33,18 @@ const CurriculumForm = () => {
   const formik = useFormik({
     initialValues: {
       about_me: '',
-      children: 'data',
-      married: 'data',
-      cpf: 'data',
-      race: 'race',
-      nationality: 'data',
-      country: 'data',
-      cep: 'data',
-      state: 'data',
-      city: 'data',
-      hood: 'data',
-      street: 'data',
-      cel: 'data',
+      children: '',
+      married: '',
+      cpf: '',
+      race: '',
+      nationality: '',
+      country: '',
+      cep: '',
+      state: '',
+      city: '',
+      hood: '',
+      street: '',
+      cel: '',
       jobs: [],
     },
     validationSchema: Yup.object({
@@ -71,6 +72,7 @@ const CurriculumForm = () => {
       // setRedirect(true);
     },
   });
+  const personalArr = ['children', 'married', 'cpf', 'race', 'nationality'];
   return (
     <StyledCurriculumForm onSubmit={formik.handleSubmit}>
       <div className="mb-4">
@@ -83,15 +85,11 @@ const CurriculumForm = () => {
         ) : ''}
       </div>
 
-      <div className="mb-4">
-        <label htmlFor="children">children</label>
-        <input type="text" id="children" onChange={formik.handleChange} value={formik.values.children} />
-        {formik.errors.name ? (
-          <div>
-            {formik.errors.name}
-          </div>
-        ) : ''}
-      </div>
+      {personalArr.map(field => (
+        <Input label={field} key={field} id={field} onChange={formik.handleChange} labelValue={field} value={formik.values[field]} errors={formik.errors[field]} />
+
+      ))}
+
     </StyledCurriculumForm>
   );
 };
