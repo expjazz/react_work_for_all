@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-use-before-define */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
@@ -15,39 +17,52 @@ import UserInfo from '../../components/user/UserInfo';
 const StyledUserPage = styled.div.attrs({
   className: 'grid',
 })``;
-const UserPage = () => {
-  const { curriculum } = useSelector(state => state.users);
-
-  const { path } = useRouteMatch();
-
-  const currentUser = useSelector(state => state.users.currentUser);
-  const [currentFocus, setCurrentFocus] = useState({ first: true, second: false });
-  const handleFocus = val => {
-    if (val.target.innerText === 'Look for Jobs') {
-      setCurrentFocus({ first: false, second: true });
+const UserPage = ({ users: { currentUser, curriculum } }) => {
+  const { path, url } = useRouteMatch();
+  const handleActiveCol = url => {
+    if (url.includes('edit')) {
+      setColTwo({ ...colTwo, active: true });
+      setColOne({ ...colOne, active: false });
+      setColThree({ ...colThree, active: false });
+    } else if (url.includes('opportunities/new')) {
+      setColTwo({ ...colTwo, active: false });
+      setColOne({ ...colOne, active: false });
+      setColThree({ ...colThree, active: true });
     } else {
-      setCurrentFocus({ first: true, second: false });
+      setColTwo({ ...colTwo, active: false });
+      setColOne({ ...colOne, active: true });
+      setColThree({ ...colThree, active: false });
     }
   };
+  const [colOne, setColOne] = useState({
+    path: url, text: currentUser.user.name, active: true, handleClick: handleActiveCol,
+  });
+  // const [colTwo, setColTwo] = useState({
+  //   path: `${path}/edit`, text: 'Edit your info', active: false, handleClick: handleActiveCol,
+  // });
+  // const [colThree, setColThree] = useState({
+  //   path: `${path}/opportunities/new`, text: 'Create a new job opportunity', active: false, handleClick: handleActiveCol,
+  // });
 
   return (
     <div>
       <StyledUserPage>
-        <SideNav focus={currentFocus} handleFocus={handleFocus}>
-          haha
-        </SideNav>
+        <SideNav
+          colOne={colOne}
+          handleClick={handleActiveCol}
+        />
 
         <Switch>
           <Route exact path={`${path}/`}>
-            { curriculum.personal ? <UserInfo currentUser={currentUser} /> : <p>no curriculum</p> }
+            <UserInfo />
 
           </Route>
-          <Route path={`${path}/edit`}>
+          {/* <Route path={`${path}/edit`}>
             <Curriculum />
-          </Route>
-          <Route path={`${path}/:topicId`}>
+          </Route> */}
+          {/* <Route path={`${path}/:topicId`}>
             <h2>haha</h2>
-          </Route>
+          </Route> */}
         </Switch>
       </StyledUserPage>
     </div>

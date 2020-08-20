@@ -30,21 +30,18 @@ const StyledUserInfo = styled.div.attrs({
     }
   }
 `;
-const UserInfo = props => {
-  const { currentUser } = props;
-
-  console.log('here');
+const UserInfo = () => {
   const { personalArr, addressArr } = useSelector(state => state.users.infoArrays);
-  const { curriculum } = useSelector(state => state.users);
+  const { currentUser, curriculum } = useSelector(state => state.users);
   console.log(curriculum);
+  console.log(currentUser);
   return (
     <StyledUserInfo>
       <div className="title">
         <h3>Overview</h3>
         <p>
           Hi
-          {' '}
-          {currentUser ? currentUser.user.name : 'loading'}
+          {currentUser.user.name}
           , welcome back!
         </p>
       </div>
@@ -57,31 +54,38 @@ const UserInfo = props => {
             Your Profile
           </p>
         </div>
-        <div className="infoList">
-          <p>personal info</p>
-          { curriculum ? personalArr.map((info => (
-            <p key={info}>
-              {info}
-              {' '}
-              {curriculum.personal[info]}
-            </p>
-          ))) : 'loading' }
-        </div>
-        <div className="addressList">
-          <p>
-            address
-          </p>
-          { curriculum ? addressArr.map(info => (
-            <p key={info}>
-              {info}
-              {' '}
-              :
-              {' '}
-              {curriculum.address[info]}
-              {' '}
-            </p>
-          )) : 'loading'}
-        </div>
+        {
+          Object.keys(curriculum).length > 0 ? (
+            <>
+              <div className="infoList">
+                <p>personal info</p>
+                { personalArr.map((info => (
+                  <p key={info}>
+                    {info}
+                    {' '}
+                    {curriculum.personal[info]}
+                  </p>
+                ))) }
+              </div>
+              <div className="addressList">
+                <p>
+                  address
+                </p>
+                { addressArr.map(info => (
+                  <p key={info}>
+                    {info}
+                    {' '}
+                    :
+                    {' '}
+                    {curriculum.address[info]}
+                    {' '}
+                  </p>
+                ))}
+              </div>
+            </>
+          ) : (
+            <p>add  curricukum</p>)
+        }
       </div>
     </StyledUserInfo>
   );

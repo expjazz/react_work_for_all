@@ -52,6 +52,7 @@ const CompanyUserPage = ({ users: { currentUser, company } }) => {
           colOne={colOne}
           colTwo={colTwo}
           colThree={colThree}
+          handleClick={handleActiveCol}
         />
         <Switch>
           <Route exact path={`${path}/`}>
