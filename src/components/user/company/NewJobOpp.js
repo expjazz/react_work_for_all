@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import jobActions from '../../../actions/job';
 import Input from '../../common/Input';
 
 const StyledNewJobOpp = styled.div.attrs({
@@ -30,6 +32,8 @@ const OppForm = styled.form.attrs({
 
 // :requirement, :salary, :position
 const NewJobOpp = () => {
+  const dispatch = useDispatch();
+  const { addNewJob } = jobActions;
   const formik = useFormik({
     initialValues: {
       requirement: '',
@@ -41,8 +45,15 @@ const NewJobOpp = () => {
       salary: Yup.string().required('Please provide a salary'),
       position: Yup.string().required('Please provide a posigion'),
     }),
-    onSubmit: values => {
-      console.log(values);
+    onSubmit: ({ requirement, salary, position }) => {
+      const newObj = {
+        job_offer: {
+          requirement,
+          salary,
+          position,
+        },
+      };
+      console.log(newObj);
     },
   });
   const jobArr = ['requirement', 'salary', 'position'];
