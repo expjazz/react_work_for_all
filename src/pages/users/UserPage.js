@@ -17,12 +17,10 @@ const StyledUserPage = styled.div.attrs({
 })``;
 const UserPage = () => {
   const { curriculum } = useSelector(state => state.users);
-  console.log(curriculum);
 
   const { path } = useRouteMatch();
 
   const currentUser = useSelector(state => state.users.currentUser);
-  console.log(currentUser);
   const [currentFocus, setCurrentFocus] = useState({ first: true, second: false });
   const handleFocus = val => {
     if (val.target.innerText === 'Look for Jobs') {

@@ -1,15 +1,38 @@
 import React from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
+import {
+  Switch,
+  Route,
+  useRouteMatch,
+} from 'react-router-dom';
+import CompanyDetail from './CompanyDetail';
+import SideNav from '../../../components/user/SideNav';
 
-const Styled = styled.div.attrs({})``;
+const StyledCompanyUserPage = styled.div.attrs({
+  className: 'grid',
+
+})``;
 const CompanyUserPage = ({ users: { currentUser, company } }) => {
-  console.log(company);
-  console.log(currentUser);
-  const a = 's';
+  const { path } = useRouteMatch();
+
   return (
     <div>
-      Hello from the company
+      <StyledCompanyUserPage>
+        Hello from the company
+        <SideNav />
+        <Switch>
+          <Route exact path={`${path}/`}>
+            <CompanyDetail />
+          </Route>
+          {/* <Route path={`${path}/edit`}>
+          <Curriculum />
+          </Route>
+          <Route path={`${path}/postjobs`}>
+          <h2>haha</h2>
+        </Route> */}
+        </Switch>
+      </StyledCompanyUserPage>
     </div>
   );
 };
