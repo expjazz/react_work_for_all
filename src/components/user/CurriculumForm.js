@@ -101,9 +101,7 @@ const CurriculumForm = () => {
           about_me,
         },
       };
-      console.log('here');
-      console.log(values);
-      console.log(newCurr);
+
       dispatch(createCurriculum(newCurr));
       // const { email, name, password } = values;
       // const newObj = {

@@ -2,8 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import SignUp from '../pages/SignUp';
-import UserPage from '../pages/users/UserPage';
-import Curriculum from '../pages/users/Curriculum';
+import UserDivider from '../pages/userDivider/UserDivider';
 import CompanySignUp from '../pages/CompanySignUp';
 import Login from '../pages/Login';
 
@@ -25,7 +24,7 @@ export default function RouteFile() {
           <CompanySignUp />
         </Route>
         <Route path="/users/user">
-          <UserPage />
+          <UserDivider />
         </Route>
 
       </Switch>

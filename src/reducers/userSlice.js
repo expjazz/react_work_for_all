@@ -11,7 +11,7 @@ export const userSlice = createSlice({
   name: 'user',
   initialState: {
     currentUser: '',
-    status: 'idlee',
+    status: 'idle',
     curriculum: {},
     infoArrays: {
       personalArr: ['children', 'married', 'cpf', 'race', 'nationality'],
@@ -30,7 +30,6 @@ export const userSlice = createSlice({
     [checkLoggedUser.pending]: (state, action) => { state.status = 'loading'; },
 
     [checkLoggedUser.fulfilled]: (state, action) => {
-      console.log(action.payload);
       if (action.payload.companyInfo) {
         return ({
           ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, company: action.payload.companyInfo,
@@ -39,8 +38,12 @@ export const userSlice = createSlice({
         return ({
           ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, curriculum: action.payload.curriculum,
         });
-      }
+      } return ({
+        ...state, status: 'rejected', currentUser: action.payload,
+      });
     },
+
+    [checkLoggedUser.rejected]: (state, action) => { state.status = 'rejected'; },
 
     [signUpUserCompany.pending]: (state, action) => { state.status = 'loading'; },
 
