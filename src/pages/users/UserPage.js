@@ -23,23 +23,23 @@ const UserPage = ({ users: { currentUser, curriculum } }) => {
     if (url.includes('edit')) {
       setColTwo({ ...colTwo, active: true });
       setColOne({ ...colOne, active: false });
-      setColThree({ ...colThree, active: false });
+      // setColThree({ ...colThree, active: false });
     } else if (url.includes('opportunities/new')) {
       setColTwo({ ...colTwo, active: false });
       setColOne({ ...colOne, active: false });
-      setColThree({ ...colThree, active: true });
+      // setColThree({ ...colThree, active: true });
     } else {
       setColTwo({ ...colTwo, active: false });
       setColOne({ ...colOne, active: true });
-      setColThree({ ...colThree, active: false });
+      // setColThree({ ...colThree, active: false });
     }
   };
   const [colOne, setColOne] = useState({
     path: url, text: currentUser.user.name, active: true, handleClick: handleActiveCol,
   });
-  // const [colTwo, setColTwo] = useState({
-  //   path: `${path}/edit`, text: 'Edit your info', active: false, handleClick: handleActiveCol,
-  // });
+  const [colTwo, setColTwo] = useState({
+    path: `${path}/curriculum/edit`, text: 'Edit your info', active: false, handleClick: handleActiveCol,
+  });
   // const [colThree, setColThree] = useState({
   //   path: `${path}/opportunities/new`, text: 'Create a new job opportunity', active: false, handleClick: handleActiveCol,
   // });
@@ -49,6 +49,7 @@ const UserPage = ({ users: { currentUser, curriculum } }) => {
       <StyledUserPage>
         <SideNav
           colOne={colOne}
+          colTwo={colTwo}
           handleClick={handleActiveCol}
         />
 
@@ -57,9 +58,9 @@ const UserPage = ({ users: { currentUser, curriculum } }) => {
             <UserInfo />
 
           </Route>
-          {/* <Route path={`${path}/edit`}>
+          <Route path={`${path}/curriculum/edit`}>
             <Curriculum />
-          </Route> */}
+          </Route>
           {/* <Route path={`${path}/:topicId`}>
             <h2>haha</h2>
           </Route> */}

@@ -33,8 +33,7 @@ const StyledUserInfo = styled.div.attrs({
 const UserInfo = () => {
   const { personalArr, addressArr } = useSelector(state => state.users.infoArrays);
   const { currentUser, curriculum } = useSelector(state => state.users);
-  console.log(curriculum);
-  console.log(currentUser);
+
   return (
     <StyledUserInfo>
       <div className="title">
