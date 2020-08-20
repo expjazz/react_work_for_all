@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import CompanyDetail from '../../../components/user/company/CompanyDetail';
 import SideNav from '../../../components/user/SideNav';
+import CompanyEdit from './CompanyEdit';
 
 const StyledCompanyUserPage = styled.div.attrs({
   className: 'grid',
@@ -19,17 +20,20 @@ const CompanyUserPage = ({ users: { currentUser, company } }) => {
   return (
     <div>
       <StyledCompanyUserPage>
-        <SideNav colOne={{ path: url, text: currentUser.user.name, active: true }} />
+        <SideNav
+          colOne={{ path: url, text: currentUser.user.name, active: true }}
+          colTwo={{ path: `${path}/edit`, text: 'Edit your info', active: false }}
+        />
         <Switch>
           <Route exact path={`${path}/`}>
             <CompanyDetail currentUser={currentUser} companyInfo={company} />
           </Route>
-          {/* <Route path={`${path}/edit`}>
-          <Curriculum />
+          <Route path={`${path}/edit`}>
+            <CompanyEdit />
           </Route>
-          <Route path={`${path}/postjobs`}>
-          <h2>haha</h2>
-        </Route> */}
+          {/* <Route path={`${path}/postjobs`}>
+            <h2>haha</h2>
+          </Route> */}
         </Switch>
       </StyledCompanyUserPage>
     </div>

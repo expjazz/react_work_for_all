@@ -1,11 +1,12 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 const StyledCompanyDetail = styled.div.attrs({
   className: 'content col-start-3 col-end-12 pt-10',
-
 })`
   .title {
     h3 {
@@ -17,7 +18,7 @@ const StyledCompanyDetail = styled.div.attrs({
     background: ${props => props.theme.green};
     ${tw` rounded-full w-48 h-16 text-center flex items-center relative`}
     :after {
-      content: '';
+      content: "";
       bottom: -12px;
       left: 50%;
       border-left: 12px solid transparent;
@@ -32,7 +33,9 @@ const StyledCompanyDetail = styled.div.attrs({
   }
 `;
 const CompanyDetail = ({ currentUser, companyInfo }) => {
-  const { addressArr, compPersonalArr } = useSelector(state => state.users.infoArrays);
+  const { addressArr, compPersonalArr } = useSelector(
+    state => state.users.infoArrays,
+  );
   return (
     <StyledCompanyDetail>
       <div className="title">
@@ -44,30 +47,24 @@ const CompanyDetail = ({ currentUser, companyInfo }) => {
           , welcome back!
         </p>
       </div>
-      <div className="jobOffer h-40">
-        some offer
-      </div>
+      <div className="jobOffer h-40">some offer</div>
       <div className="bottom">
         <div className="middlebutton">
-          <p>
-            Your Profile
-          </p>
+          <p>Your Profile</p>
         </div>
         <div className="infoList">
           <p>personal info</p>
-          { compPersonalArr.map((info => (
+          {compPersonalArr.map(info => (
             <p key={info}>
               {info}
               {' '}
               {companyInfo.personal[info]}
             </p>
-          )))}
+          ))}
         </div>
         <div className="addressList">
-          <p>
-            address
-          </p>
-          { addressArr.map(info => (
+          <p>address</p>
+          {addressArr.map(info => (
             <p key={info}>
               {info}
               {' '}
@@ -80,9 +77,13 @@ const CompanyDetail = ({ currentUser, companyInfo }) => {
         </div>
       </div>
       {' '}
-
     </StyledCompanyDetail>
   );
 };
 
 export default CompanyDetail;
+
+CompanyDetail.propTypes = {
+  currentUser: PropTypes.object.isRequired,
+  companyInfo: PropTypes.object.isRequired,
+};
