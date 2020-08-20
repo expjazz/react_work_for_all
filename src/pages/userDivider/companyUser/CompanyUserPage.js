@@ -6,7 +6,7 @@ import {
   Route,
   useRouteMatch,
 } from 'react-router-dom';
-import CompanyDetail from './CompanyDetail';
+import CompanyDetail from '../../../components/user/company/CompanyDetail';
 import SideNav from '../../../components/user/SideNav';
 
 const StyledCompanyUserPage = styled.div.attrs({
@@ -22,7 +22,7 @@ const CompanyUserPage = ({ users: { currentUser, company } }) => {
         <SideNav colOne={{ path: url, text: currentUser.user.name, active: true }} />
         <Switch>
           <Route exact path={`${path}/`}>
-            <CompanyDetail />
+            <CompanyDetail currentUser={currentUser} companyInfo={company} />
           </Route>
           {/* <Route path={`${path}/edit`}>
           <Curriculum />
