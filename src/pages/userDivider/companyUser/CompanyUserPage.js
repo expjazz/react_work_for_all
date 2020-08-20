@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import tw from 'tailwind.macro';
 
 const Styled = styled.div.attrs({})``;
-const CompanyUserPage = () => {
+const CompanyUserPage = ({ users: { currentUser, company } }) => {
+  console.log(company);
+  console.log(currentUser);
   const a = 's';
   return (
     <div>
-      a
+      Hello from the company
     </div>
   );
 };
