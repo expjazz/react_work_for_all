@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import tw from 'tailwind.macro';
 
 const StyledJobCard = styled.div.attrs({
-  className: 'rounded shadow-lg max-s',
+  className: 'rounded shadow-lg max-s h-full',
 })``;
 const JobCard = ({
   job: {
@@ -17,7 +17,6 @@ const JobCard = ({
         Position:
         {' '}
         {position}
-
       </div>
       <div className="middle">
         <p>
