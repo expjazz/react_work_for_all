@@ -13,6 +13,7 @@ import {
 import Curriculum from './Curriculum';
 import SideNav from '../../components/user/SideNav';
 import UserInfo from '../../components/user/UserInfo';
+import JobsIndex from '../jobs/JobsIndex';
 
 const StyledUserPage = styled.div.attrs({
   className: 'grid',
@@ -23,15 +24,15 @@ const UserPage = ({ users: { currentUser, curriculum } }) => {
     if (url.includes('edit')) {
       setColTwo({ ...colTwo, active: true });
       setColOne({ ...colOne, active: false });
-      // setColThree({ ...colThree, active: false });
-    } else if (url.includes('opportunities/new')) {
+      setColThree({ ...colThree, active: false });
+    } else if (url.includes('/jobs/index')) {
       setColTwo({ ...colTwo, active: false });
       setColOne({ ...colOne, active: false });
-      // setColThree({ ...colThree, active: true });
+      setColThree({ ...colThree, active: true });
     } else {
       setColTwo({ ...colTwo, active: false });
       setColOne({ ...colOne, active: true });
-      // setColThree({ ...colThree, active: false });
+      setColThree({ ...colThree, active: false });
     }
   };
   const [colOne, setColOne] = useState({
@@ -40,9 +41,9 @@ const UserPage = ({ users: { currentUser, curriculum } }) => {
   const [colTwo, setColTwo] = useState({
     path: `${path}/curriculum/edit`, text: 'Edit your info', active: false, handleClick: handleActiveCol,
   });
-  // const [colThree, setColThree] = useState({
-  //   path: `${path}/opportunities/new`, text: 'Create a new job opportunity', active: false, handleClick: handleActiveCol,
-  // });
+  const [colThree, setColThree] = useState({
+    path: `${path}/jobs/index`, text: 'Create a new job opportunity', active: false, handleClick: handleActiveCol,
+  });
 
   return (
     <div>
@@ -50,6 +51,7 @@ const UserPage = ({ users: { currentUser, curriculum } }) => {
         <SideNav
           colOne={colOne}
           colTwo={colTwo}
+          colThree={colThree}
           handleClick={handleActiveCol}
         />
 
@@ -61,9 +63,9 @@ const UserPage = ({ users: { currentUser, curriculum } }) => {
           <Route path={`${path}/curriculum/edit`}>
             <Curriculum />
           </Route>
-          {/* <Route path={`${path}/:topicId`}>
-            <h2>haha</h2>
-          </Route> */}
+          <Route path={`${path}/jobs/index`}>
+            <JobsIndex />
+          </Route>
         </Switch>
       </StyledUserPage>
     </div>
