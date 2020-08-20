@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import {
+  Link,
+
+} from 'react-router-dom';
 
 const StyledSideNav = styled.div.attrs({
   className: 'col-start-1 col-end-3 grid items-center min-h-screen content-center h-full',
@@ -25,7 +27,7 @@ const SideNav = props => (
 
       <div key={col} className="linkList">
         <div className={props[col].active ? 'one' : ''}>
-          <Link to={props[col].path}>
+          <Link to={props[col].path} onClick={() => props[col].handleClick(props[col].path)}>
             <p>
               {props[col].text}
             </p>

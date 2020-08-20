@@ -1,4 +1,6 @@
-import React from 'react';
+/* eslint-disable no-use-before-define */
+/* eslint-disable react/forbid-prop-types */
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import {
@@ -6,6 +8,7 @@ import {
   Route,
   useRouteMatch,
 } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import CompanyDetail from '../../../components/user/company/CompanyDetail';
 import SideNav from '../../../components/user/SideNav';
 import CompanyEdit from './CompanyEdit';
@@ -16,13 +19,28 @@ const StyledCompanyUserPage = styled.div.attrs({
 })``;
 const CompanyUserPage = ({ users: { currentUser, company } }) => {
   const { path, url } = useRouteMatch();
-  console.log(url);
+  const handleActiveCol = url => {
+    if (url.includes('edit')) {
+      setColTwo({ ...colTwo, active: true });
+      setColOne({ ...colOne, active: false });
+    } else {
+      setColTwo({ ...colTwo, active: false });
+      setColOne({ ...colOne, active: true });
+    }
+  };
+  const [colOne, setColOne] = useState({
+    path: url, text: currentUser.user.name, active: true, handleClick: handleActiveCol,
+  });
+  const [colTwo, setColTwo] = useState({
+    path: `${path}/edit`, text: 'Edit your info', active: false, handleClick: handleActiveCol,
+  });
+
   return (
     <div>
       <StyledCompanyUserPage>
         <SideNav
-          colOne={{ path: url, text: currentUser.user.name, active: true }}
-          colTwo={{ path: `${path}/edit`, text: 'Edit your info', active: false }}
+          colOne={colOne}
+          colTwo={colTwo}
         />
         <Switch>
           <Route exact path={`${path}/`}>
@@ -41,3 +59,7 @@ const CompanyUserPage = ({ users: { currentUser, company } }) => {
 };
 
 export default CompanyUserPage;
+
+CompanyUserPage.propTypes = {
+  users: PropTypes.object.isRequired,
+};
