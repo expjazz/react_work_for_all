@@ -14,13 +14,12 @@ const StyledCompanyUserPage = styled.div.attrs({
 
 })``;
 const CompanyUserPage = ({ users: { currentUser, company } }) => {
-  const { path } = useRouteMatch();
-
+  const { path, url } = useRouteMatch();
+  console.log(url);
   return (
     <div>
       <StyledCompanyUserPage>
-        Hello from the company
-        <SideNav />
+        <SideNav colOne={{ path: url, text: currentUser.user.name, active: true }} />
         <Switch>
           <Route exact path={`${path}/`}>
             <CompanyDetail />
