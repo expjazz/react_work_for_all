@@ -2,12 +2,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import jobActions from '../actions/job';
 
-const { addNewJob } = jobActions;
+const { addNewJob, addAllJobs } = jobActions;
 
 export const jobSlice = createSlice({
   name: 'job',
   initialState: {
-    index: [],
+    index: { all: [], status: 'idle' },
     new: {
       status: 'idle',
       job: {},
@@ -19,6 +19,8 @@ export const jobSlice = createSlice({
   extraReducers: {
     [addNewJob.pending]: state => { state.new.status = 'loading'; },
     [addNewJob.fulfilled]: (state, action) => { state.new.job = action.payload; },
+    [addAllJobs.pending]: state => { state.index.status = 'loading'; },
+    [addAllJobs.fulfilled]: (state, action) => { state.index.all = action.payload; },
 
   },
 });
