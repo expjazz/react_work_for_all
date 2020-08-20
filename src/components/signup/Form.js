@@ -26,7 +26,6 @@ const StyledForm = styled.form.attrs({
   }
 `;
 const Form = () => {
-  const currentUser = useSelector(state => state.users.currentUser);
   const [redirect, setRedirect] = useState(false);
   const { signUpUser } = usersActions;
   const dispatch = useDispatch();

@@ -42,7 +42,7 @@ const UserPage = ({ users: { currentUser, curriculum } }) => {
     path: `${path}/curriculum/edit`, text: 'Edit your info', active: false, handleClick: handleActiveCol,
   });
   const [colThree, setColThree] = useState({
-    path: `${path}/jobs/index`, text: 'Create a new job opportunity', active: false, handleClick: handleActiveCol,
+    path: `${path}/jobs/index`, text: 'Check out a job opportunity', active: false, handleClick: handleActiveCol,
   });
 
   return (

@@ -53,8 +53,8 @@ const FormL = () => {
           password,
         },
       };
-      console.log(newObj);
       dispatch(loginUser(newObj));
+      setRedirect(true);
     },
   });
 

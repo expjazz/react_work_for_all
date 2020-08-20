@@ -18,7 +18,6 @@ const UserDivider = () => {
   // handle logged user
 
   if (users.company) return <CompanyUserPage users={users} />;
-  console.log('here??');
   return <UserPage users={users} />;
 };
 
