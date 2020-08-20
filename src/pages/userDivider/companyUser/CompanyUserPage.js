@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 import CompanyDetail from '../../../components/user/company/CompanyDetail';
 import SideNav from '../../../components/user/SideNav';
 import CompanyEdit from './CompanyEdit';
+import NewJobOpp from '../../../components/user/company/NewJobOpp';
 
 const StyledCompanyUserPage = styled.div.attrs({
   className: 'grid',
@@ -23,9 +24,15 @@ const CompanyUserPage = ({ users: { currentUser, company } }) => {
     if (url.includes('edit')) {
       setColTwo({ ...colTwo, active: true });
       setColOne({ ...colOne, active: false });
+      setColThree({ ...colThree, active: false });
+    } else if (url.includes('opportunities/new')) {
+      setColTwo({ ...colTwo, active: false });
+      setColOne({ ...colOne, active: false });
+      setColThree({ ...colThree, active: true });
     } else {
       setColTwo({ ...colTwo, active: false });
       setColOne({ ...colOne, active: true });
+      setColThree({ ...colThree, active: false });
     }
   };
   const [colOne, setColOne] = useState({
@@ -34,6 +41,9 @@ const CompanyUserPage = ({ users: { currentUser, company } }) => {
   const [colTwo, setColTwo] = useState({
     path: `${path}/edit`, text: 'Edit your info', active: false, handleClick: handleActiveCol,
   });
+  const [colThree, setColThree] = useState({
+    path: `${path}/opportunities/new`, text: 'Create a new job opportunity', active: false, handleClick: handleActiveCol,
+  });
 
   return (
     <div>
@@ -41,6 +51,7 @@ const CompanyUserPage = ({ users: { currentUser, company } }) => {
         <SideNav
           colOne={colOne}
           colTwo={colTwo}
+          colThree={colThree}
         />
         <Switch>
           <Route exact path={`${path}/`}>
@@ -49,9 +60,9 @@ const CompanyUserPage = ({ users: { currentUser, company } }) => {
           <Route path={`${path}/edit`}>
             <CompanyEdit />
           </Route>
-          {/* <Route path={`${path}/postjobs`}>
-            <h2>haha</h2>
-          </Route> */}
+          <Route path={`${path}/opportunities/new`}>
+            <NewJobOpp />
+          </Route>
         </Switch>
       </StyledCompanyUserPage>
     </div>
