@@ -53,13 +53,14 @@ const NewJobOpp = () => {
           position,
         },
       };
+      dispatch(addNewJob(newObj));
       console.log(newObj);
     },
   });
   const jobArr = ['requirement', 'salary', 'position'];
   return (
     <StyledNewJobOpp>
-      <OppForm>
+      <OppForm onSubmit={formik.handleSubmit}>
         <div className="title">
           <h4>
             Add a new Opportunity
