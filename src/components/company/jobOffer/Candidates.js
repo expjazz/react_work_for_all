@@ -28,7 +28,6 @@ const Candidates = () => {
     };
     dispatch(acceptCandidate(newObj));
   };
-  console.log(user);
   return (
     <StyledCandidate>
       <div className="name">
