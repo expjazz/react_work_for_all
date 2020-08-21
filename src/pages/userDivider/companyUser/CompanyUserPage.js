@@ -13,6 +13,7 @@ import CompanyDetail from '../../../components/user/company/CompanyDetail';
 import SideNav from '../../../components/user/SideNav';
 import CompanyEdit from './CompanyEdit';
 import NewJobOpp from '../../../components/user/company/NewJobOpp';
+import CheckApplicants from '../../../components/company/CheckApplicants';
 
 const StyledCompanyUserPage = styled.div.attrs({
   className: 'grid',
@@ -25,14 +26,22 @@ const CompanyUserPage = ({ users: { currentUser, company } }) => {
       setColTwo({ ...colTwo, active: true });
       setColOne({ ...colOne, active: false });
       setColThree({ ...colThree, active: false });
+      setColFour({ ...colFour, active: false });
     } else if (url.includes('opportunities/new')) {
       setColTwo({ ...colTwo, active: false });
       setColOne({ ...colOne, active: false });
       setColThree({ ...colThree, active: true });
+      setColFour({ ...colFour, active: false });
+    } else if (url.includes('opportunities/candidates')) {
+      setColTwo({ ...colTwo, active: false });
+      setColOne({ ...colOne, active: false });
+      setColThree({ ...colThree, active: false });
+      setColFour({ ...colFour, active: true });
     } else {
       setColTwo({ ...colTwo, active: false });
       setColOne({ ...colOne, active: true });
       setColThree({ ...colThree, active: false });
+      setColFour({ ...colFour, active: false });
     }
   };
   const [colOne, setColOne] = useState({
@@ -44,6 +53,10 @@ const CompanyUserPage = ({ users: { currentUser, company } }) => {
   const [colThree, setColThree] = useState({
     path: `${path}/opportunities/new`, text: 'Create a new job opportunity', active: false, handleClick: handleActiveCol,
   });
+  const [colFour, setColFour] = useState({
+    path: `${path}/opportunities/candidates`, text: 'Check the candidates for your spots', active: false, handleClick: handleActiveCol,
+
+  });
 
   return (
     <div>
@@ -52,6 +65,7 @@ const CompanyUserPage = ({ users: { currentUser, company } }) => {
           colOne={colOne}
           colTwo={colTwo}
           colThree={colThree}
+          colFour={colFour}
           handleClick={handleActiveCol}
         />
         <Switch>
@@ -63,6 +77,9 @@ const CompanyUserPage = ({ users: { currentUser, company } }) => {
           </Route>
           <Route path={`${path}/opportunities/new`}>
             <NewJobOpp />
+          </Route>
+          <Route path={`${path}/opportunities/candidates`}>
+            <CheckApplicants />
           </Route>
         </Switch>
       </StyledCompanyUserPage>
