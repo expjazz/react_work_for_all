@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import jobActions from '../actions/job';
 
 const {
-  addAllJobs, candidateApplyForJob, acceptCandidate, updateMyJobStatus,
+  addAllJobs, candidateApplyForJob, acceptCandidate,
 } = jobActions;
 
 export const jobSlice = createSlice({

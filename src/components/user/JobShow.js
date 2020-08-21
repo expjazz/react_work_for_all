@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
 import selectJobCandidates from '../../selectors/selectCandidateJobOffer';
 import jobActions from '../../actions/job';
+import userActions from '../../actions/users';
 
 const StyledJobShow = styled.div.attrs({
   className: 'content col-start-3 col-end-12 pt-10',
@@ -12,21 +13,23 @@ const StyledJobShow = styled.div.attrs({
 })``;
 const JobShow = () => {
   const { candidateApplyForJob } = jobActions;
+  const { setUpInterviewCandidate } = userActions;
   const dispatch = useDispatch();
   const { selectJobDetailsToCandidate } = selectJobCandidates;
   const { url } = useRouteMatch();
   const list = url.split('/');
   const id = url.split('/')[list.length - 1];
   const job = useSelector(selectJobDetailsToCandidate(id));
+  console.log('jjob');
   console.log(job);
   const returnButton = () => {
     switch (job.status) {
       case 'approved':
-        return <button type="button">Set up a interview</button>;
+        return <button type="button" onClick={() => dispatch(setUpInterviewCandidate({ company_id: job.profileId, job_offer_id: job.jobId }))}>Set up a interview</button>;
       case 'pending':
         return <button type="button">Waiting for company</button>;
       default:
-        return <button type="button" onClick={() => dispatch(candidateApplyForJob({ job_offer_id: job.id }))}>Apply for job</button>;
+        return <button type="button" onClick={() => dispatch(candidateApplyForJob({ job_offer_id: job.jobId }))}>Apply for job</button>;
     }
   };
   return (

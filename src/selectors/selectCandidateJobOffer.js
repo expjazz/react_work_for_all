@@ -35,7 +35,8 @@ const selectJobDetailsToCandidate = jobId => createSelector(
       salary: job.salary,
       status,
       companyName: job.user.profile.name,
-      id: job.id,
+      profileId: job.user.profile.id,
+      jobId: job.id,
 
     };
   },
