@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,12 +6,14 @@ import { useRouteMatch } from 'react-router-dom';
 import selectJobCandidates from '../../selectors/selectCandidateJobOffer';
 import jobActions from '../../actions/job';
 import userActions from '../../actions/users';
+import PopUpInterview from '../interview/PopUpInterview';
 
 const StyledJobShow = styled.div.attrs({
   className: 'content col-start-3 col-end-12 pt-10',
 
 })``;
 const JobShow = () => {
+  const [showPopup, setShowPopup] = useState(true);
   const { candidateApplyForJob } = jobActions;
   const { setUpInterviewCandidate } = userActions;
   const dispatch = useDispatch();
@@ -52,6 +54,7 @@ const JobShow = () => {
       }
 
       {returnButton() }
+      <PopUpInterview show={showPopup} />
     </StyledJobShow>
   );
 };
