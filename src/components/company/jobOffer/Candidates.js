@@ -1,21 +1,33 @@
 import React from 'react';
 import { useRouteMatch } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import jobSelectors from '../../../selectors/selectCandidateJobOffer';
+import jobActions from '../../../actions/job';
 
 const StyledCandidate = styled.div.attrs({
   className: 'content col-start-3 col-end-12 pt-10',
 
 })``;
 const Candidates = () => {
+  const { acceptCandidate } = jobActions;
+  const dispatch = useDispatch();
   const { selectJobOfferCandidate } = jobSelectors;
   const { url } = useRouteMatch();
   const arr = url.split('/');
   const ids = [arr[arr.length - 2], arr[arr.length - 1]];
   const user = useSelector(selectJobOfferCandidate(ids[0], ids[1]));
+  console.log(user);
   const { personalArr, addressArr } = useSelector(state => state.users.infoArrays);
+  const acceptApplication = () => {
+    const newObj = {
+      candidate_id: user.id,
+      job_offer_id: user.jobId,
+
+    };
+    dispatch(acceptCandidate(newObj));
+  };
   console.log(user);
   return (
     <StyledCandidate>
@@ -59,6 +71,7 @@ const Candidates = () => {
           </p>
         ))}
       </div>
+      <button type="button" onClick={acceptApplication}>Accept application</button>
     </StyledCandidate>
   );
 };
