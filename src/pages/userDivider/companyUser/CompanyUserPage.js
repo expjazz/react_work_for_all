@@ -14,6 +14,7 @@ import SideNav from '../../../components/user/SideNav';
 import CompanyEdit from './CompanyEdit';
 import NewJobOpp from '../../../components/user/company/NewJobOpp';
 import CheckApplicants from '../../../components/company/CheckApplicants';
+import Candidates from '../../../components/company/jobOffer/Candidates';
 
 const StyledCompanyUserPage = styled.div.attrs({
   className: 'grid',
@@ -79,7 +80,7 @@ const CompanyUserPage = ({ users: { currentUser, company } }) => {
             <NewJobOpp />
           </Route>
           <Route exact path={`${path}/opportunities/candidates/:jobId/:candidateId`}>
-            <p>name</p>
+            <Candidates />
           </Route>
           <Route path={`${path}/opportunities/candidates`}>
             <CheckApplicants />
