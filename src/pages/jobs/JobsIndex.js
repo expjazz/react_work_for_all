@@ -10,13 +10,14 @@ const StyledJobIndex = styled.div.attrs({
     'col-start-3 col-end-12 border-2 border-gray-300 rounded-lg mx-10 m-auto h-56',
 })``;
 const JobsIndex = () => {
+  const email = useSelector(state => state.users.currentUser.user.gerenalInfo.email);
   const allJobs = useSelector(state => state.jobOffers.index.all);
   if (allJobs.length === 0) return <p>loading</p>;
   return (
     <StyledJobIndex>
       <Carousel renderPagination={({ pages, activePage, onClick }) => <></>}>
         {allJobs.map(job => (
-          <JobCard key={job.id} job={job} />
+          <JobCard key={job.id} job={job} applied={!!job.candidates.find(candidate => candidate.user.email === email)} />
         ))}
       </Carousel>
     </StyledJobIndex>

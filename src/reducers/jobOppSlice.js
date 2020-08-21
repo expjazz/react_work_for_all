@@ -2,7 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import jobActions from '../actions/job';
 
-const { addNewJob, addAllJobs } = jobActions;
+const { addNewJob, addAllJobs, candidateApplyForJob } = jobActions;
 
 export const jobSlice = createSlice({
   name: 'job',
@@ -21,6 +21,8 @@ export const jobSlice = createSlice({
     [addNewJob.fulfilled]: (state, action) => { state.new.job = action.payload; },
     [addAllJobs.pending]: state => { state.index.status = 'loading'; },
     [addAllJobs.fulfilled]: (state, action) => { state.index.all = action.payload; },
+    [candidateApplyForJob.pending]: state => { state.index.status = 'loading'; },
+    [candidateApplyForJob.fulfilled]: (state, action) => { state.jobApplied = action.payload; },
 
   },
 });

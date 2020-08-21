@@ -24,4 +24,15 @@ const addAllJobs = createAsyncThunk('/job/index', async args => {
   return res.data;
 });
 
-export default { addNewJob, addAllJobs };
+const candidateApplyForJob = createAsyncThunk('/job/candidateApplyForJob', async args => {
+  const options = {
+    method: 'POST',
+    url: 'http://localhost:3000/applyjobs',
+    withCredentials: true,
+    data: args,
+  };
+  const res = await axios(options);
+  return res.data;
+});
+
+export default { addNewJob, addAllJobs, candidateApplyForJob };
