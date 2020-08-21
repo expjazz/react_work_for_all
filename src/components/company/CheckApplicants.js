@@ -20,6 +20,7 @@ const CheckApplicants = () => {
         ))}
       </Carousel>
     </StyledCheckApplicants>
+
   );
 };
 

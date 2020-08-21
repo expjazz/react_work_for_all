@@ -1,6 +1,8 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 const StyledJobCardCompany = styled.div.attrs({
   className: 'rounded shadow-lg max-s h-full',
@@ -10,36 +12,42 @@ const JobCardCompany = ({
   job: {
     position, requirement, salary, candidates, id,
   },
-}) => (
-  <StyledJobCardCompany>
+}) => {
+  const { path } = useRouteMatch();
+  return (
+    <StyledJobCardCompany>
 
-    <div className="title">
-      Position:
-      {' '}
-      {position}
-    </div>
-    <div className="middle">
-      <p>
-        Requirement:
+      <div className="title">
+        Position:
         {' '}
-        {requirement}
-        Salary:
-        {' '}
-        {salary}
-      </p>
-      <div className="candidates">
-        Candidates:
-        {
-          candidates.map(candidate => (
+        {position}
+      </div>
+      <div className="middle">
+        <p>
+          Requirement:
+          {' '}
+          {requirement}
+          Salary:
+          {' '}
+          {salary}
+        </p>
+        <div className="candidates">
+          Candidates:
+          {
+          candidates.map((candidate, ind) => (
             <>
-              <p key={candidate.name}>{candidate.name}</p>
+              <Link to={`${path}/${candidate.name}`} key={candidate.name}>
+
+                {candidate.name}
+              </Link>
 
             </>
           ))
         }
+        </div>
       </div>
-    </div>
-  </StyledJobCardCompany>
-);
+    </StyledJobCardCompany>
+  );
+};
 
 export default JobCardCompany;
