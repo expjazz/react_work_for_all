@@ -5,7 +5,7 @@ import curriculumActions from '../actions/curriculum';
 
 const { createCurriculum } = curriculumActions;
 const {
-  signUpUser, checkLoggedUser, signUpUserCompany, loginUser,
+  signUpUser, checkLoggedUser, signUpUserCompany, loginUser, addNewJob,
 } = usersActions;
 export const userSlice = createSlice({
   name: 'user',
@@ -22,6 +22,13 @@ export const userSlice = createSlice({
 
   },
   extraReducers: {
+    [addNewJob.pending]: state => { state.status = 'loading'; },
+    [addNewJob.fulfilled]: (state, action) => {
+      const jobOffers = [...state.company.jobOffers, action.payload];
+      const company = { ...state.company, jobOffers };
+      return { ...state, company, status: 'fulfilled' };
+    },
+
     [signUpUser.pending]: (state, action) => { state.status = 'loading'; },
 
     [signUpUser.fulfilled]: (state, action) => ({ ...state, status: 'fullfiled', currentUser: action.payload }),

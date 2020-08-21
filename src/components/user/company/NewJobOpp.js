@@ -4,7 +4,7 @@ import tw from 'tailwind.macro';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import jobActions from '../../../actions/job';
+import userActions from '../../../actions/users';
 import Input from '../../common/Input';
 
 const StyledNewJobOpp = styled.div.attrs({
@@ -33,7 +33,7 @@ const OppForm = styled.form.attrs({
 // :requirement, :salary, :position
 const NewJobOpp = () => {
   const dispatch = useDispatch();
-  const { addNewJob } = jobActions;
+  const { addNewJob } = userActions;
   const formik = useFormik({
     initialValues: {
       requirement: '',

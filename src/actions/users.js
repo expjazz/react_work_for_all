@@ -57,6 +57,18 @@ const checkLoggedUser = createAsyncThunk('user/checkloggeduser', async thunkAPI 
   return data.data;
 });
 
+const addNewJob = createAsyncThunk('user/job/new', async (args, thunkAPI) => {
+  const options = {
+    method: 'POST',
+    url: 'http://localhost:3000/job_offers',
+    withCredentials: true,
+    data: args,
+  };
+  const res = await axios(options);
+  // thunkAPI.dispatch(checkLoggedUser());
+  return res.data;
+});
+
 export default {
-  signUpUser, checkLoggedUser, signUpUserCompany, loginUser,
+  signUpUser, checkLoggedUser, signUpUserCompany, loginUser, addNewJob,
 };

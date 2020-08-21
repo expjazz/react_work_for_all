@@ -59,5 +59,5 @@ const acceptCandidate = createAsyncThunk('job/companyAccept', async args => {
 });
 
 export default {
-  addNewJob, addAllJobs, candidateApplyForJob, acceptCandidate,
+  addAllJobs, candidateApplyForJob, acceptCandidate,
 };
