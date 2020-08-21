@@ -69,6 +69,17 @@ const addNewJob = createAsyncThunk('user/job/new', async (args, thunkAPI) => {
   return res.data;
 });
 
+const setUpInterviewCandidate = createAsyncThunk('user/candidate/interview', async args => {
+  const options = {
+    method: 'POST',
+    url: 'http://localhost:3000/interviews/create',
+    withCredentials: true,
+    data: args,
+  };
+  const { data } = await axios(options);
+  return data;
+});
+
 export default {
-  signUpUser, checkLoggedUser, signUpUserCompany, loginUser, addNewJob,
+  signUpUser, checkLoggedUser, signUpUserCompany, loginUser, addNewJob, setUpInterviewCandidate,
 };
