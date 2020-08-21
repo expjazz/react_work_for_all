@@ -4,6 +4,7 @@ const selectJobOfferCandidate = (jobOfferId, candidateId) => createSelector(
   state => state.users.company.jobOffers,
   jobOffers => {
     const job = jobOffers[jobOfferId];
+
     const candidate = job.candidates[candidateId];
     return {
       name: candidate.name,
