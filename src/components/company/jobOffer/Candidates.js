@@ -18,7 +18,6 @@ const Candidates = () => {
   const arr = url.split('/');
   const ids = [arr[arr.length - 2], arr[arr.length - 1]];
   const user = useSelector(selectJobOfferCandidate(ids[0], ids[1]));
-  console.log(user);
   const { personalArr, addressArr } = useSelector(state => state.users.infoArrays);
   const acceptApplication = () => {
     const newObj = {

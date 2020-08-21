@@ -26,7 +26,7 @@ const JobShow = () => {
       case 'pending':
         return <button type="button">Waiting for company</button>;
       default:
-        return <button type="button" onClick={() => dispatch(candidateApplyForJob({ job_offer_id: job.id }))}>Aply for job</button>;
+        return <button type="button" onClick={() => dispatch(candidateApplyForJob({ job_offer_id: job.id }))}>Apply for job</button>;
     }
   };
   return (
