@@ -25,6 +25,10 @@ const loginUser = createAsyncThunk('user/login', async (args, thunkAPI) => {
   };
   const res = await axios(options);
   const { data } = res;
+  const { addAllJobs } = jobActions;
+
+  thunkAPI.dispatch(addAllJobs());
+
   return data;
 });
 

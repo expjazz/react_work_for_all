@@ -11,8 +11,7 @@ const createCurriculum = createAsyncThunk('curriculum/create', async (args, thun
   };
 
   const data = await axios(options);
-  console.log(data);
-  return data;
+  return data.data;
 });
 
 export default { createCurriculum };
