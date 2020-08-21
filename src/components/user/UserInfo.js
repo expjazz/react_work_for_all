@@ -54,7 +54,7 @@ const UserInfo = () => {
           </p>
         </div>
         {
-          Object.keys(curriculum).length > 0 ? (
+          curriculum ? (
             <>
               <div className="infoList">
                 <p>personal info</p>

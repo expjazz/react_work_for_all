@@ -6,8 +6,7 @@ const selectJobOfferCandidate = (jobOfferId, candidateId) => createSelector(
     const job = jobOffers[jobOfferId];
 
     const candidate = job.candidates[candidateId];
-    console.log('object');
-    console.log(candidate);
+
     return {
       name: candidate.name,
       email: candidate.user.email,

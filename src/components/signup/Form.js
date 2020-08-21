@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import usersActions from '../../actions/users';
+import jobActions from '../../actions/job';
 
 const StyledForm = styled.form.attrs({
   className: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4',
@@ -26,6 +27,8 @@ const StyledForm = styled.form.attrs({
   }
 `;
 const Form = () => {
+  const { addAllJobs } = jobActions;
+
   const [redirect, setRedirect] = useState(false);
   const { signUpUser } = usersActions;
   const dispatch = useDispatch();
@@ -61,6 +64,8 @@ const Form = () => {
 
       };
       dispatch(signUpUser(newObj));
+      dispatch(addAllJobs());
+
       setRedirect(true);
     },
   });

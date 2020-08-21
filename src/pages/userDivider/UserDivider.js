@@ -11,9 +11,9 @@ const UserDivider = () => {
   if (users.status === 'loading' || users.status === 'idle') {
     return <p>loading</p>;
   }
-  // if (users.status === 'rejected') {
-  //   return <p>{users.currentUser.message}</p>;
-  // }
+  if (users.status === 'rejected') {
+    return <p>{users.currentUser.message}</p>;
+  }
 
   // handle logged user
 

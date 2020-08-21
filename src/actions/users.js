@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import jobActions from './job';
 
 const signUpUser = createAsyncThunk('user/signup', async (args, thunkAPI) => {
   const options = {
@@ -8,8 +9,11 @@ const signUpUser = createAsyncThunk('user/signup', async (args, thunkAPI) => {
     withCredentials: true,
     data: args,
   };
+  const { addAllJobs } = jobActions;
   const data = await axios(options);
-  return data;
+
+  thunkAPI.dispatch(addAllJobs());
+  return data.data;
 });
 
 const loginUser = createAsyncThunk('user/login', async (args, thunkAPI) => {
