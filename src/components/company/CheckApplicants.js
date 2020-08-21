@@ -15,8 +15,8 @@ const CheckApplicants = () => {
   return (
     <StyledCheckApplicants>
       <Carousel renderPagination={({ pages, activePage, onClick }) => <></>}>
-        {allJobOffersFromUser.map(job => (
-          <JobCardCompany key={job.id} job={job} />
+        {allJobOffersFromUser.map((job, index) => (
+          <JobCardCompany key={job.id} job={job} index={index} />
         ))}
       </Carousel>
     </StyledCheckApplicants>

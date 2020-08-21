@@ -78,7 +78,7 @@ const CompanyUserPage = ({ users: { currentUser, company } }) => {
           <Route path={`${path}/opportunities/new`}>
             <NewJobOpp />
           </Route>
-          <Route exact path={`${path}/opportunities/candidates/:name`}>
+          <Route exact path={`${path}/opportunities/candidates/:jobId/:candidateId`}>
             <p>name</p>
           </Route>
           <Route path={`${path}/opportunities/candidates`}>

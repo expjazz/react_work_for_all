@@ -10,8 +10,8 @@ const StyledJobCardCompany = styled.div.attrs({
 })``;
 const JobCardCompany = ({
   job: {
-    position, requirement, salary, candidates, id,
-  },
+    position, requirement, salary, candidates,
+  }, index,
 }) => {
   const { path } = useRouteMatch();
   return (
@@ -36,7 +36,7 @@ const JobCardCompany = ({
           {
           candidates.map((candidate, ind) => (
             <>
-              <Link to={`${path}/${candidate.name}`} key={candidate.name}>
+              <Link to={`${path}/${index}/${ind}`} key={candidate.name}>
 
                 {candidate.name}
               </Link>
