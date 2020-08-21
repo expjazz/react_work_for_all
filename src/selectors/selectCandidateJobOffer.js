@@ -21,7 +21,6 @@ const selectJobDetailsToCandidate = jobId => createSelector(
   (all, name) => {
     if ((all).length === 0) return {};
     const job = all[jobId];
-    console.log(all);
     let status = 'idle';
     if (job.approved.find(candidate => candidate.name === name)) {
       status = 'approved';
@@ -33,6 +32,7 @@ const selectJobDetailsToCandidate = jobId => createSelector(
       salary: job.salary,
       status,
       companyName: job.user.profile.name,
+      id: job.id,
 
     };
   },
