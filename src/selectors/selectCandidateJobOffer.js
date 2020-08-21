@@ -17,9 +17,11 @@ const selectJobOfferCandidate = (jobOfferId, candidateId) => createSelector(
 );
 
 const selectJobDetailsToCandidate = jobId => createSelector(
-  state => state.jobOffers.index.all, state => state.currentUser.user.name,
+  state => state.jobOffers.index.all, state => state.users.currentUser.user.name,
   (all, name) => {
+    if ((all).length === 0) return {};
     const job = all[jobId];
+    console.log(all);
     let status = 'idle';
     if (job.approved.find(candidate => candidate.name === name)) {
       status = 'approved';
@@ -36,4 +38,4 @@ const selectJobDetailsToCandidate = jobId => createSelector(
   },
 );
 
-export default { selectJobOfferCandidate };
+export default { selectJobOfferCandidate, selectJobDetailsToCandidate };

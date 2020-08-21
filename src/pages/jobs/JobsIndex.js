@@ -16,8 +16,8 @@ const JobsIndex = () => {
   return (
     <StyledJobIndex>
       <Carousel renderPagination={({ pages, activePage, onClick }) => <></>}>
-        {allJobs.map(job => (
-          <JobCard key={job.id} job={job} applied={!!job.candidates.find(candidate => candidate.user.email === email)} />
+        {allJobs.map((job, index) => (
+          <JobCard key={job.id} job={job} index={index} />
         ))}
       </Carousel>
     </StyledJobIndex>
