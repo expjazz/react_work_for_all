@@ -1,7 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import userActions from './users';
 
-const addNewJob = createAsyncThunk('job/new', async args => {
+const addNewJob = createAsyncThunk('job/new', async (args, thunkAPI) => {
+  const { checkLoggedUser } = userActions;
   const options = {
     method: 'POST',
     url: 'http://localhost:3000/job_offers',
@@ -9,6 +11,7 @@ const addNewJob = createAsyncThunk('job/new', async args => {
     data: args,
   };
   const res = await axios(options);
+  thunkAPI.dispatch(checkLoggedUser());
   return res.data;
 });
 
