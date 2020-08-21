@@ -28,6 +28,11 @@ const Candidates = () => {
         email:
         {' '}
         {user.email}
+        <p>
+          header:
+          {' '}
+          {user.aboutMe}
+        </p>
       </div>
       <div className="infoList">
         <p>personal info</p>

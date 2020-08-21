@@ -16,4 +16,24 @@ const selectJobOfferCandidate = (jobOfferId, candidateId) => createSelector(
   },
 );
 
+const selectJobDetailsToCandidate = jobId => createSelector(
+  state => state.jobOffers.index.all, state => state.currentUser.user.name,
+  (all, name) => {
+    const job = all[jobId];
+    let status = 'idle';
+    if (job.approved.find(candidate => candidate.name === name)) {
+      status = 'approved';
+    } else if (status !== 'approved' && job.candidates.find(candidate => candidate.name === name)) {
+      status = 'pending';
+    }
+    return {
+      requirement: job.requirement,
+      salary: job.salary,
+      status,
+      companyName: job.user.profile.name,
+
+    };
+  },
+);
+
 export default { selectJobOfferCandidate };

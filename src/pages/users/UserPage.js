@@ -14,6 +14,7 @@ import Curriculum from './Curriculum';
 import SideNav from '../../components/user/SideNav';
 import UserInfo from '../../components/user/UserInfo';
 import JobsIndex from '../jobs/JobsIndex';
+import JobShow from '../../components/user/JobShow';
 
 const StyledUserPage = styled.div.attrs({
   className: 'grid',
@@ -63,7 +64,10 @@ const UserPage = ({ users: { currentUser, curriculum } }) => {
           <Route path={`${path}/curriculum/edit`}>
             <Curriculum />
           </Route>
-          <Route path={`${path}/jobs/index`}>
+          <Route path={`${path}/jobs/index/:jobId`}>
+            <JobShow />
+          </Route>
+          <Route exact path={`${path}/jobs/index`}>
             <JobsIndex />
           </Route>
         </Switch>

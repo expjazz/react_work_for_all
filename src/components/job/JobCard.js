@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { useSelector, useDispatch } from 'react-redux';
+import { useRouteMatch, Link } from 'react-router-dom';
 import jobActions from '../../actions/job';
 
 const StyledJobCard = styled.div.attrs({
@@ -17,6 +18,7 @@ const JobCard = ({
     position, requirement, salary, user, id,
   }, applied,
 }) => {
+  const { url } = useRouteMatch();
   const { candidateApplyForJob, addAllJobs } = jobActions;
   const dispatch = useDispatch();
   const handleApplication = () => {
@@ -52,7 +54,10 @@ const JobCard = ({
           {user.profile.name}
         </div>
       </div>
-      <button type="button" onClick={handleApplication}>{applied ? 'waiting for an anwser ' : 'Apply'}</button>
+      <Link to={`${url}/id`}>
+
+        <button type="button"> Check More</button>
+      </Link>
     </StyledJobCard>
   );
 };
