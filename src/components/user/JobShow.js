@@ -28,7 +28,12 @@ const JobShow = () => {
   const handleShowPopup = () => {
     setdNone(false);
     setTimeout(() => setShowPopup(true), 300);
-    console.log('here');
+  };
+
+  const hidePopUp = () => {
+    setShowPopup(false);
+
+    setTimeout(() => setdNone(true), 300);
   };
   const returnButton = () => {
     switch (job.status) {
@@ -60,7 +65,7 @@ const JobShow = () => {
       }
 
       {returnButton() }
-      <PopUpInterview show={showPopup} dNone={dNone} />
+      <PopUpInterview show={showPopup} dNone={dNone} hide={hidePopUp} companyId={job.profileId} jobId={job.jobId} />
     </StyledJobShow>
   );
 };
