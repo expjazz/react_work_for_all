@@ -46,7 +46,7 @@ export const userSlice = createSlice({
     [checkLoggedUser.fulfilled]: (state, action) => {
       if (action.payload.companyInfo) {
         return ({
-          ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, company: action.payload.companyInfo,
+          ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, company: action.payload.companyInfo, interviews: action.payload.interviews,
         });
       } if (action.payload.curriculum) {
         return ({
@@ -74,11 +74,11 @@ export const userSlice = createSlice({
     [loginUser.fulfilled]: (state, action) => {
       if (action.payload.companyInfo) {
         return ({
-          ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, company: action.payload.companyInfo,
+          ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, company: action.payload.companyInfo, interviews: action.payload.interviews,
         });
       } if (action.payload.curriculum) {
         return ({
-          ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, curriculum: action.payload.curriculum,
+          ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, curriculum: action.payload.curriculum, interviews: action.payload.interviews,
         });
       } if (action.payload.message === 'no user logged in') {
         return ({

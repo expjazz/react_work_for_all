@@ -15,6 +15,7 @@ import CompanyEdit from './CompanyEdit';
 import NewJobOpp from '../../../components/user/company/NewJobOpp';
 import CheckApplicants from '../../../components/company/CheckApplicants';
 import Candidates from '../../../components/company/jobOffer/Candidates';
+import CompanyInterviewIndex from '../../../components/user/company/CompanyInterviewIndex';
 
 const StyledCompanyUserPage = styled.div.attrs({
   className: 'grid',
@@ -28,23 +29,30 @@ const CompanyUserPage = ({ users: { currentUser, company } }) => {
       setColOne({ ...colOne, active: false });
       setColThree({ ...colThree, active: false });
       setColFour({ ...colFour, active: false });
+      setColFive({ ...colFive, active: false });
     } else if (url.includes('opportunities/new')) {
       setColTwo({ ...colTwo, active: false });
       setColOne({ ...colOne, active: false });
       setColThree({ ...colThree, active: true });
       setColFour({ ...colFour, active: false });
+      setColFive({ ...colFive, active: false });
     } else if (url.includes('opportunities/candidates')) {
       setColTwo({ ...colTwo, active: false });
       setColOne({ ...colOne, active: false });
       setColThree({ ...colThree, active: false });
       setColFour({ ...colFour, active: true });
+      setColFive({ ...colFive, active: false });
     } else {
       setColTwo({ ...colTwo, active: false });
       setColOne({ ...colOne, active: true });
       setColThree({ ...colThree, active: false });
       setColFour({ ...colFour, active: false });
+      setColFive({ ...colFive, active: false });
     }
   };
+  const [colFive, setColFive] = useState({
+    path: `${url}/interviews/index`, text: 'Check your interviews', active: false, handleClick: handleActiveCol,
+  });
   const [colOne, setColOne] = useState({
     path: url, text: currentUser.user.name, active: true, handleClick: handleActiveCol,
   });
@@ -67,6 +75,7 @@ const CompanyUserPage = ({ users: { currentUser, company } }) => {
           colTwo={colTwo}
           colThree={colThree}
           colFour={colFour}
+          colFive={colFive}
           handleClick={handleActiveCol}
         />
         <Switch>
@@ -79,6 +88,10 @@ const CompanyUserPage = ({ users: { currentUser, company } }) => {
           <Route path={`${path}/opportunities/new`}>
             <NewJobOpp />
           </Route>
+          <Route path={`${path}/interviews/index`}>
+            <CompanyInterviewIndex />
+          </Route>
+
           <Route exact path={`${path}/opportunities/candidates/:jobId/:candidateId`}>
             <Candidates />
           </Route>
