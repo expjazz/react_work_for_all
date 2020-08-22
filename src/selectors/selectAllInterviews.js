@@ -11,6 +11,7 @@ const selectCandidateInterviews = createSelector(
     candidateName: interview.candidate.name,
     jobOfferId: interview.job_offer.id,
     jobOfferPosition: interview.job_offer.position,
+    time: interview.time,
   })),
 );
 

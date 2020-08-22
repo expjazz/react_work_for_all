@@ -8,7 +8,7 @@ const StyledInterviewCard = styled.div.attrs({
 })``;
 const InterviewCard = ({
   interview: {
-    id, status, companyId, candidateId, companyName, candidateName, jobOfferId, jobOfferPosition,
+    id, status, companyId, candidateId, companyName, candidateName, jobOfferId, jobOfferPosition, time,
   },
 }) => {
   console.log(status);
@@ -28,6 +28,12 @@ const InterviewCard = ({
         Status:
         {' '}
         {status}
+      </p>
+
+      <p>
+        time:
+        {' '}
+        {time}
       </p>
     </StyledInterviewCard>
   );
