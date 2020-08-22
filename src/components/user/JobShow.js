@@ -13,7 +13,8 @@ const StyledJobShow = styled.div.attrs({
 
 })``;
 const JobShow = () => {
-  const [showPopup, setShowPopup] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
+  const [dNone, setdNone] = useState(true);
   const { candidateApplyForJob } = jobActions;
   const { setUpInterviewCandidate } = userActions;
   const dispatch = useDispatch();
@@ -24,10 +25,15 @@ const JobShow = () => {
   const job = useSelector(selectJobDetailsToCandidate(id));
   console.log('jjob');
   console.log(job);
+  const handleShowPopup = () => {
+    setdNone(false);
+    setTimeout(() => setShowPopup(true), 300);
+    console.log('here');
+  };
   const returnButton = () => {
     switch (job.status) {
       case 'approved':
-        return <button type="button" onClick={() => dispatch(setUpInterviewCandidate({ company_id: job.profileId, job_offer_id: job.jobId }))}>Set up a interview</button>;
+        return <button type="button" onClick={handleShowPopup}>Set up a interview</button>;
       case 'pending':
         return <button type="button">Waiting for company</button>;
       default:
@@ -54,7 +60,7 @@ const JobShow = () => {
       }
 
       {returnButton() }
-      <PopUpInterview show={showPopup} />
+      <PopUpInterview show={showPopup} dNone={dNone} />
     </StyledJobShow>
   );
 };

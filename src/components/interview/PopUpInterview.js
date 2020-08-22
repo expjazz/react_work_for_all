@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import tw from 'tailwind.macro';
 
 const StyledPopUpInterview = styled.div.attrs({
-  className: 'bg-red-800 absolute',
+  className: 'bg-red-800 absolute transition-all duration-700 ',
 })`
   height: 20rem;
   width: 40rem;
@@ -11,16 +11,21 @@ const StyledPopUpInterview = styled.div.attrs({
   left: 25%;
 
 `;
-const PopUpInterview = ({ show }) => {
+const PopUpInterview = ({ show, dNone }) => {
   const a = 'ts';
   return (
-    <StyledPopUpInterview>
+    <StyledPopUpInterview className={`${show ? 'opacity-100' : 'opacity-0'} ${dNone ? 'hidden' : 'block'}`}>
 
-      <div className={show ? 'opacity-100' : 'opacity-0'}>
+      <div>
         sd
+        <button type="button">
+          close
+        </button>
       </div>
     </StyledPopUpInterview>
   );
 };
 
 export default PopUpInterview;
+
+// onClick={() => dispatch(setUpInterviewCandidate({ company_id: job.profileId, job_offer_id: job.jobId }))}
