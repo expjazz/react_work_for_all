@@ -50,7 +50,7 @@ export const userSlice = createSlice({
         });
       } if (action.payload.curriculum) {
         return ({
-          ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, curriculum: action.payload.curriculum,
+          ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, curriculum: action.payload.curriculum, interviews: action.payload.interviews,
         });
       } if (action.payload.message === 'no user logged in') {
         return ({
