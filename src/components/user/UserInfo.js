@@ -6,27 +6,58 @@ import { useSelector } from 'react-redux';
 const StyledUserInfo = styled.div.attrs({
   className: 'content col-start-3 col-end-12 pt-10',
 })`
+  .jobOffer {
+    ${tw`pt-8 pl-8`}
+    .smallTitle {
+      ${tw`text-gray-400`}
+    }
+
+    .title {
+      ${tw`text-4xl`}
+    }
+
+    span {
+      ${tw`text-gray-600 capitalize`}
+    }
+  }
+
   .title {
     h3 {
       ${tw`text-4xl`}
     }
   }
 
-  .middlebutton {
-    background: ${props => props.theme.green};
-    ${tw` rounded-full w-48 h-16 text-center flex items-center relative`}
-    :after {
-      content: '';
-      bottom: -12px;
-      left: 50%;
-      border-left: 12px solid transparent;
-      border-right: 12px solid transparent;
-      border-top: 12px solid ${props => props.theme.green};
-      position: absolute;
-    }
+  .bottom {
+    ${tw`pt-16`}
+  }
 
-    p {
-      ${tw`m-auto`}
+  .buttons {
+    ${tw`mb-8`}
+    .middlebutton {
+      background: ${props => props.theme.green};
+      ${tw` rounded-full w-48 h-16 text-center flex items-center relative justify-center`}
+      p {
+        ${tw`m-auto`}
+      }
+
+      :first-child {
+        ::after {
+          content: '';
+          bottom: -12px;
+          left: 50%;
+          border-left: 12px solid transparent;
+          border-right: 12px solid transparent;
+          border-top: 12px solid ${props => props.theme.green};
+          position: absolute;
+        }
+      }
+
+      :last-child {
+        ${tw`ml-8`}
+
+        background: ${props => props.theme.white};
+        border: 1px solid ${props => props.theme.green};
+      }
     }
   }
 `;
@@ -35,8 +66,7 @@ const UserInfo = () => {
   const { currentUser, curriculum } = useSelector(state => state.users);
   const allJobOffers = useSelector(state => state.jobOffers.index.all);
   const jobOffer = allJobOffers[Math.floor(Math.random() * allJobOffers.length)];
-  console.log('object');
-  console.log(jobOffer);
+
   if (!jobOffer) return <p>loading</p>;
   return (
     <StyledUserInfo>
@@ -59,23 +89,37 @@ const UserInfo = () => {
         </p>
         <div className="content">
           <p>
+            <span>
 
-            position:
+              position:
+            </span>
             {' '}
             {jobOffer.position}
           </p>
           <p>
-            company:
+            <span>
+
+              company:
+            </span>
             {' '}
             {jobOffer.user.profile.name}
           </p>
         </div>
       </div>
       <div className="bottom">
-        <div className="middlebutton">
-          <p>
-            Your Profile
-          </p>
+        <div className="buttons flex">
+
+          <div className="middlebutton">
+            <button type="button">
+              Your Profile
+            </button>
+          </div>
+
+          <div className="middlebutton">
+            <button type="button">
+              Check out more offers
+            </button>
+          </div>
         </div>
         {
           curriculum ? (
