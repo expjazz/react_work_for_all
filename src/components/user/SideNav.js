@@ -21,17 +21,21 @@ const StyledSideNav = styled.div.attrs({
     }
   }
 `;
+
 const SideNav = props => (
   <StyledSideNav>
     { Object.keys(props).map(col => (
 
       <div key={col} className="linkList">
         <div className={props[col].active ? 'one' : ''}>
-          <Link to={props[col].path} onClick={() => props[col].handleClick(props[col].path)}>
-            <p>
-              {props[col].text}
-            </p>
-          </Link>
+          {props[col].path === undefined ? '' : (
+
+            <Link to={props[col].path} onClick={() => props[col].handleClick(props[col].path)}>
+              <p>
+                {props[col].text}
+              </p>
+            </Link>
+          )}
         </div>
       </div>
     ))}

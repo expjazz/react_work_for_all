@@ -33,7 +33,9 @@ const StyledUserInfo = styled.div.attrs({
 const UserInfo = () => {
   const { personalArr, addressArr } = useSelector(state => state.users.infoArrays);
   const { currentUser, curriculum } = useSelector(state => state.users);
-
+  console.log('object');
+  const currentJobOffer = useSelector(state => state.jobOffers.index.all[-1]);
+  console.log(currentJobOffer);
   return (
     <StyledUserInfo>
       <div className="title">
@@ -45,7 +47,7 @@ const UserInfo = () => {
         </p>
       </div>
       <div className="jobOffer h-40">
-        some offer
+        some
       </div>
       <div className="bottom">
         <div className="middlebutton">
