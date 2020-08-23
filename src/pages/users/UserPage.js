@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /* eslint-disable no-use-before-define */
 import React, { useState } from 'react';
 import styled from 'styled-components';
@@ -7,9 +6,9 @@ import { useSelector } from 'react-redux';
 import {
   Switch,
   Route,
-  Link,
   useRouteMatch,
 } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Curriculum from './Curriculum';
 import SideNav from '../../components/user/SideNav';
 import UserInfo from '../../components/user/UserInfo';
@@ -20,7 +19,7 @@ import UserInterviewIndex from '../../components/user/UserInterviewIndex';
 const StyledUserPage = styled.div.attrs({
   className: 'grid',
 })``;
-const UserPage = ({ users: { currentUser, curriculum } }) => {
+const UserPage = ({ users: { currentUser } }) => {
   const { path, url } = useRouteMatch();
   const handleActiveCol = url => {
     if (url.includes('edit')) {
@@ -94,3 +93,13 @@ const UserPage = ({ users: { currentUser, curriculum } }) => {
 };
 
 export default UserPage;
+
+UserPage.propTypes = {
+  users: PropTypes.shape({
+    currentUser: PropTypes.shape({
+      user: PropTypes.shape({
+        name: PropTypes.string,
+      }),
+    }),
+  }).isRequired,
+};
