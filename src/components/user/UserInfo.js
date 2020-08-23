@@ -33,21 +33,43 @@ const StyledUserInfo = styled.div.attrs({
 const UserInfo = () => {
   const { personalArr, addressArr } = useSelector(state => state.users.infoArrays);
   const { currentUser, curriculum } = useSelector(state => state.users);
+  const allJobOffers = useSelector(state => state.jobOffers.index.all);
+  const jobOffer = allJobOffers[Math.floor(Math.random() * allJobOffers.length)];
   console.log('object');
-  const currentJobOffer = useSelector(state => state.jobOffers.index.all[-1]);
-  console.log(currentJobOffer);
+  console.log(jobOffer);
+  if (!jobOffer) return <p>loading</p>;
   return (
     <StyledUserInfo>
       <div className="title">
         <h3>Overview</h3>
         <p>
           Hi
+          {' '}
+          {' '}
           {currentUser.user.name}
           , welcome back!
         </p>
       </div>
       <div className="jobOffer h-40">
-        some
+        <p className="smallTitle">CHECK OUT THIS JOB OFFER</p>
+        <p className="title">
+          $
+          {' '}
+          {jobOffer.salary}
+        </p>
+        <div className="content">
+          <p>
+
+            position:
+            {' '}
+            {jobOffer.position}
+          </p>
+          <p>
+            company:
+            {' '}
+            {jobOffer.user.profile.name}
+          </p>
+        </div>
       </div>
       <div className="bottom">
         <div className="middlebutton">
