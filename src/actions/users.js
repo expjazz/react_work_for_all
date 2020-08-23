@@ -80,6 +80,17 @@ const setUpInterviewCandidate = createAsyncThunk('user/candidate/interview', asy
   return data;
 });
 
+const updateInterviewStatus = createAsyncThunk('user/company/interview', async args => {
+  const options = {
+    method: 'PATCH',
+    url: 'http://localhost:3000/interviews/update',
+    withCredentials: true,
+    data: args,
+  };
+  const { data } = await axios(options);
+  return data;
+});
+
 export default {
-  signUpUser, checkLoggedUser, signUpUserCompany, loginUser, addNewJob, setUpInterviewCandidate,
+  signUpUser, checkLoggedUser, signUpUserCompany, loginUser, addNewJob, setUpInterviewCandidate, updateInterviewStatus,
 };

@@ -5,7 +5,7 @@ import curriculumActions from '../actions/curriculum';
 
 const { createCurriculum } = curriculumActions;
 const {
-  signUpUser, checkLoggedUser, signUpUserCompany, loginUser, addNewJob, setUpInterviewCandidate,
+  signUpUser, checkLoggedUser, signUpUserCompany, loginUser, addNewJob, setUpInterviewCandidate, updateInterviewStatus,
 } = usersActions;
 export const userSlice = createSlice({
   name: 'user',
@@ -33,6 +33,10 @@ export const userSlice = createSlice({
     [signUpUser.pending]: (state, action) => { state.status = 'loading'; },
 
     [signUpUser.fulfilled]: (state, action) => ({ ...state, status: 'fullfiled', currentUser: action.payload }),
+
+    [updateInterviewStatus.pending]: (state, action) => { state.status = 'loading'; },
+
+    [updateInterviewStatus.fulfilled]: (state, action) => ({ ...state, status: 'fullfiled', interviews: [...state.interviews, action.payload] }),
 
     [setUpInterviewCandidate.pending]: (state, action) => { state.status = 'loading'; },
 

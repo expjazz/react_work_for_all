@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import styled from 'styled-components';
@@ -9,9 +10,19 @@ const StyledInterviewCard = styled.div.attrs({
 const InterviewCard = ({
   interview: {
     id, status, companyId, candidateId, companyName, candidateName, jobOfferId, jobOfferPosition, time,
-  },
+  }, companyPage,
 }) => {
-  console.log(status);
+  const companyButtons = () => {
+    if (companyPage) {
+      return (
+        <div className="buttons">
+          <button type="button" onClick={() => companyPage.update(jobOfferId, companyId, candidateId, 'Accepted')}>Accept</button>
+          <button type="button" onClick={() => companyPage.update(jobOfferId, companyId, candidateId, 'Waiting for the candidate', time)}>Suggest Another time</button>
+
+        </div>
+      );
+    }
+  };
   return (
     <StyledInterviewCard>
       <p>
@@ -35,6 +46,9 @@ const InterviewCard = ({
         {' '}
         {time}
       </p>
+
+      {companyButtons()}
+
     </StyledInterviewCard>
   );
 };
