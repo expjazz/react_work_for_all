@@ -2,12 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { useSelector } from 'react-redux';
+import CandidateJobStats from './CandidateJobStats';
 
 const StyledUserInfo = styled.div.attrs({
-  className: 'content col-start-3 col-end-12 pt-10',
+  className: 'content col-start-3 col-end-9 pt-10 flex justify-center flex-col text-center',
 })`
   .jobOffer {
-    ${tw`pt-8 pl-8`}
+    ${tw`pt-8 text-center`}
     .smallTitle {
       ${tw`text-gray-400`}
     }
@@ -54,13 +55,6 @@ const StyledUserInfo = styled.div.attrs({
           position: absolute;
         }
       }
-
-      :last-child {
-        ${tw`ml-8`}
-
-        background: ${props => props.theme.white};
-        border: 1px solid ${props => props.theme.green};
-      }
     }
   }
 
@@ -82,61 +76,62 @@ const UserInfo = () => {
 
   if (!jobOffer) return <p>loading</p>;
   return (
-    <StyledUserInfo>
-      <div className="title">
-        <h3>Overview</h3>
-        <p>
-          Hi
-          {' '}
-          {' '}
-          {currentUser.user.name}
-          , welcome back!
-        </p>
-      </div>
-      <div className="jobOffer h-40">
-        <p className="smallTitle">CHECK OUT THIS JOB OFFER</p>
-        <p className="title">
-          $
-          {' '}
-          {jobOffer.salary}
-        </p>
-        <div className="content">
+    <>
+      <StyledUserInfo>
+        <div className="title">
+          <h3>Overview</h3>
           <p>
-            <span>
-
-              position:
-            </span>
+            Hi
             {' '}
-            {jobOffer.position}
-          </p>
-          <p>
-            <span>
-
-              company:
-            </span>
             {' '}
-            {jobOffer.user.profile.name}
+            {currentUser.user.name}
+            , welcome back!
           </p>
         </div>
-      </div>
-      <div className="bottom">
-        <div className="buttons flex">
+        <div className="jobOffer h-40">
+          <p className="smallTitle">CHECK OUT THIS JOB OFFER</p>
+          <p className="title">
+            $
+            {' '}
+            {jobOffer.salary}
+          </p>
+          <div className="content">
+            <p>
+              <span>
 
-          <div className="middlebutton">
-            <button type="button">
-              Your Profile
-            </button>
-          </div>
+                position:
+              </span>
+              {' '}
+              {jobOffer.position}
+            </p>
+            <p>
+              <span>
 
-          <div className="middlebutton">
-            <button type="button">
-              Check out more offers
-            </button>
+                company:
+              </span>
+              {' '}
+              {jobOffer.user.profile.name}
+            </p>
           </div>
         </div>
-        <div className="candidateInfo">
+        <div className="bottom">
+          <div className="buttons flex justify-center">
 
-          {
+            <div className="middlebutton">
+              <button type="button">
+                Your Profile
+              </button>
+            </div>
+
+            {/* <div className="middlebutton">
+              <button type="button">
+                Check out more offers
+              </button>
+            </div> */}
+          </div>
+          <div className="candidateInfo">
+
+            {
           curriculum ? (
             <>
               <div className="infoList">
@@ -175,10 +170,13 @@ const UserInfo = () => {
           ) : (
             <p>add  curricukum</p>)
         }
-        </div>
+          </div>
 
-      </div>
-    </StyledUserInfo>
+        </div>
+      </StyledUserInfo>
+
+      <CandidateJobStats />
+    </>
   );
 };
 
