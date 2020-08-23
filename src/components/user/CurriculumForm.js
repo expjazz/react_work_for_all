@@ -34,11 +34,21 @@ const StyledPastJobs = styled.div`
 
 `;
 const CurriculumForm = () => {
+  const { personalArr, addressArr } = useSelector(state => state.users.infoArrays);
+  const { header, address, personal } = useSelector(state => state.users.curriculum);
   const { createCurriculum } = curriculumActions;
   const [redirect, setRedirect] = useState(false);
   const dispatch = useDispatch();
   const [pastJobsState, setPastJobsState] = useState([]);
   const [allRefs, setAllRefs] = useState([]);
+
+  const generateInputVals = arr => {
+    const newObj = {};
+    arr.forEach(fields => {
+      Object.keys(fields).forEach(field => { newObj[field] = fields[field]; });
+    });
+    return newObj;
+  };
   const addNewJob = () => {
     const inputs = {
       start: '',
@@ -49,8 +59,12 @@ const CurriculumForm = () => {
     setAllRefs([...allRefs, newRef]);
     setPastJobsState([...pastJobsState, inputs]);
   };
+
+  const formValues = (generateInputVals([address, personal]));
+
+  const curriculum = useSelector(state => state.users.curriculum);
   const formik = useFormik({
-    initialValues: {
+    initialValues: curriculum ? ({ about_me: header.about_me, ...formValues }) : ({
       about_me: '',
       children: '',
       married: '',
@@ -65,7 +79,7 @@ const CurriculumForm = () => {
       street: '',
       cel: '',
       jobs: [],
-    },
+    }),
     validationSchema: Yup.object({
       // cpf: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
       // state: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
@@ -142,8 +156,7 @@ const CurriculumForm = () => {
     //   setInputValues(newIn);
     // }
   };
-  const personalArr = ['children', 'married', 'cpf', 'race', 'nationality'];
-  const addressArr = ['country', 'cep', 'state', 'city', 'hood', 'street', 'cel'];
+
   return (
     <StyledCurriculumForm onSubmit={formik.handleSubmit}>
       <div className="title">
