@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 const StyledSideNav = styled.div.attrs({
-  className: 'col-start-1 col-end-3 grid items-center min-h-screen content-center h-full',
+  className: 'col-start-1 col-end-2 grid items-center min-h-screen content-center h-full',
 })`
   .linkList {
     ${tw``}

@@ -32,6 +32,9 @@ const StyledUserInfo = styled.div.attrs({
   }
 
   .buttons {
+    button {
+      ${tw`outline-none`}
+    }
     ${tw`mb-8`}
     .middlebutton {
       background: ${props => props.theme.green};
@@ -58,6 +61,16 @@ const StyledUserInfo = styled.div.attrs({
         background: ${props => props.theme.white};
         border: 1px solid ${props => props.theme.green};
       }
+    }
+  }
+
+  .candidateInfo {
+    span {
+      ${tw`text-gray-700 capitalize`}
+    }
+
+    h6 {
+      ${tw`my-4 uppercase`}
     }
   }
 `;
@@ -121,28 +134,37 @@ const UserInfo = () => {
             </button>
           </div>
         </div>
-        {
+        <div className="candidateInfo">
+
+          {
           curriculum ? (
             <>
               <div className="infoList">
-                <p>personal info</p>
+                <h6>Personal Information</h6>
                 { personalArr.map((info => (
                   <p key={info}>
-                    {info}
+                    <span>
+
+                      {info}
+                      :
+                    </span>
                     {' '}
                     {curriculum.personal[info]}
                   </p>
                 ))) }
               </div>
               <div className="addressList">
-                <p>
-                  address
-                </p>
+                <h6>Address Information</h6>
+
                 { addressArr.map(info => (
                   <p key={info}>
-                    {info}
-                    {' '}
-                    :
+                    <span>
+
+                      {info}
+
+                      {' '}
+                      :
+                    </span>
                     {' '}
                     {curriculum.address[info]}
                     {' '}
@@ -153,6 +175,8 @@ const UserInfo = () => {
           ) : (
             <p>add  curricukum</p>)
         }
+        </div>
+
       </div>
     </StyledUserInfo>
   );
