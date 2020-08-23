@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import CandidateJobStats from './CandidateJobStats';
 
 const StyledUserInfo = styled.div.attrs({
-  className: 'content col-start-3 col-end-9 pt-10 flex justify-center flex-col text-center',
+  className: 'content md:col-start-3 md:col-end-9 col-start-1 col-end-12 mx-8 md:mx-0 pt-10 flex justify-center flex-col text-center bg-gray-200 rounded-lg border shadow-2xl mb-8 mt-8',
 })`
   .jobOffer {
     ${tw`pt-8 text-center`}
@@ -34,7 +34,7 @@ const StyledUserInfo = styled.div.attrs({
 
   .buttons {
     button {
-      ${tw`outline-none`}
+      ${tw`outline-none `}
     }
     ${tw`mb-8`}
     .middlebutton {
@@ -54,6 +54,11 @@ const StyledUserInfo = styled.div.attrs({
           border-top: 12px solid ${props => props.theme.green};
           position: absolute;
         }
+      }
+
+      :last-child {
+        background: transparent;
+        border: 1px solid ${props => props.theme.green};
       }
     }
   }
@@ -123,11 +128,11 @@ const UserInfo = () => {
               </button>
             </div>
 
-            {/* <div className="middlebutton">
+            <div className="middlebutton">
               <button type="button">
-                Check out more offers
+                Check out your jobs applied
               </button>
-            </div> */}
+            </div>
           </div>
           <div className="candidateInfo">
 

@@ -2,7 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import curriculumActions from '../actions/curriculum';
 
-const { createCurriculum } = curriculumActions;
+const { createCurriculum, updateCurriculum } = curriculumActions;
 
 export const curriculumSlice = createSlice({
   name: 'curriculum',
@@ -14,6 +14,10 @@ export const curriculumSlice = createSlice({
   extraReducers: {
     [createCurriculum.pending]: (state, action) => { state.status = 'loading'; },
     [createCurriculum.fulfilled]: (state, action) => ({ ...state, status: 'fullfiled', current: action.payload }),
+
+    [updateCurriculum.pending]: (state, action) => { state.status = 'loading'; },
+    [updateCurriculum.fulfilled]: (state, action) => ({ ...state, status: 'fullfiled', current: action.payload }),
+
   },
 });
 

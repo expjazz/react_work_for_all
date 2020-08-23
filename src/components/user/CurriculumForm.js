@@ -35,9 +35,12 @@ const StyledPastJobs = styled.div`
 `;
 const CurriculumForm = () => {
   const { personalArr, addressArr } = useSelector(state => state.users.infoArrays);
-  const { header, address, personal } = useSelector(state => state.users.curriculum);
-  const { createCurriculum } = curriculumActions;
+
+  const curriculum = useSelector(state => state.users.curriculum);
+
+  const { createCurriculum, updateCurriculum } = curriculumActions;
   const [redirect, setRedirect] = useState(false);
+
   const dispatch = useDispatch();
   const [pastJobsState, setPastJobsState] = useState([]);
   const [allRefs, setAllRefs] = useState([]);
@@ -49,22 +52,10 @@ const CurriculumForm = () => {
     });
     return newObj;
   };
-  const addNewJob = () => {
-    const inputs = {
-      start: '',
-      end: '',
-      name: '',
-    };
-    const newRef = React.createRef();
-    setAllRefs([...allRefs, newRef]);
-    setPastJobsState([...pastJobsState, inputs]);
-  };
 
-  const formValues = (generateInputVals([address, personal]));
-
-  const curriculum = useSelector(state => state.users.curriculum);
-  const formik = useFormik({
-    initialValues: curriculum ? ({ about_me: header.about_me, ...formValues }) : ({
+  let formValues = {};
+  if (!curriculum) {
+    formValues = {
       about_me: '',
       children: '',
       married: '',
@@ -79,7 +70,27 @@ const CurriculumForm = () => {
       street: '',
       cel: '',
       jobs: [],
-    }),
+    };
+  } else {
+    const {
+      header, address, personal, pastJobs,
+    } = curriculum;
+    formValues = generateInputVals([header, address, personal]);
+    if (pastJobsState.length === 0) setPastJobsState(pastJobs);
+  }
+  const addNewJob = () => {
+    const inputs = {
+      start: '',
+      end: '',
+      name: '',
+    };
+    const newRef = React.createRef();
+    setAllRefs([...allRefs, newRef]);
+    setPastJobsState([...pastJobsState, inputs]);
+  };
+  console.log(curriculum);
+  const formik = useFormik({
+    initialValues: { ...formValues },
     validationSchema: Yup.object({
       // cpf: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
       // state: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
@@ -116,7 +127,12 @@ const CurriculumForm = () => {
         },
       };
 
-      dispatch(createCurriculum(newCurr));
+      if (!curriculum) {
+        dispatch(createCurriculum(newCurr));
+      } else {
+        dispatch(updateCurriculum({ ...newCurr, curriculum_id: curriculum.personal.curriculum_id }));
+      }
+
       // const { email, name, password } = values;
       // const newObj = {
       //   user: {

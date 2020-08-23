@@ -14,4 +14,15 @@ const createCurriculum = createAsyncThunk('curriculum/create', async (args, thun
   return data.data;
 });
 
-export default { createCurriculum };
+const updateCurriculum = createAsyncThunk('curriculum/update', async args => {
+  const options = {
+    method: 'PATCH',
+    url: 'http://localhost:3000/curriculums',
+    withCredentials: true,
+    data: args,
+  };
+  const { data } = await axios(options);
+  return data;
+});
+
+export default { createCurriculum, updateCurriculum };
