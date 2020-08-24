@@ -5,90 +5,78 @@ import { useSelector } from 'react-redux';
 import CandidateJobStats from './CandidateJobStats';
 
 const StyledUserInfo = styled.div.attrs({
-  className: 'content md:col-start-3 md:col-end-9 col-start-1 col-end-12 mx-8 md:mx-0 pt-10 flex justify-center flex-col text-center bg-gray-200 rounded-lg border shadow-2xl mb-8 mt-8',
+  className: 'content md:col-start-3 md:col-end-9 col-start-1 col-end-12 mx-8 md:mx-0 pt-10 flex justify-center flex-col text-center bg-gray-200 rounded-lg border shadow-2xl mb-8 mt-8 w-11/12 transition-all duration-200 ease-linear',
 })`
-  .jobOffer {
-    ${tw`pt-8 text-center`}
-    .smallTitle {
-      ${tw`text-gray-400`}
-    }
+justify-self: center;
+overflow-y: hidden;
 
-    .title {
-      ${tw`text-4xl`}
-    }
+:hover {
+  transform: scaleY(1.01);
+  transform: scale(1.01);
+}
 
-    span {
-      ${tw`text-gray-600 capitalize`}
-    }
+.title {
+  h3 {
+    ${tw`text-4xl`}
   }
+}
 
-  .title {
-    h3 {
-      ${tw`text-4xl`}
-    }
+span {
+  ${tw`text-gray-600 capitalize`}
+}
+
+.image {
+  ${tw`w-3/12 mx-auto mt-16`}
+}
+
+.bottom {
+  ${tw`pt-12`}
+}
+
+.buttons {
+  button {
+    ${tw`outline-none `}
   }
-
-  .bottom {
-    ${tw`pt-16`}
-  }
-
-  .buttons {
-    button {
-      ${tw`outline-none `}
+  ${tw`mb-8`}
+  .middlebutton {
+    background: ${props => props.theme.green};
+    ${tw` rounded-full w-48 h-16 text-center flex items-center relative justify-center mr-3`}
+    p {
+      ${tw`m-auto`}
     }
-    ${tw`mb-8`}
-    .middlebutton {
-      background: ${props => props.theme.green};
-      ${tw` rounded-full w-48 h-16 text-center flex items-center relative justify-center`}
-      p {
-        ${tw`m-auto`}
-      }
 
-      :first-child {
-        ::after {
-          content: '';
-          bottom: -12px;
-          left: 50%;
-          border-left: 12px solid transparent;
-          border-right: 12px solid transparent;
-          border-top: 12px solid ${props => props.theme.green};
-          position: absolute;
-        }
-      }
-
-      :last-child {
-        background: transparent;
-        border: 1px solid ${props => props.theme.green};
+    :first-child {
+      ::after {
+        content: '';
+        bottom: -12px;
+        left: 50%;
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        border-top: 12px solid ${props => props.theme.green};
+        position: absolute;
       }
     }
-  }
 
-  .candidateInfo {
-    span {
-      ${tw`text-gray-700 capitalize`}
-    }
-
-    h6 {
-      ${tw`my-4 uppercase`}
+    :last-child {
+      background: transparent;
+      border: 1px solid ${props => props.theme.green};
     }
   }
+}
+
+.candidateInfo {
+  span {
+    ${tw`text-gray-700 capitalize`}
+  }
+
+  h6 {
+    ${tw`my-4 uppercase`}
+  }
+}
 `;
 const UserInfo = () => {
   const { personalArr, addressArr } = useSelector(state => state.users.infoArrays);
   const { currentUser, curriculum } = useSelector(state => state.users);
-  const allJobOffers = useSelector(state => state.jobOffers.index.all);
-  let jobOffer = allJobOffers[Math.floor(Math.random() * allJobOffers.length)];
-  if (!jobOffer) {
-    jobOffer = {
-      salary: 'loading',
-      position: 'loading',
-      user: {
-        profile: {
-          name: 'loading',
-        },
-      },
-    };
-  }
 
   return (
     <>
@@ -103,31 +91,8 @@ const UserInfo = () => {
             , welcome back!
           </p>
         </div>
-        <div className="jobOffer h-40">
-          <p className="smallTitle">CHECK OUT THIS JOB OFFER</p>
-          <p className="title">
-            $
-            {' '}
-            {jobOffer.salary}
-          </p>
-          <div className="content">
-            <p>
-              <span>
-
-                position:
-              </span>
-              {' '}
-              {jobOffer.position}
-            </p>
-            <p>
-              <span>
-
-                company:
-              </span>
-              {' '}
-              {jobOffer.user.profile.name}
-            </p>
-          </div>
+        <div className="image">
+          <img src={currentUser.user.image} alt="" />
         </div>
         <div className="bottom">
           <div className="buttons flex justify-center">
