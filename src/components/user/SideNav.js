@@ -42,7 +42,7 @@ const SideNav = props => {
   const { signOut } = userActions;
   const dispatch = useDispatch();
   const isTablet = useMediaQuery({ query: '(max-width: 768px' });
-  const { handleToggler } = props;
+  const { handleToggler, toggler } = props;
 
   return (
     <>
@@ -53,7 +53,7 @@ const SideNav = props => {
 
         </StyledToggler>
       ) : ''}
-      <StyledSideNav className={`${props.toggler ? 'col-start-1 col-end-4' : 'hidden col-start-1 col-end-2'}`}>
+      <StyledSideNav className={`${toggler ? 'col-start-1 col-end-4' : 'hidden col-start-1 col-end-2'}`}>
         { Object.keys(props).map(col => (
 
           <div key={col} className="linkList">
@@ -91,4 +91,5 @@ export default SideNav;
 
 SideNav.propTypes = {
   handleToggler: PropTypes.func.isRequired,
+  toggler: PropTypes.bool.isRequired,
 };
