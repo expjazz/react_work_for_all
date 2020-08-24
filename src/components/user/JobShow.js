@@ -8,6 +8,7 @@ import jobActions from '../../actions/job';
 import userActions from '../../actions/users';
 import PopUpInterview from '../interview/PopUpInterview';
 import JobLeftTable from '../job/JobLeftTable';
+import Table from '../common/Table';
 
 const StyledJobShow = styled.div.attrs({
   className: 'content col-start-2 col-end-6 pt-10',
@@ -57,7 +58,9 @@ const JobShow = () => {
         return <button type="button" onClick={() => dispatch(candidateApplyForJob({ job_offer_id: job.jobId }))}>Apply for job</button>;
     }
   };
-  const keys = ['Requirement'];
+  const iteratorTable = [
+    'position', 'requirement', 'companyName',
+  ];
   return (
     <>
       <StyledJobShow>
@@ -79,7 +82,7 @@ const JobShow = () => {
         <PopUpInterview show={showPopup} dNone={dNone} hide={hidePopUp} companyId={job.profileId} jobId={job.jobId} />
       </StyledJobShow>
       <div className="rigth col-start-6 mr-8 col-end-12">
-        <JobLeftTable job={job} />
+        <Table classes="col-start-7 col-end-12" title={job.companyName} user={job} iterator={iteratorTable} />
       </div>
     </>
   );

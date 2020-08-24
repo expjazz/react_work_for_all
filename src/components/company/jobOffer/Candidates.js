@@ -19,7 +19,9 @@ const StyledCandidate = styled.div.attrs({
   }
 
   button {
-    ${tw`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+    ${tw` text-white font-bold hover:bg-green-800 py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+
+    background: ${props => props.theme.green};
   }
 `;
 const Candidates = () => {
@@ -49,49 +51,16 @@ const Candidates = () => {
       <StyledCandidate>
         <div className="image">
           <img src={user.image} alt="" />
-
         </div>
-        <div className="name">
-          <h3>
-            name:
-            {' '}
-            {user.name}
-          </h3>
-          email:
-          {' '}
-          {user.email}
+        <div className="aboutMe pt-12 mb-12">
           <p>
-            header:
-            {' '}
             {user.aboutMe}
           </p>
         </div>
-        <div className="infoList">
-          <p>personal info</p>
-          { personalArr.map((info => (
-            <p key={info}>
-              {info}
-              {' '}
-              {user.personal[info]}
-            </p>
-          ))) }
+        <div className="button text-center">
+
+          <button type="button" onClick={acceptApplication}>Accept application</button>
         </div>
-        <div className="addressList">
-          <p>
-            address
-          </p>
-          { addressArr.map(info => (
-            <p key={info}>
-              {info}
-              {' '}
-              :
-              {' '}
-              {user.address[info]}
-              {' '}
-            </p>
-          ))}
-        </div>
-        <button type="button" onClick={acceptApplication}>Accept application</button>
       </StyledCandidate>
       <Table classes="col-start-7 col-end-12" title={user.name} user={newUser} iterator={iteratorTable} />
     </>
