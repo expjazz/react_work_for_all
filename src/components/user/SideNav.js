@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import PropTypes from 'prop-types';
 import userActions from '../../actions/users';
 
 const StyledSideNav = styled.div.attrs({
@@ -41,12 +42,13 @@ const SideNav = props => {
   const { signOut } = userActions;
   const dispatch = useDispatch();
   const isTablet = useMediaQuery({ query: '(max-width: 768px' });
+  const { handleToggler } = props;
 
   return (
     <>
       { redirect ? <Redirect to="/" /> : ''}
       {isTablet ? (
-        <StyledToggler type="button" className="self-start fixed bg-red-800 z-10 toggler" onClick={props.handleToggler}>
+        <StyledToggler type="button" className="self-start fixed bg-red-800 z-10 toggler" onClick={handleToggler}>
           <FontAwesomeIcon icon={faCoffee} />
 
         </StyledToggler>
@@ -87,29 +89,6 @@ const SideNav = props => {
 
 export default SideNav;
 
-// {/* <div className="linkList">
-//   <div className={first ? 'one' : ''}>
-
-//     <Link to="/users/user" onClick={handleFocus}>
-//       <p>
-//         {currentUser ? currentUser.user.name : 'loading'}
-//       </p>
-//     </Link>
-//   </div>
-
-//   <div className={second ? 'one' : ''}>
-
-//     <Link to={`${url}/edit`} onClick={handleFocus}>
-//       Edit your information
-//     </Link>
-
-//   </div>
-//   <div className={second ? 'one' : ''}>
-
-//     <Link to={`${url}/searchjobs`} onClick={handleFocus}>
-//       Look for Jobs
-//     </Link>
-
-//   </div>
-
-// </div> */}
+SideNav.propTypes = {
+  handleToggler: PropTypes.func.isRequired,
+};

@@ -4,6 +4,7 @@ import tw from 'tailwind.macro';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import userActions from '../../actions/users';
 import Input from '../common/Input';
 import { storage } from '../../firebase/firebase';
@@ -28,11 +29,10 @@ const StyledForm = styled.form.attrs({
 
 const FormC = () => {
   const { signUpUserCompany } = userActions;
+  const [redirect, setRedirect] = useState(false);
   const dispatch = useDispatch();
   const { addressArr, compPersonalArr } = useSelector(state => state.users.infoArrays);
-  const allInputs = { imgUrl: '' };
   const [imageAsFile, setImageAsFile] = useState('');
-  const [imageAsUrl, setImageAsUrl] = useState(allInputs);
 
   const formik = useFormik({
     initialValues: {
@@ -80,9 +80,6 @@ const FormC = () => {
         // gets the download url then sets the image from firebase as the value for the imgUrl key:
           storage.ref('images').child(imageAsFile.name).getDownloadURL()
             .then(fireBaseUrl => {
-              setImageAsUrl(prevObject => ({ ...prevObject, imgUrl: fireBaseUrl }));
-              console.log(fireBaseUrl);
-
               // normal form
               const {
                 name, header, country, cep, state, city, hood, street, cel, cnpj, size, aboutUs, email, password,
@@ -113,11 +110,11 @@ const FormC = () => {
                 },
               };
               dispatch(signUpUserCompany(newObj));
+              setRedirect(true);
             });
         });
     },
   });
-  console.log(imageAsFile);
   const handleImage = e => {
     e.persist();
     const image = e.target.files[0];
@@ -125,7 +122,7 @@ const FormC = () => {
   };
   return (
     <StyledForm onSubmit={formik.handleSubmit}>
-      {/* {redirect ? <Redirect to="/users/user" /> : ''} */}
+      {redirect ? <Redirect to="/users/user" /> : ''}
       <div className="mb-4">
         <label htmlFor="name">Name</label>
         <input type="text" id="name" onChange={formik.handleChange} value={formik.values.name} />
