@@ -56,7 +56,12 @@ const StyledLeftArrow = styled.div`
 `;
 
 const FinalButton = styled.button`
-  background: transparent;
+background: transparent;
+outline: none;
+
+:focus {
+  outline: none;
+}
 
 `;
 const CheckApplicants = () => {

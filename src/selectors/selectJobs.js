@@ -10,6 +10,23 @@ const selectJobsFromCompany = createSelector(
   },
 );
 
-export default { selectJobsFromCompany };
+const selectAllJobs = createSelector(
+  state => state.jobOffers.index.all,
+  all => {
+    if (all.length === 0) return [];
+    return (
+      all.map(job => ({
+        requirement: job.requirement,
+        salary: job.salary,
+        position: job.position,
+        companyName: job.user.profile.name,
+        companyImage: job.user.profile.image_url,
+
+      }
+      ))
+    );
+  },
+);
+export default { selectJobsFromCompany, selectAllJobs };
 
 // state => state.users.company.jobOffers

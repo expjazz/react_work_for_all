@@ -4,41 +4,66 @@ import tw from 'tailwind.macro';
 import { useRouteMatch, Link } from 'react-router-dom';
 
 const StyledJobCard = styled.div.attrs({
-  className: 'rounded shadow-lg max-s h-full',
+  className: 'shadow-lg max-sm-auto text-center ',
 })`
-  button {
-    ${tw`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
-  }
+:hover {
+  transform: scaleY(1.01);
+  transform: scale(1.01);
+}
+
+.title {
+  ${tw`uppercase text-center`}
+}
+
+span {
+  ${tw`text-gray-400`}
+}
+
+button {
+  ${tw`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+}
+
+}
 
 `;
 const JobCard = ({
   job: {
-    position, requirement, salary, user, id,
+    position, requirement, salary, companyName, companyImage,
   }, index,
 }) => {
   const { url } = useRouteMatch();
 
   return (
     <StyledJobCard>
+
+      <div className="topImage">
+        <img src={companyImage} alt="" />
+      </div>
       <div className="title">
-        Position:
+
         {' '}
         {position}
       </div>
-      <div className="middle">
-        <p>
-          Requirement:
+      <div className="middle flex flex-col text-center my-8">
+        <p className="mb-8">
+          <span>
+
+            Requirement:
+          </span>
           {' '}
           {requirement}
-          Salary:
+
+        </p>
+
+        <p>
+          <span>
+
+            Salary:
+          </span>
           {' '}
           {salary}
         </p>
-        <div className="companny">
-          Company:
-          {' '}
-          {user.profile.name}
-        </div>
+
       </div>
       <Link to={`${url}/${index}`}>
 
