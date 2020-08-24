@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import {
+  Redirect,
   Link,
 
 } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
 import { useMediaQuery } from 'react-responsive';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import userActions from '../../actions/users';
 
 const StyledSideNav = styled.div.attrs({
   className: ' pt-48 min-h-screen content-center md:block h-full border-r-2 border-gray-100 transition-all duration-700',
@@ -33,10 +37,14 @@ const StyledToggler = styled.button.attrs({
 `;
 
 const SideNav = props => {
+  const [redirect, setRedirect] = useState(false);
+  const { signOut } = userActions;
+  const dispatch = useDispatch();
   const isTablet = useMediaQuery({ query: '(max-width: 768px' });
 
   return (
     <>
+      { redirect ? <Redirect to="/" /> : ''}
       {isTablet ? (
         <StyledToggler type="button" className="self-start fixed bg-red-800 z-10 toggler" onClick={props.handleToggler}>
           <FontAwesomeIcon icon={faCoffee} />
@@ -59,6 +67,19 @@ const SideNav = props => {
             </div>
           </div>
         ))}
+
+        <button
+          type="button"
+          onClick={() => {
+            dispatch(signOut());
+            setRedirect(true);
+          }}
+        >
+          {' '}
+          Log Out
+          {' '}
+
+        </button>
       </StyledSideNav>
     </>
   );

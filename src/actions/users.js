@@ -98,6 +98,18 @@ const updateInterviewStatus = createAsyncThunk('user/company/interview', async a
   return data;
 });
 
+const signOut = createAsyncThunk('user/signout', async args => {
+  const options = {
+    method: 'DELETE',
+    url: 'http://localhost:3000/signout',
+    withCredentials: true,
+  };
+
+  axios(options);
+
+  return '';
+});
+
 export default {
-  signUpUser, checkLoggedUser, signUpUserCompany, loginUser, addNewJob, setUpInterviewCandidate, updateInterviewStatus,
+  signUpUser, checkLoggedUser, signUpUserCompany, loginUser, addNewJob, setUpInterviewCandidate, updateInterviewStatus, signOut,
 };

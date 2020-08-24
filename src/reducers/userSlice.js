@@ -4,8 +4,19 @@ import usersActions from '../actions/users';
 import curriculumActions from '../actions/curriculum';
 
 const { createCurriculum } = curriculumActions;
+const defaultState = {
+
+  currentUser: '',
+  status: 'idle',
+  interviews: [{}],
+  infoArrays: {
+    personalArr: ['children', 'married', 'cpf', 'race', 'nationality'],
+    addressArr: ['country', 'cep', 'state', 'city', 'hood', 'street', 'cel'],
+    compPersonalArr: ['cnpj', 'aboutUs', 'size'],
+  },
+};
 const {
-  signUpUser, checkLoggedUser, signUpUserCompany, loginUser, addNewJob, setUpInterviewCandidate, updateInterviewStatus,
+  signUpUser, checkLoggedUser, signUpUserCompany, loginUser, addNewJob, setUpInterviewCandidate, updateInterviewStatus, signOut,
 } = usersActions;
 export const userSlice = createSlice({
   name: 'user',
@@ -33,6 +44,8 @@ export const userSlice = createSlice({
     [signUpUser.pending]: (state, action) => { state.status = 'loading'; },
 
     [signUpUser.fulfilled]: (state, action) => ({ ...state, status: 'fullfiled', currentUser: action.payload }),
+
+    [signOut.fulfilled]: (state, action) => (defaultState),
 
     [updateInterviewStatus.pending]: (state, action) => { state.status = 'loading'; },
 
