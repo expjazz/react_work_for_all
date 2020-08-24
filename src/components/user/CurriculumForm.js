@@ -75,14 +75,18 @@ const CurriculumForm = () => {
     const {
       header, address, personal, pastJobs,
     } = curriculum;
-    console.log(pastJobs);
     formValues = generateInputVals([header, address, personal]);
     if (pastJobsState.length === 0) {
+      const tempJobs = [];
+      const tempRefs = [];
       pastJobs.forEach(job => {
         const newRef = React.createRef();
-        setAllRefs([...allRefs, newRef]);
-        setPastJobsState([...pastJobsState, job]);
+        tempRefs.push(newRef);
+        tempJobs.push(job);
       });
+      console.log(tempJobs);
+      setAllRefs([...allRefs, ...tempRefs]);
+      setPastJobsState([...pastJobsState, ...tempJobs]);
     }
   }
   const addNewJob = () => {
@@ -102,7 +106,7 @@ const CurriculumForm = () => {
       state: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
       city: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
       street: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
-      cell: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
+      cel: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
 
     }),
     onSubmit: values => {
@@ -155,7 +159,6 @@ const CurriculumForm = () => {
     },
   });
   const addJobChange = (e, curRef) => {
-    console.log('here');
     const y = allRefs.forEach((ref, ind) => {
       if (ref === curRef) {
         const copy = [...pastJobsState];
@@ -207,7 +210,7 @@ const CurriculumForm = () => {
       <button type="button" onClick={addNewJob}> Add a new past job</button>
       <StyledPastJobs>
         <h3>Old Jobs</h3>
-        {pastJobsState.map((pJ, index) => <PastJobs onChange={addJobChange} ref={allRefs[index]} key={`input${pJ.id}`} inputs={pJ} />)}
+        {pastJobsState.map((pJ, index) => <PastJobs onChange={addJobChange} ref={allRefs[index]} key={`input${pJ.name}`} inputs={pJ} />)}
       </StyledPastJobs>
 
       <div className="title">

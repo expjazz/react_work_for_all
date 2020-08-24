@@ -4,9 +4,8 @@ import Input from '../common/Input';
 
 const PastJobs = React.forwardRef((props, ref) => {
   const { inputs, onChange } = props;
-  console.log(inputs.name);
 
-  const labels = ['start', 'end', ' name'];
+  const labels = ['start', 'end', 'name'];
 
   return (
     <>
