@@ -7,7 +7,7 @@ import { useMediaQuery } from 'react-responsive';
 import {
   Switch,
   Route,
-  useRouteMatch,
+  useRouteMatch, useLocation,
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Curriculum from './Curriculum';
@@ -21,7 +21,10 @@ const StyledUserPage = styled.div.attrs({
   className: 'grid',
 })``;
 const UserPage = ({ users: { currentUser } }) => {
+  const location = useLocation();
+
   const isTablet = useMediaQuery({ query: '(max-width: 768px' });
+  const [firstTime, setFirstTime] = useState(true);
   const { path, url } = useRouteMatch();
   const handleActiveCol = url => {
     if (url.includes('edit')) {
@@ -34,7 +37,7 @@ const UserPage = ({ users: { currentUser } }) => {
       setColOne({ ...colOne, active: false });
       setColThree({ ...colThree, active: true });
       setColFour({ ...colFour, active: false });
-    } else if (true) {
+    } else if (url.includes('interviews/index')) {
       setColTwo({ ...colTwo, active: false });
       setColOne({ ...colOne, active: false });
       setColThree({ ...colThree, active: false });
@@ -46,6 +49,7 @@ const UserPage = ({ users: { currentUser } }) => {
       setColFour({ ...colFour, active: false });
     }
   };
+
   const [colOne, setColOne] = useState({
     path: url, text: currentUser.user.name, active: true, handleClick: handleActiveCol,
   });
@@ -60,9 +64,12 @@ const UserPage = ({ users: { currentUser } }) => {
     path: `${path}/interviews/index`, text: 'Check your interviews', active: false, handleClick: handleActiveCol,
   });
 
+  if (firstTime) {
+    handleActiveCol(location.pathname);
+    setFirstTime(false);
+  }
   const [navToggle, setNavToggle] = useState(false);
   const handleNavToggle = () => {
-    console.log('here');
     setNavToggle(!navToggle);
   };
   let propToggle;

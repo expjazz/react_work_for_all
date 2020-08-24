@@ -77,7 +77,6 @@ span {
 const UserInfo = () => {
   const { personalArr, addressArr } = useSelector(state => state.users.infoArrays);
   const { currentUser, curriculum } = useSelector(state => state.users);
-  console.log(curriculum);
 
   return (
     <>
