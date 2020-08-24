@@ -32,6 +32,13 @@ const loginUser = createAsyncThunk('user/login', async (args, thunkAPI) => {
   return data;
 });
 
+const addImage = createAsyncThunk('user/addimage', async args => {
+  const options = {
+    method: 'POST',
+    url: 'http://localhost:3000/company_details',
+  };
+});
+
 const signUpUserCompany = createAsyncThunk('user/signupcompany', async (args, thunkAPI) => {
   const options = {
     method: 'POST',

@@ -5,9 +5,10 @@ import {
   Link,
 
 } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 
 const StyledSideNav = styled.div.attrs({
-  className: 'col-start-1 col-end-2 pt-48 min-h-screen content-center hidden md:block h-full border-r-2 border-gray-100',
+  className: ' pt-48 min-h-screen content-center md:block h-full border-r-2 border-gray-100 transition-all duration-700',
 })`
   .linkList {
     ${tw``}
@@ -22,25 +23,34 @@ const StyledSideNav = styled.div.attrs({
   }
 `;
 
-const SideNav = props => (
-  <StyledSideNav>
-    { Object.keys(props).map(col => (
+const SideNav = props => {
+  const isTablet = useMediaQuery({ query: '(max-width: 768px' });
 
-      <div key={col} className="linkList">
-        <div className={props[col].active ? 'one' : ''}>
-          {props[col].path === undefined ? '' : (
+  return (
+    <>
+      {isTablet ? (
+        <button type="button" className="self-start" onClick={props.handleToggler}>toggler</button>
+      ) : ''}
+      <StyledSideNav className={`${props.toggler ? 'col-start-1 col-end-4' : 'hidden col-start-1 col-end-2'}`}>
+        { Object.keys(props).map(col => (
 
-            <Link to={props[col].path} onClick={() => props[col].handleClick(props[col].path)}>
-              <p>
-                {props[col].text}
-              </p>
-            </Link>
-          )}
-        </div>
-      </div>
-    ))}
-  </StyledSideNav>
-);
+          <div key={col} className="linkList">
+            <div className={props[col].active ? 'one' : ''}>
+              {props[col].path === undefined ? '' : (
+
+                <Link to={props[col].path} onClick={() => props[col].handleClick(props[col].path)}>
+                  <p>
+                    {props[col].text}
+                  </p>
+                </Link>
+              )}
+            </div>
+          </div>
+        ))}
+      </StyledSideNav>
+    </>
+  );
+};
 
 export default SideNav;
 

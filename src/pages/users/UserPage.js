@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { useSelector } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
 import {
   Switch,
   Route,
@@ -20,6 +21,7 @@ const StyledUserPage = styled.div.attrs({
   className: 'grid',
 })``;
 const UserPage = ({ users: { currentUser } }) => {
+  const isTablet = useMediaQuery({ query: '(max-width: 768px' });
   const { path, url } = useRouteMatch();
   const handleActiveCol = url => {
     if (url.includes('edit')) {
@@ -58,6 +60,18 @@ const UserPage = ({ users: { currentUser } }) => {
     path: `${path}/interviews/index`, text: 'Check your interviews', active: false, handleClick: handleActiveCol,
   });
 
+  const [navToggle, setNavToggle] = useState(false);
+  const handleNavToggle = () => {
+    console.log('here');
+    setNavToggle(!navToggle);
+  };
+  let propToggle;
+  if (isTablet && navToggle) {
+    propToggle = true;
+  } else {
+    propToggle = false;
+  }
+
   return (
     <div>
       <StyledUserPage>
@@ -67,6 +81,8 @@ const UserPage = ({ users: { currentUser } }) => {
           colThree={colThree}
           colFour={colFour}
           handleClick={handleActiveCol}
+          toggler={propToggle}
+          handleToggler={handleNavToggle}
         />
 
         <Switch>
@@ -75,7 +91,7 @@ const UserPage = ({ users: { currentUser } }) => {
 
           </Route>
           <Route path={`${path}/curriculum/edit`}>
-            <Curriculum />
+            <Curriculum toggler={propToggle} />
           </Route>
           <Route path={`${path}/interviews/index`}>
             <UserInterviewIndex />

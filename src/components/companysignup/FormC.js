@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { useFormik } from 'formik';
@@ -29,7 +29,7 @@ const FormC = () => {
   const { signUpUserCompany } = userActions;
   const dispatch = useDispatch();
   const { addressArr, compPersonalArr } = useSelector(state => state.users.infoArrays);
-
+  const [image, setImage] = useState({});
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -60,6 +60,12 @@ const FormC = () => {
     //     .oneOf([Yup.ref('password'), null], 'Passwords must match'),
     // }),
     onSubmit: values => {
+      const form = new FormData();
+      form.append('image', image);
+      fetch('http://localhost:3000/items', {
+        method: 'POST',
+        body: form,
+      });
       const {
         name, header, country, cep, state, city, hood, street, cel, cnpj, size, aboutUs, email, password,
       } = values;
@@ -90,6 +96,11 @@ const FormC = () => {
       dispatch(signUpUserCompany(newObj));
     },
   });
+
+  const handleImage = e => {
+    e.persist();
+    setImage(() => ({ [e.target.name]: e.target.files[0] }));
+  };
   return (
     <StyledForm onSubmit={formik.handleSubmit}>
       {/* {redirect ? <Redirect to="/users/user" /> : ''} */}
@@ -140,6 +151,11 @@ const FormC = () => {
       {compPersonalArr.map(field => (
         <Input label={field} key={field} id={field} onChange={formik.handleChange} labelValue={field} value={formik.values[field]} errors={formik.errors[field]} />
       ))}
+      <div className="image">
+
+        <label>Image Upload</label>
+        <input type="file" name="image" onChange={handleImage} />
+      </div>
       <button type="submit">Submit</button>
 
     </StyledForm>
