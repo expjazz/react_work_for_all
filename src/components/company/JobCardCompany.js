@@ -5,7 +5,7 @@ import tw from 'tailwind.macro';
 import { Link, useRouteMatch } from 'react-router-dom';
 
 const StyledJobCardCompany = styled.div.attrs({
-  className: 'rounded shadow-lg max-s h-full',
+  className: 'rounded shadow-lg max-s h-full m-auto',
 
 })``;
 const JobCardCompany = ({
