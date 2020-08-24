@@ -77,9 +77,19 @@ const UserInfo = () => {
   const { personalArr, addressArr } = useSelector(state => state.users.infoArrays);
   const { currentUser, curriculum } = useSelector(state => state.users);
   const allJobOffers = useSelector(state => state.jobOffers.index.all);
-  const jobOffer = allJobOffers[Math.floor(Math.random() * allJobOffers.length)];
+  let jobOffer = allJobOffers[Math.floor(Math.random() * allJobOffers.length)];
+  if (!jobOffer) {
+    jobOffer = {
+      salary: 'loading',
+      position: 'loading',
+      user: {
+        profile: {
+          name: 'loading',
+        },
+      },
+    };
+  }
 
-  if (!jobOffer) return <p>loading</p>;
   return (
     <>
       <StyledUserInfo>

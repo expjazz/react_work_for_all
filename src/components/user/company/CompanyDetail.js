@@ -50,6 +50,7 @@ const CompanyDetail = ({ currentUser, companyInfo }) => {
       <div className="jobOffer h-40">some offer</div>
       <div className="bottom">
         <div className="middlebutton">
+          <img src={companyInfo.image} alt="" />
           <p>Your Profile</p>
         </div>
         <div className="infoList">
