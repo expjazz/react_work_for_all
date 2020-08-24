@@ -2,13 +2,13 @@
 /* eslint-disable react/forbid-prop-types */
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import tw from 'tailwind.macro';
 import {
   Switch,
   Route,
-  useRouteMatch,
+  useRouteMatch, useLocation,
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useMediaQuery } from 'react-responsive';
 import CompanyDetail from '../../../components/user/company/CompanyDetail';
 import SideNav from '../../../components/user/SideNav';
 import CompanyEdit from './CompanyEdit';
@@ -23,6 +23,9 @@ const StyledCompanyUserPage = styled.div.attrs({
 })``;
 const CompanyUserPage = ({ users: { currentUser, company } }) => {
   const { path, url } = useRouteMatch();
+  const location = useLocation();
+  const [firstTime, setFirstTime] = useState(true);
+  const isTablet = useMediaQuery({ query: '(max-width: 768px' });
   const handleActiveCol = url => {
     if (url.includes('edit')) {
       setColTwo({ ...colTwo, active: true });
@@ -67,6 +70,21 @@ const CompanyUserPage = ({ users: { currentUser, company } }) => {
 
   });
 
+  if (firstTime) {
+    handleActiveCol(location.pathname);
+    setFirstTime(false);
+  }
+  const [navToggle, setNavToggle] = useState(false);
+  const handleNavToggle = () => {
+    setNavToggle(!navToggle);
+  };
+  let propToggle;
+  if (isTablet && navToggle) {
+    propToggle = true;
+  } else {
+    propToggle = false;
+  }
+
   return (
     <div>
       <StyledCompanyUserPage>
@@ -76,6 +94,9 @@ const CompanyUserPage = ({ users: { currentUser, company } }) => {
           colThree={colThree}
           colFour={colFour}
           colFive={colFive}
+          toggler={propToggle}
+          handleToggler={handleNavToggle}
+
           handleClick={handleActiveCol}
         />
         <Switch>

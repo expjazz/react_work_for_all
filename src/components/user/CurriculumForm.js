@@ -136,6 +136,7 @@ const CurriculumForm = () => {
           about_me,
         },
       };
+      setRedirect(true);
 
       if (!curriculum) {
         dispatch(createCurriculum(newCurr));
@@ -155,7 +156,6 @@ const CurriculumForm = () => {
 
       // };
       // dispatch(signUpUser(newObj));
-      setRedirect(true);
     },
   });
   const addJobChange = (e, curRef) => {

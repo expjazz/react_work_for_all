@@ -16,7 +16,7 @@ const defaultState = {
   },
 };
 const {
-  signUpUser, checkLoggedUser, signUpUserCompany, loginUser, addNewJob, setUpInterviewCandidate, updateInterviewStatus, signOut,
+  signUpUser, checkLoggedUser, signUpUserCompany, loginUser, addNewJob, setUpInterviewCandidate, updateInterviewStatus, signOut, updateCompanyInfo,
 } = usersActions;
 export const userSlice = createSlice({
   name: 'user',
@@ -84,6 +84,12 @@ export const userSlice = createSlice({
     [signUpUserCompany.pending]: (state, action) => { state.status = 'loading'; },
 
     [signUpUserCompany.fulfilled]: (state, action) => ({
+      ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, company: action.payload.companyInfo,
+    }),
+
+    [updateCompanyInfo.pending]: (state, action) => { state.status = 'loading'; },
+
+    [updateCompanyInfo.fulfilled]: (state, action) => ({
       ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, company: action.payload.companyInfo,
     }),
 

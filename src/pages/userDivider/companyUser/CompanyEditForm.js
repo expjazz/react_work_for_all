@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { Redirect } from 'react-router-dom';
 import Input from '../../../components/common/Input';
+import userActions from '../../../actions/users';
 
-const StyledCompanyForm = styled.div.attrs({
+const StyledCompanyForm = styled.form.attrs({
   className: 'bg-white rounded px-8 pt-6 pb-8 mb-4 w-full',
 })`
   & {
@@ -25,6 +27,9 @@ const StyledCompanyForm = styled.div.attrs({
   }
 `;
 const CompanyEditForm = () => {
+  const { updateCompanyInfo } = userActions;
+  const dispatch = useDispatch();
+  const [redirect, setRedirect] = useState(false);
   const { user } = useSelector(state => state.users.currentUser);
   const { address, personal, header } = useSelector(state => state.users.company);
   const generateInputVals = arr => {
@@ -37,7 +42,7 @@ const CompanyEditForm = () => {
     return newObj;
   };
 
-  const formValues = generateInputVals([header, personal, address]);
+  const formValues = generateInputVals([[header], personal, address]);
 
   const formik = useFormik({
     initialValues: {
@@ -45,12 +50,42 @@ const CompanyEditForm = () => {
       ...formValues,
     },
     onSubmit: values => {
-      console.log(values);
+      const {
+        name, header, country, cep, state, city, hood, street, cel, cnpj, size, aboutUs, email, password,
+      } = values;
+      const newObj = {
+        user: {
+          email,
+          password,
+        },
+        company: {
+          name,
+          header,
+          company_address: {
+            country,
+            cep,
+            state,
+            city,
+            hood,
+            street,
+            cel,
+          },
+          company_personal: {
+            cnpj,
+            size,
+            aboutUs,
+          },
+        },
+      };
+      setRedirect(true);
+
+      dispatch(updateCompanyInfo(newObj));
     },
   });
 
   return (
     <StyledCompanyForm onSubmit={formik.handleSubmit}>
+      {redirect ? <Redirect to="/users/user" /> : ''}
       <div className="title">
         <h4>
           General Info
@@ -70,6 +105,7 @@ const CompanyEditForm = () => {
       {Object.keys(formValues).map(field => (
         <Input label={field} key={field} id={field} onChange={formik.handleChange} labelValue={field} value={formik.values[field]} errors={formik.errors[field]} />
       ))}
+      <button type="submit">Submit</button>
     </StyledCompanyForm>
   );
 };

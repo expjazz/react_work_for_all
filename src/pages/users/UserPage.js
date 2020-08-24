@@ -1,8 +1,6 @@
 /* eslint-disable no-use-before-define */
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import tw from 'tailwind.macro';
-import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import {
   Switch,

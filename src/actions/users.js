@@ -32,13 +32,6 @@ const loginUser = createAsyncThunk('user/login', async (args, thunkAPI) => {
   return data;
 });
 
-const addImage = createAsyncThunk('user/addimage', async args => {
-  const options = {
-    method: 'POST',
-    url: 'http://localhost:3000/company_details',
-  };
-});
-
 const signUpUserCompany = createAsyncThunk('user/signupcompany', async (args, thunkAPI) => {
   const options = {
     method: 'POST',
@@ -110,6 +103,18 @@ const signOut = createAsyncThunk('user/signout', async args => {
   return '';
 });
 
+const updateCompanyInfo = createAsyncThunk('user/company/update', async (args, thunksAPI) => {
+  const options = {
+    method: 'PATCH',
+    url: 'http://localhost:3000/companyinfo',
+    withCredentials: true,
+    data: args,
+  };
+
+  const { data } = await axios(options);
+  return data;
+});
+
 export default {
-  signUpUser, checkLoggedUser, signUpUserCompany, loginUser, addNewJob, setUpInterviewCandidate, updateInterviewStatus, signOut,
+  signUpUser, checkLoggedUser, signUpUserCompany, loginUser, addNewJob, setUpInterviewCandidate, updateInterviewStatus, signOut, updateCompanyInfo,
 };
