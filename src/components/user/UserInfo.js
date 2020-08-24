@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import CandidateJobStats from './CandidateJobStats';
 
 const StyledUserInfo = styled.div.attrs({
@@ -195,3 +196,7 @@ const UserInfo = ({ toggler }) => {
 };
 
 export default UserInfo;
+
+UserInfo.propTypes = {
+  toggler: PropTypes.bool.isRequired,
+};

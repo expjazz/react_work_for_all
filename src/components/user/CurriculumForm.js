@@ -1,10 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { useFormik } from 'formik';
+import { Redirect } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import usersActions from '../../actions/users';
 import Input from '../common/Input';
 import PastJobs from './PastJobs';
 import curriculumActions from '../../actions/curriculum';
@@ -75,8 +75,15 @@ const CurriculumForm = () => {
     const {
       header, address, personal, pastJobs,
     } = curriculum;
+    console.log(pastJobs);
     formValues = generateInputVals([header, address, personal]);
-    if (pastJobsState.length === 0) setPastJobsState(pastJobs);
+    if (pastJobsState.length === 0) {
+      pastJobs.forEach(job => {
+        const newRef = React.createRef();
+        setAllRefs([...allRefs, newRef]);
+        setPastJobsState([...pastJobsState, job]);
+      });
+    }
   }
   const addNewJob = () => {
     const inputs = {
@@ -88,15 +95,14 @@ const CurriculumForm = () => {
     setAllRefs([...allRefs, newRef]);
     setPastJobsState([...pastJobsState, inputs]);
   };
-  console.log(curriculum);
   const formik = useFormik({
     initialValues: { ...formValues },
     validationSchema: Yup.object({
-      // cpf: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
-      // state: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
-      // city: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
-      // street: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
-      // cell: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
+      cpf: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
+      state: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
+      city: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
+      street: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
+      cell: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
 
     }),
     onSubmit: values => {
@@ -145,10 +151,11 @@ const CurriculumForm = () => {
 
       // };
       // dispatch(signUpUser(newObj));
-      // setRedirect(true);
+      setRedirect(true);
     },
   });
   const addJobChange = (e, curRef) => {
+    console.log('here');
     const y = allRefs.forEach((ref, ind) => {
       if (ref === curRef) {
         const copy = [...pastJobsState];
@@ -175,6 +182,8 @@ const CurriculumForm = () => {
 
   return (
     <StyledCurriculumForm onSubmit={formik.handleSubmit}>
+      {redirect ? <Redirect to="/users/user" /> : ''}
+
       <div className="title">
         <h4>
           Personal info
@@ -198,7 +207,7 @@ const CurriculumForm = () => {
       <button type="button" onClick={addNewJob}> Add a new past job</button>
       <StyledPastJobs>
         <h3>Old Jobs</h3>
-        {pastJobsState.map((pJ, index) => <PastJobs onChange={addJobChange} ref={allRefs[index]} key={`input${index}`} inputs={pJ} />)}
+        {pastJobsState.map((pJ, index) => <PastJobs onChange={addJobChange} ref={allRefs[index]} key={`input${pJ.id}`} inputs={pJ} />)}
       </StyledPastJobs>
 
       <div className="title">
