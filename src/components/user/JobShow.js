@@ -22,7 +22,9 @@ const StyledJobShow = styled.div.attrs({
   }
 
   button {
-    ${tw`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+    ${tw`hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+
+    background: ${props => props.theme.green};
   }
 `;
 const JobShow = () => {
@@ -35,6 +37,7 @@ const JobShow = () => {
   const { url } = useRouteMatch();
   const list = url.split('/');
   const id = url.split('/')[list.length - 1];
+  const { interviews } = useSelector(state => state.users);
   const job = useSelector(selectJobDetailsToCandidate(id));
   console.log('jjob');
   console.log(job);
@@ -49,9 +52,13 @@ const JobShow = () => {
     setTimeout(() => setdNone(true), 300);
   };
   const returnButton = () => {
+    const interview = interviews.find(interview => interview.job_offer_id === job.jobId);
+    console.log(job);
     switch (job.status) {
       case 'approved':
-        return <button type="button" onClick={handleShowPopup}>Set up a interview</button>;
+        if (!interview) return <button type="button" onClick={handleShowPopup}>Set up a interview</button>;
+        if (interview && interview.status === 'waiting for confirmation from the company') return <button type="button">Waiting for company</button>;
+        if (interview && interview.status === 'Accepted') return <button type="button">Attend your interview</button>;
       case 'pending':
         return <button type="button">Waiting for company</button>;
       default:

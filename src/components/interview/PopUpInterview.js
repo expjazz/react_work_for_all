@@ -12,7 +12,7 @@ const StyledPopUpInterview = styled.div.attrs({
   width: 40rem;
   top: 25%;
   left: 25%;
-  background: ${props => props.theme.green};
+  background: ${props => props.theme.white};
 
   form {
     ${tw`content-center `}
@@ -28,10 +28,12 @@ const StyledPopUpInterview = styled.div.attrs({
 
       justify-self: center;
     }
+  }
 
-    button {
-      ${tw`outline-none`}
-    }
+  button {
+    ${tw`outline-none`}
+
+    background: ${props => props.theme.green};
   }
 
 `;
@@ -61,15 +63,20 @@ const PopUpInterview = ({
       </button>
       <form onSubmit={formik.handleSubmit} className="grid">
         <div className="day grid">
-          <label htmlFor="date" />
-          {' '}
-          Date
-          <input type="date" name="date" id="date" value={formik.values.date} onChange={formik.handleChange} />
+          <label htmlFor="date">
+
+            {' '}
+            Date
+            <input type="date" name="date" id="date" value={formik.values.date} onChange={formik.handleChange} />
+          </label>
 
         </div>
         <div className="clock grid">
-          <label htmlFor="time"> Time</label>
-          <input type="time" name="time" id="time" value={formik.values.time} onChange={formik.handleChange} />
+          <label htmlFor="time">
+            {' '}
+            Time
+            <input type="time" name="time" id="time" value={formik.values.time} onChange={formik.handleChange} />
+          </label>
         </div>
         <button type="submit"> Submit </button>
       </form>
