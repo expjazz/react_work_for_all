@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
 import userActions from '../../actions/users';
 import Input from '../common/Input';
+import { storage } from '../../firebase/firebase';
 
 const StyledForm = styled.form.attrs({
   className: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4',
@@ -29,7 +30,10 @@ const FormC = () => {
   const { signUpUserCompany } = userActions;
   const dispatch = useDispatch();
   const { addressArr, compPersonalArr } = useSelector(state => state.users.infoArrays);
-  const [image, setImage] = useState({});
+  const allInputs = { imgUrl: '' };
+  const [imageAsFile, setImageAsFile] = useState('');
+  const [imageAsUrl, setImageAsUrl] = useState(allInputs);
+
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -60,46 +64,64 @@ const FormC = () => {
     //     .oneOf([Yup.ref('password'), null], 'Passwords must match'),
     // }),
     onSubmit: values => {
-      const form = new FormData();
-      form.append('image', image);
-      fetch('http://localhost:3000/items', {
-        method: 'POST',
-        body: form,
-      });
-      const {
-        name, header, country, cep, state, city, hood, street, cel, cnpj, size, aboutUs, email, password,
-      } = values;
-      const newObj = {
-        user: {
-          email,
-          password,
-        },
-        company: {
-          name,
-          header,
-          company_address: {
-            country,
-            cep,
-            state,
-            city,
-            hood,
-            street,
-            cel,
-          },
-          company_personal: {
-            cnpj,
-            size,
-            aboutUs,
-          },
-        },
-      };
-      dispatch(signUpUserCompany(newObj));
+      // Handle image uploading
+
+      const uploadTask = storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile);
+      // initiates the firebase side uploading
+      uploadTask.on('state_changed',
+        snapShot => {
+        // takes a snap shot of the process as it is happening
+          console.log(snapShot);
+        }, err => {
+        // catches the errors
+          console.log(err);
+        }, () => {
+        // gets the functions from storage refences the image storage in firebase by the children
+        // gets the download url then sets the image from firebase as the value for the imgUrl key:
+          storage.ref('images').child(imageAsFile.name).getDownloadURL()
+            .then(fireBaseUrl => {
+              setImageAsUrl(prevObject => ({ ...prevObject, imgUrl: fireBaseUrl }));
+              console.log(fireBaseUrl);
+
+              // normal form
+              const {
+                name, header, country, cep, state, city, hood, street, cel, cnpj, size, aboutUs, email, password,
+              } = values;
+              const newObj = {
+                user: {
+                  email,
+                  password,
+                },
+                company: {
+                  name,
+                  header,
+                  image_url: fireBaseUrl,
+                  company_address: {
+                    country,
+                    cep,
+                    state,
+                    city,
+                    hood,
+                    street,
+                    cel,
+                  },
+                  company_personal: {
+                    cnpj,
+                    size,
+                    aboutUs,
+                  },
+                },
+              };
+              dispatch(signUpUserCompany(newObj));
+            });
+        });
     },
   });
-
+  console.log(imageAsFile);
   const handleImage = e => {
     e.persist();
-    setImage(() => ({ [e.target.name]: e.target.files[0] }));
+    const image = e.target.files[0];
+    setImageAsFile(imageFile => (image));
   };
   return (
     <StyledForm onSubmit={formik.handleSubmit}>

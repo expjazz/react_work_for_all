@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styled, { ThemeProvider } from 'styled-components';
-import {
-  CloudinaryContext,
-} from 'cloudinary-react';
+
 import usersActions from './actions/users';
 import RouteFile from './components/RouteFile';
 import theme from './components/theme';
@@ -28,10 +26,8 @@ function App() {
   return (
     <StyledApp className="App">
       <ThemeProvider theme={theme}>
-        <CloudinaryContext cloudName={process.env.REACT_APP_CLOUD_NAME}>
 
-          <RouteFile />
-        </CloudinaryContext>
+        <RouteFile />
 
       </ThemeProvider>
     </StyledApp>
