@@ -10,6 +10,7 @@ const selectJobOfferCandidate = (jobOfferId, candidateId) => createSelector(
     return {
       name: candidate.name,
       email: candidate.user.email,
+      image: candidate.image_url,
       id: candidate.id,
       aboutMe: candidate.user.curriculum.about_me,
       address: candidate.user.curriculum.candidate_address,
