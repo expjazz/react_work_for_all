@@ -34,8 +34,10 @@ const selectJobDetailsToCandidate = jobId => createSelector(
       requirement: job.requirement,
       salary: job.salary,
       status,
+      position: job.position,
       companyName: job.user.profile.name,
       profileId: job.user.profile.id,
+      companyImage: job.user.profile.image_url,
       jobId: job.id,
 
     };

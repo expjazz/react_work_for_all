@@ -114,7 +114,7 @@ const JobsIndex = () => {
         renderArrow={arrow}
       >
         {allJobs.map((job, index) => (
-          <JobCard key={job.id} job={job} index={index} />
+          <JobCard key={job.requirement} job={job} index={index} />
         ))}
       </Carousel>
     </StyledJobIndex>

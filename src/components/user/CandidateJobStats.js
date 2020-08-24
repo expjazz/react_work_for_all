@@ -4,7 +4,7 @@ import tw from 'tailwind.macro';
 import { useSelector } from 'react-redux';
 
 const StyledCandidateJobStats = styled.div.attrs({
-  className: ' col-start-10 col-end-12 pt-48 hidden lg:block text-center px-4',
+  className: ' col-start-9 col-end-12 pt-48 hidden lg:block text-center px-4',
 
 })`
 
@@ -67,7 +67,7 @@ const CandidateJobStats = () => {
           <span>
             Number of interviews scheduled:
           </span>
-          {interviews.length - 1}
+          {interviews.length}
         </p>
         <p>
           <span>

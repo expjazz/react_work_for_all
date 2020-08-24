@@ -7,11 +7,23 @@ import selectJobCandidates from '../../selectors/selectCandidateJobOffer';
 import jobActions from '../../actions/job';
 import userActions from '../../actions/users';
 import PopUpInterview from '../interview/PopUpInterview';
+import JobLeftTable from '../job/JobLeftTable';
 
 const StyledJobShow = styled.div.attrs({
-  className: 'content col-start-3 col-end-12 pt-10',
+  className: 'content col-start-2 col-end-6 pt-10',
 
-})``;
+})`
+  .image {
+    ${tw`w-full flex justify-center`}
+    img {
+      ${tw`w-7/12 `}
+    }
+  }
+
+  button {
+    ${tw`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+  }
+`;
 const JobShow = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [dNone, setdNone] = useState(true);
@@ -45,28 +57,31 @@ const JobShow = () => {
         return <button type="button" onClick={() => dispatch(candidateApplyForJob({ job_offer_id: job.jobId }))}>Apply for job</button>;
     }
   };
+  const keys = ['Requirement'];
   return (
-    <StyledJobShow>
-      <p>
-        company:
-        {' '}
-        {job.companyName}
-      </p>
-      {
-        Object.keys(job).map(val => (
-          <p key={val}>
-            {' '}
-            {val}
-            :
-            {' '}
-            {job[val]}
-          </p>
-        ))
-      }
+    <>
+      <StyledJobShow>
+        <div className="image">
+          <img src={job.companyImage} alt="" />
 
-      {returnButton() }
-      <PopUpInterview show={showPopup} dNone={dNone} hide={hidePopUp} companyId={job.profileId} jobId={job.jobId} />
-    </StyledJobShow>
+        </div>
+
+        <div className="title text-center">
+          <h5 className="text-3xl">
+            {job.position}
+          </h5>
+        </div>
+        <div className="btn text-center">
+
+          {returnButton() }
+
+        </div>
+        <PopUpInterview show={showPopup} dNone={dNone} hide={hidePopUp} companyId={job.profileId} jobId={job.jobId} />
+      </StyledJobShow>
+      <div className="rigth col-start-6 mr-8 col-end-12">
+        <JobLeftTable job={job} />
+      </div>
+    </>
   );
 };
 
