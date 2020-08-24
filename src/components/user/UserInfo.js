@@ -74,13 +74,13 @@ span {
   }
 }
 `;
-const UserInfo = () => {
+const UserInfo = ({ toggler }) => {
   const { personalArr, addressArr } = useSelector(state => state.users.infoArrays);
   const { currentUser, curriculum } = useSelector(state => state.users);
 
   return (
     <>
-      <StyledUserInfo>
+      <StyledUserInfo className={`${toggler ? 'col-start-4 col-end-12' : 'col-start-3 col-end-12'}`}>
         <div className="title">
           <h3>Overview</h3>
           <p>

@@ -94,7 +94,7 @@ const UserPage = ({ users: { currentUser } }) => {
 
         <Switch>
           <Route exact path={`${path}/`}>
-            <UserInfo />
+            <UserInfo toggler={propToggle} />
 
           </Route>
           <Route path={`${path}/curriculum/edit`}>
