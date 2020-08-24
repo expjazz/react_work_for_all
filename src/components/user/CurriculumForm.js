@@ -143,19 +143,6 @@ const CurriculumForm = () => {
       } else {
         dispatch(updateCurriculum({ ...newCurr, curriculum_id: curriculum.personal.curriculum_id }));
       }
-
-      // const { email, name, password } = values;
-      // const newObj = {
-      //   user: {
-      //     email,
-      //     password,
-      //   },
-      //   candidate: {
-      //     name,
-      //   },
-
-      // };
-      // dispatch(signUpUser(newObj));
     },
   });
   const addJobChange = (e, curRef) => {

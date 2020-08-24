@@ -21,7 +21,6 @@ const CompanyInterviewIndex = () => {
   const company = true;
   const handleCompanyAwnser = {
     update: (job_offer_id, company_id, candidate_id, status, time = null) => {
-      console.log('dispatch');
       const newObj = {
         job_offer_id, company_id, candidate_id, status,
       };
