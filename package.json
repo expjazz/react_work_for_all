@@ -13,6 +13,7 @@
     "autoprefixer": "^9.8.6",
     "axios": "^0.19.2",
     "babel-plugin-macros": "^2.8.0",
+    "cloudinary-react": "^1.6.6",
     "formik": "^2.1.5",
     "postcss-cli": "^7.1.1",
     "prop-types": "^15.7.2",
