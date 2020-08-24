@@ -77,6 +77,7 @@ span {
 const UserInfo = () => {
   const { personalArr, addressArr } = useSelector(state => state.users.infoArrays);
   const { currentUser, curriculum } = useSelector(state => state.users);
+  console.log(curriculum);
 
   return (
     <>
@@ -115,6 +116,14 @@ const UserInfo = () => {
           curriculum ? (
             <>
               <div className="infoList">
+                <div className="aboutMe">
+                  <h6>About Me</h6>
+                  <p className="text-gray-700">
+                    {' '}
+                    {curriculum.header.about_me}
+                    {' '}
+                  </p>
+                </div>
                 <h6>Personal Information</h6>
                 { personalArr.map((info => (
                   <p key={info}>
@@ -146,9 +155,35 @@ const UserInfo = () => {
                   </p>
                 ))}
               </div>
+
+              <div className="pastJobs">
+                <h6>Past Jobs</h6>
+                {curriculum.pastJobs.map(job => (
+                  <div key={job.id} className="border mb-8">
+                    <p>
+                      <span>Name: </span>
+                      {' '}
+                      {job.name }
+                    </p>
+                    <p>
+                      <span>Start:</span>
+                      {' '}
+                      {job.start}
+                      {' '}
+                    </p>
+
+                    <p>
+                      <span>End:</span>
+                      {' '}
+                      {job.end}
+                      {' '}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </>
           ) : (
-            <p>add  curricukum</p>)
+            <p className="px-12 text-center">To access the app and to apply for a job you need to create a curriculum. To do it, go to Edit your info tab on the sidebar </p>)
         }
           </div>
 

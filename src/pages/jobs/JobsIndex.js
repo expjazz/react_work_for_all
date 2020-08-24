@@ -12,7 +12,7 @@ const StyledJobIndex = styled.div.attrs({
 const JobsIndex = () => {
   const email = useSelector(state => state.users.currentUser.user.generalInfo.email);
   const allJobs = useSelector(state => state.jobOffers.index.all);
-  if (allJobs.length === 0) return <p>loading</p>;
+  if (allJobs.length === 0) return <h3 className="col-start-3 col-end-12 border-2 border-gray-300 rounded-lg text-center pt-12 text-3xl w-full">No job oportunity available</h3>;
   return (
     <StyledJobIndex>
       <Carousel renderPagination={({ pages, activePage, onClick }) => <></>}>
