@@ -61,6 +61,9 @@ const JobShow = () => {
   const iteratorTable = [
     'position', 'requirement', 'companyName',
   ];
+
+  const { curriculum } = useSelector(state => state.users);
+
   return (
     <>
       <StyledJobShow>
@@ -76,7 +79,7 @@ const JobShow = () => {
         </div>
         <div className="btn text-center">
 
-          {returnButton() }
+          {curriculum ? returnButton() : '' }
 
         </div>
         <PopUpInterview show={showPopup} dNone={dNone} hide={hidePopUp} companyId={job.profileId} jobId={job.jobId} />

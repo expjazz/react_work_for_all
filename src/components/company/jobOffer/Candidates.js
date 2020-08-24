@@ -46,6 +46,12 @@ const Candidates = () => {
     ...Object.keys(user.address), ...Object.keys(user.personal), 'email',
   ];
   const newUser = { ...user.personal, ...user.address, email: user.email };
+  const renderButton = () => {
+    if (user.job.approved.find(person => person.name === user.name)) {
+      return <button type="button"> Waiting for user to initiate interview </button>;
+    }
+    return <button type="button" onClick={acceptApplication}>Accept application</button>;
+  };
   return (
     <>
       <StyledCandidate>
@@ -59,7 +65,7 @@ const Candidates = () => {
         </div>
         <div className="button text-center">
 
-          <button type="button" onClick={acceptApplication}>Accept application</button>
+          {renderButton()}
         </div>
       </StyledCandidate>
       <Table classes="col-start-7 col-end-12" title={user.name} user={newUser} iterator={iteratorTable} />
