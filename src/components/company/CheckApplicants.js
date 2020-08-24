@@ -5,7 +5,7 @@ import Carousel, { consts } from 'react-elastic-carousel';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretRight, faCaretLeft } from '@fortawesome/free-solid-svg-icons';
-
+import jobSelectors from '../../selectors/selectJobs';
 import JobCardCompany from './JobCardCompany';
 
 const StyledCheckApplicants = styled.div.attrs({
@@ -60,7 +60,7 @@ const FinalButton = styled.button`
 
 `;
 const CheckApplicants = () => {
-  const a = 'r';
+  const { selectJobsFromCompany } = jobSelectors;
   const arrow = ({ type, onClick, isEdge }) => {
     const pointer = type === consts.PREV ? (
       <StyledLeftArrow>
@@ -79,10 +79,10 @@ const CheckApplicants = () => {
       </FinalButton>
     );
   };
-  const allJobOffersFromUser = useSelector(state => state.users.company.jobOffers);
+  const allJobOffersFromUser = useSelector(selectJobsFromCompany);
   return (
     <StyledCheckApplicants>
-      <div className="top text-center pt-32">
+      <div className="top text-center pt-24">
         <h3 className="text-3xl">
 
           {' '}
