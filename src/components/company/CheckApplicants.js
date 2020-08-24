@@ -9,8 +9,10 @@ import { faCaretRight, faCaretLeft } from '@fortawesome/free-solid-svg-icons';
 import JobCardCompany from './JobCardCompany';
 
 const StyledCheckApplicants = styled.div.attrs({
-  className: 'col-start-3 col-end-12 border-2 border-gray-300 rounded-lg mx-10 grid content-center',
-})``;
+  className: 'col-start-3 col-end-12 border-2 border-gray-300 rounded-lg mx-10 grid',
+})`
+
+`;
 
 const StyledRightArrow = styled.div`
   background: ${props => props.theme.green};
@@ -80,6 +82,15 @@ const CheckApplicants = () => {
   const allJobOffersFromUser = useSelector(state => state.users.company.jobOffers);
   return (
     <StyledCheckApplicants>
+      <div className="top text-center pt-32">
+        <h3 className="text-3xl">
+
+          {' '}
+          Latest Job Offers
+        </h3>
+        <p className="text-gray-700">Choose a offer to apply</p>
+
+      </div>
       <Carousel renderPagination={({ pages, activePage, onClick }) => <></>} renderArrow={arrow}>
         {allJobOffersFromUser.map((job, index) => (
           <JobCardCompany key={job.id} job={job} index={index} />
