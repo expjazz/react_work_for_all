@@ -5,7 +5,7 @@ import jobActions from './job';
 const signUpUser = createAsyncThunk('user/signup', async (args, thunkAPI) => {
   const options = {
     method: 'POST',
-    url: 'https://whispering-stream-10328.herokuapp.com/signup',
+    url: 'http://localhost:3000/signup',
     withCredentials: true,
     data: args,
   };
@@ -19,7 +19,7 @@ const signUpUser = createAsyncThunk('user/signup', async (args, thunkAPI) => {
 const loginUser = createAsyncThunk('user/login', async (args, thunkAPI) => {
   const options = {
     method: 'POST',
-    url: 'https://whispering-stream-10328.herokuapp.com/login',
+    url: 'http://localhost:3000/login',
     withCredentials: true,
     data: args,
   };
@@ -35,7 +35,7 @@ const loginUser = createAsyncThunk('user/login', async (args, thunkAPI) => {
 const signUpUserCompany = createAsyncThunk('user/signupcompany', async args => {
   const options = {
     method: 'POST',
-    url: 'https://whispering-stream-10328.herokuapp.com/company_details',
+    url: 'http://localhost:3000/company_details',
     withCredentials: true,
     data: args,
   };
@@ -48,7 +48,7 @@ const checkLoggedUser = createAsyncThunk('user/checkloggeduser', async () => {
   const options = {
 
     method: 'GET',
-    url: 'https://whispering-stream-10328.herokuapp.com/loggeduser',
+    url: 'http://localhost:3000/loggeduser',
     withCredentials: true,
 
   };
@@ -60,7 +60,7 @@ const checkLoggedUser = createAsyncThunk('user/checkloggeduser', async () => {
 const addNewJob = createAsyncThunk('user/job/new', async args => {
   const options = {
     method: 'POST',
-    url: 'https://whispering-stream-10328.herokuapp.com/job_offers',
+    url: 'http://localhost:3000/job_offers',
     withCredentials: true,
     data: args,
   };
@@ -72,7 +72,7 @@ const addNewJob = createAsyncThunk('user/job/new', async args => {
 const setUpInterviewCandidate = createAsyncThunk('user/candidate/interview', async args => {
   const options = {
     method: 'POST',
-    url: 'https://whispering-stream-10328.herokuapp.com/interviews/create',
+    url: 'http://localhost:3000/interviews/create',
     withCredentials: true,
     data: args,
   };
@@ -83,7 +83,7 @@ const setUpInterviewCandidate = createAsyncThunk('user/candidate/interview', asy
 const updateInterviewStatus = createAsyncThunk('user/company/interview', async args => {
   const options = {
     method: 'PATCH',
-    url: 'https://whispering-stream-10328.herokuapp.com/interviews/update',
+    url: 'http://localhost:3000/interviews/update',
     withCredentials: true,
     data: args,
   };
@@ -94,7 +94,7 @@ const updateInterviewStatus = createAsyncThunk('user/company/interview', async a
 const signOut = createAsyncThunk('user/signout', async () => {
   const options = {
     method: 'DELETE',
-    url: 'https://whispering-stream-10328.herokuapp.com/signout',
+    url: 'http://localhost:3000/signout',
     withCredentials: true,
   };
 
@@ -106,7 +106,7 @@ const signOut = createAsyncThunk('user/signout', async () => {
 const updateCompanyInfo = createAsyncThunk('user/company/update', async args => {
   const options = {
     method: 'PATCH',
-    url: 'https://whispering-stream-10328.herokuapp.com/companyinfo',
+    url: 'http://localhost:3000/companyinfo',
     withCredentials: true,
     data: args,
   };

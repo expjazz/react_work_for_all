@@ -6,7 +6,7 @@ const createCurriculum = createAsyncThunk('curriculum/create', async args => {
   console.log(args);
   const options = {
     method: 'POST',
-    url: 'https://whispering-stream-10328.herokuapp.com/curriculums',
+    url: 'http://localhost:3000/curriculums',
     withCredentials: true,
     data: args,
   };
@@ -20,7 +20,7 @@ const updateCurriculum = createAsyncThunk('curriculum/update', async (args, thun
 
   const options = {
     method: 'PATCH',
-    url: 'https://whispering-stream-10328.herokuapp.com/curriculums',
+    url: 'http://localhost:3000/curriculums',
     withCredentials: true,
     data: args,
   };
