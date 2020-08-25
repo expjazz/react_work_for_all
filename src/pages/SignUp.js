@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import Left from '../components/signup/Left';
+import Left from '../components/common/Left';
 import Right from '../components/signup/Right';
 
 const StyledSignUp = styled.div.attrs({
-  className: 'w-full grid grid-flow-col grid-cols-2 h-screen',
+  className: 'w-full grid grid-flow-col grid-cols-1 h-screen md:grid-cols-2',
 })`
 
 `;
 const SignUp = () => (
   <StyledSignUp>
-    <Left />
+    <Left message="Join to fill your dream home" color="yellow" />
     <Right />
   </StyledSignUp>
 );

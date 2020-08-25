@@ -9,6 +9,7 @@ import { Redirect } from 'react-router-dom';
 import usersActions from '../../actions/users';
 import jobActions from '../../actions/job';
 import { storage } from '../../firebase/firebase';
+import GreenButton from '../common/GreenButton';
 
 const StyledForm = styled.form.attrs({
   className: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4',
@@ -24,7 +25,9 @@ const StyledForm = styled.form.attrs({
   }
 
   button {
-    ${tw`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+    ${tw`hover:bg-orange-700 mt-8 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+
+    background: ${props => props.theme.yellow};
   }
 `;
 const Form = () => {
@@ -139,7 +142,6 @@ const Form = () => {
         <input type="file" name="image" onChange={handleImageChange} />
       </div>
       <button type="submit">Submit</button>
-
     </StyledForm>
   );
 };
