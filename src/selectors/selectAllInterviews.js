@@ -14,6 +14,7 @@ const selectCandidateInterviews = createSelector(
       candidateName: interview.candidate.name,
       jobOfferId: interview.job_offer.id,
       jobOfferPosition: interview.job_offer.position,
+      candidateImage: interview.candidate.image_url,
       time: interview.time,
     }));
   },
