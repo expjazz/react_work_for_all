@@ -7,14 +7,11 @@ const StyledLogin = styled.div.attrs({
   className: 'w-full grid grid-flow-col grid-cols-2 h-screen',
 
 })``;
-const Login = () => {
-  const a = 'a';
-  return (
-    <StyledLogin>
-      <Left color="red" message="Sign in to get closer to your dream" />
-      <RightL />
-    </StyledLogin>
-  );
-};
+const Login = () => (
+  <StyledLogin>
+    <Left color="red" message="Sign in to get closer to your dream" />
+    <RightL />
+  </StyledLogin>
+);
 
 export default Login;

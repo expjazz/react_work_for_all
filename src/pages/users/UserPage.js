@@ -8,18 +8,22 @@ import {
   useRouteMatch, useLocation,
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import Curriculum from './Curriculum';
 import SideNav from '../../components/user/SideNav';
 import UserInfo from '../../components/user/UserInfo';
-import JobsIndex from '../jobs/JobsIndex';
 import JobShow from '../../components/user/JobShow';
 import UserInterviewIndex from '../../components/user/UserInterviewIndex';
+import JobCarousel from '../../components/common/JobCarousel';
+import selectJobs from '../../selectors/selectJobs';
 
 const StyledUserPage = styled.div.attrs({
   className: 'grid',
 })``;
 const UserPage = ({ users: { currentUser } }) => {
   const location = useLocation();
+  const { selectAllJobs } = selectJobs;
+  const allJobs = useSelector(selectAllJobs);
 
   const isTablet = useMediaQuery({ query: '(max-width: 768px' });
   const [firstTime, setFirstTime] = useState(true);
@@ -105,7 +109,7 @@ const UserPage = ({ users: { currentUser } }) => {
             <JobShow />
           </Route>
           <Route exact path={`${path}/jobs/index`}>
-            <JobsIndex />
+            <JobCarousel allJobs={allJobs} button contentIfNone="There are no jobs available at the moment" />
           </Route>
         </Switch>
       </StyledUserPage>

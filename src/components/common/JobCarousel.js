@@ -40,7 +40,6 @@ const JobCarousel = ({ allJobs, contentIfNone, button }) => {
     if (isTablet) return 2;
     return 1;
   };
-  console.log(allJobs);
 
   if (allJobs.length === 0) return <h3 className="col-start-3 col-end-12 border-2 border-gray-300 rounded-lg text-center pt-12 text-3xl w-full">{contentIfNone}</h3>;
   return (
@@ -56,7 +55,7 @@ const JobCarousel = ({ allJobs, contentIfNone, button }) => {
       </div>
       <Carousel
         itemsToShow={rowNumber()}
-        renderPagination={({ pages, activePage, onClick }) => <></>}
+        renderPagination={() => <></>}
         renderArrow={arrow}
       >
         {allJobs.map((job, index) => (job ? (

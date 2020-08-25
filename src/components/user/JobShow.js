@@ -59,6 +59,11 @@ const JobShow = () => {
         if (!interview) return <button type="button" onClick={handleShowPopup}>Set up a interview</button>;
         if (interview && interview.status === 'waiting for confirmation from the company') return <button type="button">Waiting for company</button>;
         if (interview && interview.status === 'Accepted') return <button type="button">Attend your interview</button>;
+        if (interview && interview.status === 'Company needs another time. Accept?') {
+          return (
+            <button type="button">Accept?</button>
+          );
+        }
         break;
       case 'pending':
         return <button type="button">Waiting for company</button>;

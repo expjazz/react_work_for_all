@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable camelcase */
 import React, { useState } from 'react';
 import styled from 'styled-components';
@@ -31,7 +32,7 @@ const StyledPastJobs = styled.div`
   ${tw`py-8`}
 `;
 const CurriculumForm = () => {
-  console.log('here');
+  let count = 0;
   const { personalArr, addressArr } = useSelector(state => state.users.infoArrays);
   const [firstRender, setFirstRender] = useState(false);
 
@@ -109,7 +110,8 @@ const CurriculumForm = () => {
 
     }),
     onSubmit: values => {
-      values[jobs] = pastJobsState;
+      // eslint-disable-next-line no-use-before-define
+      values.jobs = pastJobsState;
       const {
         about_me, country, cep, state,
         city, hood, street, cel, children, married, cpf, race, nationality, jobs,
@@ -150,7 +152,7 @@ const CurriculumForm = () => {
     },
   });
   const addJobChange = (e, curRef) => {
-    const y = allRefs.forEach((ref, ind) => {
+    allRefs.forEach((ref, ind) => {
       if (ref === curRef) {
         const copy = [...pastJobsState];
         const fields = curRef.current.querySelectorAll('input');
@@ -215,14 +217,17 @@ const CurriculumForm = () => {
       <StyledPastJobs>
         <h3>Old Jobs</h3>
         {pastJobsState
-          .map((pJ, index) => (
-            <PastJobs
-              onChange={addJobChange}
-              ref={allRefs[index]}
-              key={index}
-              inputs={pJ}
-            />
-          ))}
+          .map((pJ, index) => {
+            count += 1;
+            return (
+              <PastJobs
+                onChange={addJobChange}
+                ref={allRefs[index]}
+                key={count}
+                inputs={pJ}
+              />
+            );
+          })}
       </StyledPastJobs>
 
       <div className="title">

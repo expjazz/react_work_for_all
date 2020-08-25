@@ -23,7 +23,7 @@ const selectCandidateInterviews = createSelector(
 const selectCandidateInterviewsForUserPage = createSelector(
   state => state.users.interviews,
   interviews => {
-    if (!interviews[1]) return [];
+    if (!interviews[0] || Object.keys(interviews[0]).length === 0) return [];
 
     return interviews.map(interview => ({
       id: interview.id,

@@ -29,6 +29,7 @@ const UserInterviewIndex = () => {
     numberRows -= 1;
     str += '250px ';
   }
+  console.log(allInterviews);
   if (allInterviews.length === 0) return <h3 className="col-start-3 col-end-12 border-2 border-gray-300 rounded-lg text-center pt-12 text-3xl w-full">No Interviews Scheduled</h3>;
   return (
     <StyledUserInterviewIndex style={{ gridTemplateRows: str }}>

@@ -34,25 +34,22 @@ const StyledRightL = styled.div.attrs({})`
   }
 }
 `;
-const RightL = () => {
-  const a = 1;
-  return (
-    <StyledRightL>
-      <div className="top">
-        <h3 className="title">
-          Sign up
-          {' '}
-          <br />
-          {' '}
-          to find your  dream job
-        </h3>
-        <p>or</p>
-      </div>
-      {' '}
-      <FormL />
+const RightL = () => (
+  <StyledRightL>
+    <div className="top">
+      <h3 className="title">
+        Sign up
+        {' '}
+        <br />
+        {' '}
+        to find your  dream job
+      </h3>
+      <p>or</p>
+    </div>
+    {' '}
+    <FormL />
 
-    </StyledRightL>
-  );
-};
+  </StyledRightL>
+);
 
 export default RightL;

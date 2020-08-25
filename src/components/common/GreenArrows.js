@@ -12,6 +12,11 @@ const StyledRightArrow = styled.div`
   justify-content: start;
   align-items: center;
   padding-left: 1rem;
+  transition: all 500ms ease;
+
+  :hover {
+    background: #607909;
+  }
 
   svg {
     stroke: ${props => props.theme.white};
@@ -32,6 +37,11 @@ const StyledLeftArrow = styled.div`
   font-size: 3rem;
   padding-right: 1rem;
   align-items: center;
+  transition: all 500ms ease;
+
+  :hover {
+    background: #607909;
+  }
 
   svg {
     stroke: ${props => props.theme.white};

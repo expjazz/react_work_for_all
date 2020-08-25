@@ -12,14 +12,11 @@ const StyledCurriculum = styled.div.attrs({
 }
 
 `;
-const Curriculum = ({ toggler }) => {
-  const a = 's';
-  return (
-    <StyledCurriculum className={`${toggler ? 'col-start-4 col-end-12' : 'col-start-3 col-end-12'}`}>
-      <CurriculumForm />
-    </StyledCurriculum>
-  );
-};
+const Curriculum = ({ toggler }) => (
+  <StyledCurriculum className={`${toggler ? 'col-start-4 col-end-12' : 'col-start-3 col-end-12'}`}>
+    <CurriculumForm />
+  </StyledCurriculum>
+);
 
 export default Curriculum;
 
