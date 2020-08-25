@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import userActions from '../../actions/users';
 
@@ -34,7 +34,6 @@ const FormL = () => {
       name: '',
       email: '',
       password: '',
-      passwordConfirmation: '',
     },
     validationSchema: Yup.object({
       email: Yup.string().email('It needs to be a valid email').required('Please Enter your email'),
@@ -43,8 +42,6 @@ const FormL = () => {
           /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
           'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character',
         ),
-      passwordConfirmation: Yup.string()
-        .oneOf([Yup.ref('password'), null], 'Passwords must match'),
     }),
     onSubmit: ({ email, password }) => {
       const newObj = {
@@ -79,16 +76,6 @@ const FormL = () => {
         {formik.errors.password ? (
           <div>
             {formik.errors.password}
-          </div>
-        ) : ''}
-
-      </div>
-      <div className="mb-4">
-        <label htmlFor="passwordConfirmation">Confirm Password</label>
-        <input type="password" id="passwordConfirmation" onChange={formik.handleChange} value={formik.values.passwordConfirmation} />
-        {formik.errors.passwordConfirmation ? (
-          <div>
-            {formik.errors.passwordConfirmation}
           </div>
         ) : ''}
 

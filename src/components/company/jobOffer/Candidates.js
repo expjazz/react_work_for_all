@@ -1,5 +1,5 @@
-import React from 'react';
-import { useRouteMatch } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useRouteMatch, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
@@ -25,15 +25,15 @@ const StyledCandidate = styled.div.attrs({
   }
 `;
 const Candidates = () => {
+  const [redirectInterviews, setRedirectInterviews] = useState(false);
   const { acceptCandidate } = jobActions;
   const dispatch = useDispatch();
   const { selectJobOfferCandidate } = jobSelectors;
   const { url } = useRouteMatch();
   const arr = url.split('/');
   const ids = [arr[arr.length - 2], arr[arr.length - 1]];
+  const interviews = useSelector(state => state.users.interviews);
   const user = useSelector(selectJobOfferCandidate(ids[0], ids[1]));
-  const { personalArr, addressArr } = useSelector(state => state.users.infoArrays);
-  console.log(user);
   const acceptApplication = () => {
     const newObj = {
       candidate_id: user.id,
@@ -47,13 +47,17 @@ const Candidates = () => {
   ];
   const newUser = { ...user.personal, ...user.address, email: user.email };
   const renderButton = () => {
-    if (user.job.approved.find(person => person.name === user.name)) {
-      return <button type="button"> Waiting for user to initiate interview </button>;
+    const approved = user.job.approved.find(person => person.name === user.name);
+    if (!approved) return <button type="button" onClick={acceptApplication}>Accept application</button>;
+    const interviewInitiates = interviews.find(interview => interview.candidate_id === approved.id && interview.job_offer_id === user.jobId);
+    if (interviewInitiates) {
+      return <button type="button" onClick={() => setRedirectInterviews(true)}> Schedule the interview</button>;
     }
-    return <button type="button" onClick={acceptApplication}>Accept application</button>;
+    return <button type="button"> Waiting for user to initiate interview </button>;
   };
   return (
     <>
+      {redirectInterviews ? <Redirect to="/users/user/interviews/index" /> : ''}
       <StyledCandidate>
         <div className="image">
           <img src={user.image} alt="" />
