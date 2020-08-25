@@ -12,7 +12,7 @@ import JobCard from '../job/JobCard';
 const StyledShowJob = styled.div.attrs({
   className: 'col-start-3 col-end-12 mx-10 m-auto h-full relative',
 })``;
-const JobCarousel = ({ allJobs, contentIfNone }) => {
+const JobCarousel = ({ allJobs, contentIfNone, button }) => {
   const { StyledLeftArrow, StyledRightArrow, FinalButton } = arrows;
   const isTablet = useMediaQuery({ query: '(min-width: 750px' });
   const isLarge = useMediaQuery({ query: '(min-width: 980px' });
@@ -59,7 +59,7 @@ const JobCarousel = ({ allJobs, contentIfNone }) => {
         renderArrow={arrow}
       >
         {allJobs.map((job, index) => (
-          <JobCard key={job.requirement} job={job} index={index} />
+          <JobCard key={job.requirement} job={job} index={index} button={button} />
         ))}
       </Carousel>
     </StyledShowJob>
@@ -71,4 +71,5 @@ export default JobCarousel;
 JobCarousel.propTypes = {
   allJobs: PropTypes.arrayOf(Object).isRequired,
   contentIfNone: PropTypes.string.isRequired,
+  button: PropTypes.bool.isRequired,
 };

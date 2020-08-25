@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { useRouteMatch, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import GreenButton from '../common/GreenButton';
 
 const StyledJobCard = styled.div.attrs({
   className: 'shadow-lg max-sm-auto text-center ',
@@ -9,6 +11,10 @@ const StyledJobCard = styled.div.attrs({
 :hover {
   transform: scaleY(1.01);
   transform: scale(1.01);
+}
+
+img {
+  ${tw`w-32 h-32`}
 }
 
 .title {
@@ -29,14 +35,14 @@ button {
 const JobCard = ({
   job: {
     position, requirement, salary, companyName, companyImage,
-  }, index,
+  }, index, button,
 }) => {
   const { url } = useRouteMatch();
 
   return (
     <StyledJobCard>
 
-      <div className="topImage">
+      <div className="topImage flex justify-center">
         <img src={companyImage} alt="" />
       </div>
       <div className="title">
@@ -64,13 +70,36 @@ const JobCard = ({
           {salary}
         </p>
 
-      </div>
-      <Link to={`${url}/${index}`}>
+        <p>
+          <span>
 
-        <button type="button"> Check More</button>
-      </Link>
+            Company:
+          </span>
+          {' '}
+          {companyName}
+        </p>
+      </div>
+      { button ? (
+
+        <Link to={`${url}/${index}`}>
+
+          <GreenButton type="button">
+            Check More
+          </GreenButton>
+        </Link>
+      ) : ''}
     </StyledJobCard>
   );
 };
 
 export default JobCard;
+
+JobCard.propTypes = {
+  job: PropTypes.objectOf(String).isRequired,
+  index: PropTypes.number.isRequired,
+  button: PropTypes.bool.isRequired,
+};
+
+// job: {
+//   position, requirement, salary, companyName, companyImage,
+// }, index, button,

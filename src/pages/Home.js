@@ -19,7 +19,7 @@ export default function Home() {
     <StyledContainer>
       <Navbar />
       <Jumbotrom />
-      <JobCarousel allJobs={allJobs} messageIfNone="There are no jobs available in the moment" />
+      <JobCarousel allJobs={allJobs} messageIfNone="There are no jobs available in the moment" button={false} />
     </StyledContainer>
   );
 }
