@@ -66,6 +66,11 @@ const FormC = () => {
         .oneOf([Yup.ref('password'), null], 'Passwords must match'),
     }),
     onSubmit: values => {
+      if (!imageAsFile) {
+        alert('You need to upload an image');
+        return '';
+      }
+
       const uploadTask = storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile);
       uploadTask.on('state_changed',
         snapShot => {

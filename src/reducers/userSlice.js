@@ -39,7 +39,13 @@ export const userSlice = createSlice({
   extraReducers: {
     [addNewJob.pending]: state => { state.status = 'loading'; },
     [addNewJob.fulfilled]: (state, action) => {
-      const jobOffers = [...state.company.jobOffers, action.payload];
+      let jobOffers = [];
+      if (state.company.jobOffers) {
+        jobOffers = [...state.company.jobOffers, action.payload];
+      } else {
+        jobOffers = [action.payload];
+      }
+
       const company = { ...state.company, jobOffers };
       return { ...state, company, status: 'fulfilled' };
     },

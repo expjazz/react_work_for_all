@@ -35,12 +35,17 @@ span {
 `;
 const CompanyStats = () => {
   const allJobOffers = useSelector(state => state.users.company.jobOffers);
+  if (!allJobOffers) return '';
   const jobOffersNum = allJobOffers.length;
   let allCandidates = [];
   let allApproved = [];
   allJobOffers.forEach(vals => {
-    allCandidates = [...allCandidates, ...vals.candidates];
-    allApproved = [...allApproved, ...vals.approved];
+    if (vals.candidates) {
+      allCandidates = [...allCandidates, ...vals.candidates];
+    }
+    if (vals.approved) {
+      allApproved = [...allApproved, ...vals.approved];
+    }
   });
 
   return (
@@ -54,13 +59,13 @@ const CompanyStats = () => {
           <span>
             Number of Candidates Applied
           </span>
-          {allCandidates ? allCandidates.length : 0}
+          {allCandidates > 0 ? allCandidates.length : 0}
         </p>
         <p>
           <span>
             Number of candidates scheduled:
           </span>
-          {allApproved ? allApproved.length : 0}
+          {allApproved > 0 ? allApproved.length : 0}
         </p>
         <p>
           <span>
