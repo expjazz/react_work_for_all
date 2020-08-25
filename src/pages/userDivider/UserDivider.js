@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import CompanyUserPage from './companyUser/CompanyUserPage';
 import UserPage from '../users/UserPage';
 
@@ -11,6 +12,8 @@ const UserDivider = () => {
   if (users.status === 'loading' || users.status === 'idle') {
     return <p>loading</p>;
   }
+
+  if (users.status === 'wrong') return <Redirect to="/login" />;
   if (users.status === 'rejected') {
     return <p>{users.currentUser.message}</p>;
   }

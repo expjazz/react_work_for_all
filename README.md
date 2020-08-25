@@ -1,68 +1,76 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Work For All - A full stack application to get your dream jobs
 
-## Available Scripts
+This is a full-fledge application that allows companies to post jobs, and users to apply for them. IT also shows the info of the company to users and users to companies, but with restrictions to provide security.
 
-In the project directory, you can run:
+### Screenshots
 
-### `yarn start`
+#### Main Menu
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- ![Main page](./screenshotOne.png)
+-![President page](./screenshotTwo.png)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `yarn test`
+### FEATURES
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+It has RubyOnRails on the backend and React on the front end. It features a lot of different models and associations, a RESTfull API, Redux for managing the store, and many restrictions so the information gets secure. It also features a full authentication system using JWT tokens, design with Tailwind, and Styled Components.
 
-### `yarn build`
+### Live Demo
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [Here](https://leadersofworlddashboard.netlify.app/)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### BUILT WITH
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- React
+- Redux
+- RubyOnRails for the Backend
+- Tailwind CSS
+- Javascript
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Getting Started
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- First, clone the Backend Repo;
+- Run bundle install and rails db:migrate;
+- Run rails s to start the development server.
+- Clone the frontend Repo to your local machine;
+- `cd` into the project directory;
+- Run `yarn install` to install the necessary modules;
+- To check in development mode, run `yarn start`, press `y ` and the page will automatically load on [localhost:3001](localhost:3001).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### AUTHORS
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+👤Expedito Andrade
 
-## Learn More
+- Github: [@githubexpjazz](https://github.com/expjazz)
+- Twitter: [@expjazz](https://twitter.com/expeditoandrade13)
+- Linkedin: [Expedito Andrade](https://www.linkedin.com/in/expedito-andrade/)
+- Portfolio: [Expedito Andrade](https://expjazz.github.io/expedito_andrade/)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Show your support
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Give a star if you like this project!
 
-### Code Splitting
+### Acknowledgments
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+- Microverse
+- This data is Fake. The idea is to showcase a possible dashoard
 
-### Analyzing the Bundle Size
+### 🤝 Contributing
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+Contributions, issues and feature requests are welcome! Start by:
 
-### Making a Progressive Web App
+- Forking the project
+- Cloning the project to your local machine
+- `cd` into the project directory
+- Run `git checkout -b your-branch-name`
+- Make your contributions
+- Push your branch up to your forked repository
+- Open a Pull Request with a detailed description to the development branch of the original project for a review
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+### Show your support
 
-### Advanced Configuration
+Give a ⭐️ if you like this project!
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+### 📝 License
 
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This project is MIT licensed

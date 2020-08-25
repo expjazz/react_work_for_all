@@ -5,7 +5,7 @@ const selectJobsFromCompany = createSelector(
   users => {
     if (!users.company.jobOffers) return [];
     return users.company.jobOffers.map(offer => (
-      { ...offer, image: users.currentUser.user.image }
+      { ...offer, companyImage: users.currentUser.user.image }
     ));
   },
 );

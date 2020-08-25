@@ -8,6 +8,7 @@ const { createCurriculum } = curriculumActions;
 const defaultState = {
 
   currentUser: '',
+  error: [],
   status: 'idle',
   interviews: [{}],
   infoArrays: {
@@ -103,6 +104,8 @@ export const userSlice = createSlice({
     }),
 
     [loginUser.pending]: state => { state.status = 'loading'; },
+    [loginUser.rejected]: state => { state.error = 'Error with your info'; state.status = 'wrong'; },
+
     [loginUser.fulfilled]: (state, action) => {
       if (action.payload.companyInfo) {
         return ({

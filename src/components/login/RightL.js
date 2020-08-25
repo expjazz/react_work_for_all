@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
+import { useSelector } from 'react-redux';
 import FormL from './FormL';
 
 const StyledRightL = styled.div.attrs({})`
@@ -34,22 +35,32 @@ const StyledRightL = styled.div.attrs({})`
   }
 }
 `;
-const RightL = () => (
-  <StyledRightL>
-    <div className="top">
-      <h3 className="title">
-        Sign up
-        {' '}
-        <br />
-        {' '}
-        to find your  dream job
-      </h3>
-      <p>or</p>
-    </div>
-    {' '}
-    <FormL />
+const RightL = () => {
+  const error = useSelector(state => state.users.error);
+  return (
+    <StyledRightL>
+      <div className="top">
+        <h3 className="title">
+          Sign up
+          {' '}
+          <br />
+          {' '}
+          to find your  dream job
+        </h3>
+        <p>or</p>
+      </div>
+      {' '}
+      <FormL />
+      <div className="error">
+        { error ? (
+          <p>
+            {error}
+          </p>
+        ) : ''}
+      </div>
 
-  </StyledRightL>
-);
+    </StyledRightL>
+  );
+};
 
 export default RightL;

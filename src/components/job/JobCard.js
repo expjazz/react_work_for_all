@@ -29,12 +29,13 @@ span {
 
 `;
 const JobCard = ({
-  job: {
-    position, requirement, salary, companyName, companyImage,
-  }, index, button,
+  job, index, button, infoCandidates,
 }) => {
-  const { url } = useRouteMatch();
-
+  const { url, path } = useRouteMatch();
+  const {
+    position, requirement, salary, companyName, companyImage, candidates,
+  } = job;
+  console.log(job);
   return (
     <StyledJobCard>
 
@@ -65,16 +66,42 @@ const JobCard = ({
           {' '}
           {salary}
         </p>
+        { infoCandidates ? '' : (
 
-        <p>
-          <span>
+          <p>
+            <span>
 
-            Company:
-          </span>
-          {' '}
-          {companyName}
-        </p>
+              Company:
+            </span>
+            {' '}
+            {companyName}
+          </p>
+        )}
       </div>
+      {
+       infoCandidates ? (
+         <div className="candidates pt-16">
+           <p>
+             Candidates:
+
+           </p>
+           <div className="list grid">
+
+             {
+            candidates.map((candidate, ind) => (
+              <>
+                <Link to={`${path}/${index}/${ind}`} key={candidate.name}>
+
+                  {candidate.name}
+                </Link>
+
+              </>
+            ))
+        }
+           </div>
+         </div>
+       ) : ''
+      }
       { button ? (
 
         <Link to={`${url}/${index}`}>
@@ -94,8 +121,9 @@ JobCard.propTypes = {
   job: PropTypes.objectOf(String).isRequired,
   index: PropTypes.number.isRequired,
   button: PropTypes.bool.isRequired,
+  infoCandidates: PropTypes.bool,
 };
 
-// job: {
-//   position, requirement, salary, companyName, companyImage,
-// }, index, button,
+JobCard.defaultProps = {
+  // infoCandidates: false,
+};

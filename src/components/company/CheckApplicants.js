@@ -85,9 +85,10 @@ const CheckApplicants = () => {
     );
   };
   const allJobOffersFromUser = useSelector(selectJobsFromCompany);
+  const infoCandidates = true;
   return (
     <StyledCheckApplicants>
-      <JobCarousel allJobs={allJobOffersFromUser} contentIfNone="You do not have any job offer" button />
+      <JobCarousel allJobs={allJobOffersFromUser} contentIfNone="You do not have any job offer" button={false} infoCandidates={infoCandidates} />
     </StyledCheckApplicants>
 
   );

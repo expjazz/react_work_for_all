@@ -12,7 +12,10 @@ import JobCard from '../job/JobCard';
 const StyledShowJob = styled.div.attrs({
   className: 'col-start-3 col-end-12 mx-10 m-auto h-full relative',
 })``;
-const JobCarousel = ({ allJobs, contentIfNone, button }) => {
+const JobCarousel = ({
+  allJobs, contentIfNone, button, infoCandidates,
+}) => {
+  console.log(allJobs);
   const { StyledLeftArrow, StyledRightArrow, FinalButton } = arrows;
   const isTablet = useMediaQuery({ query: '(min-width: 750px' });
   const isLarge = useMediaQuery({ query: '(min-width: 980px' });
@@ -46,11 +49,14 @@ const JobCarousel = ({ allJobs, contentIfNone, button }) => {
     <StyledShowJob>
       <div className="top text-center pt-24">
         <h3 className="text-3xl">
-
+          { infoCandidates ? 'Check the Candidates for your spots' : 'Latest Job Offers' }
           {' '}
-          Latest Job Offers
         </h3>
-        <p className="text-gray-700">Choose a offer to apply</p>
+        <p className="text-gray-700">
+          {' '}
+          {infoCandidates ? 'Choose a candidate to see the curriculum' : 'Choose a offer to apply'}
+          {' '}
+        </p>
 
       </div>
       <Carousel
@@ -59,7 +65,7 @@ const JobCarousel = ({ allJobs, contentIfNone, button }) => {
         renderArrow={arrow}
       >
         {allJobs.map((job, index) => (job ? (
-          <JobCard key={job.requirement} job={job} index={index} button={button} />
+          <JobCard key={job.requirement} job={job} index={index} infoCandidates={infoCandidates} button={button} />
         ) : ''))}
       </Carousel>
     </StyledShowJob>
@@ -72,4 +78,9 @@ JobCarousel.propTypes = {
   allJobs: PropTypes.arrayOf(Object).isRequired,
   contentIfNone: PropTypes.string.isRequired,
   button: PropTypes.bool.isRequired,
+  infoCandidates: PropTypes.bool.isRequired,
+};
+
+JobCarousel.defaultProps = {
+  // infoCandidates: false,
 };

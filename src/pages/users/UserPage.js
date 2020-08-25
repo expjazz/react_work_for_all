@@ -80,6 +80,7 @@ const UserPage = ({ users: { currentUser } }) => {
   } else {
     propToggle = false;
   }
+  const button = true;
 
   return (
     <div>
@@ -109,7 +110,7 @@ const UserPage = ({ users: { currentUser } }) => {
             <JobShow />
           </Route>
           <Route exact path={`${path}/jobs/index`}>
-            <JobCarousel allJobs={allJobs} button contentIfNone="There are no jobs available at the moment" />
+            <JobCarousel allJobs={allJobs} button={button} infoCandidates={false} contentIfNone="There are no jobs available at the moment" />
           </Route>
         </Switch>
       </StyledUserPage>
