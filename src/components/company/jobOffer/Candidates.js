@@ -49,7 +49,8 @@ const Candidates = () => {
   const renderButton = () => {
     const approved = user.job.approved.find(person => person.name === user.name);
     if (!approved) return <button type="button" onClick={acceptApplication}>Accept application</button>;
-    const interviewInitiates = interviews.find(interview => interview.candidate_id === approved.id && interview.job_offer_id === user.jobId);
+    const interviewInitiates = interviews.find(interview => interview
+      .candidate_id === approved.id && interview.job_offer_id === user.jobId);
     if (interviewInitiates) {
       return <button type="button" onClick={() => setRedirectInterviews(true)}> Schedule the interview</button>;
     }

@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable import/prefer-default-export */
 import { createSlice } from '@reduxjs/toolkit';
 import usersActions from '../actions/users';
@@ -16,7 +17,9 @@ const defaultState = {
   },
 };
 const {
-  signUpUser, checkLoggedUser, signUpUserCompany, loginUser, addNewJob, setUpInterviewCandidate, updateInterviewStatus, signOut, updateCompanyInfo,
+  signUpUser, checkLoggedUser, signUpUserCompany,
+  loginUser, addNewJob, setUpInterviewCandidate,
+  updateInterviewStatus, signOut, updateCompanyInfo,
 } = usersActions;
 export const userSlice = createSlice({
   name: 'user',
@@ -41,24 +44,24 @@ export const userSlice = createSlice({
       return { ...state, company, status: 'fulfilled' };
     },
 
-    [signUpUser.pending]: (state, action) => { state.status = 'loading'; },
+    [signUpUser.pending]: state => { state.status = 'loading'; },
 
     [signUpUser.fulfilled]: (state, action) => ({ ...state, status: 'fullfiled', currentUser: action.payload }),
 
-    [signOut.fulfilled]: (state, action) => (defaultState),
+    [signOut.fulfilled]: () => (defaultState),
 
-    [updateInterviewStatus.pending]: (state, action) => { state.status = 'loading'; },
+    [updateInterviewStatus.pending]: state => { state.status = 'loading'; },
 
     [updateInterviewStatus.fulfilled]: (state, action) => ({ ...state, status: 'fullfiled', interviews: [...state.interviews, action.payload] }),
 
-    [setUpInterviewCandidate.pending]: (state, action) => { state.status = 'loading'; },
+    [setUpInterviewCandidate.pending]: state => { state.status = 'loading'; },
 
     [setUpInterviewCandidate.fulfilled]: (state, action) => {
       const interviews = [...state.interviews, action.payload];
       return ({ ...state, status: 'fullfiled', interviews });
     },
 
-    [checkLoggedUser.pending]: (state, action) => { state.status = 'loading'; },
+    [checkLoggedUser.pending]: state => { state.status = 'loading'; },
 
     [checkLoggedUser.fulfilled]: (state, action) => {
       if (action.payload.companyInfo) {
@@ -79,21 +82,21 @@ export const userSlice = createSlice({
 
       });
     },
-    [checkLoggedUser.rejected]: (state, action) => { state.status = 'rejected'; },
+    [checkLoggedUser.rejected]: state => { state.status = 'rejected'; },
 
-    [signUpUserCompany.pending]: (state, action) => { state.status = 'loading'; },
+    [signUpUserCompany.pending]: state => { state.status = 'loading'; },
 
     [signUpUserCompany.fulfilled]: (state, action) => ({
       ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, company: action.payload.companyInfo,
     }),
 
-    [updateCompanyInfo.pending]: (state, action) => { state.status = 'loading'; },
+    [updateCompanyInfo.pending]: state => { state.status = 'loading'; },
 
     [updateCompanyInfo.fulfilled]: (state, action) => ({
       ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, company: action.payload.companyInfo,
     }),
 
-    [loginUser.pending]: (state, action) => { state.status = 'loading'; },
+    [loginUser.pending]: state => { state.status = 'loading'; },
     [loginUser.fulfilled]: (state, action) => {
       if (action.payload.companyInfo) {
         return ({
@@ -114,7 +117,7 @@ export const userSlice = createSlice({
       });
     },
 
-    [createCurriculum.pending]: (state, action) => { state.status = 'loading'; },
+    [createCurriculum.pending]: state => { state.status = 'loading'; },
     [createCurriculum.fulfilled]: (state, action) => ({ ...state, status: 'fullfiled', curriculum: action.payload }),
   },
 });

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import { Redirect } from 'react-router-dom';
 import Input from '../../../components/common/Input';
 import userActions from '../../../actions/users';
@@ -51,7 +50,9 @@ const CompanyEditForm = () => {
     },
     onSubmit: values => {
       const {
-        name, header, country, cep, state, city, hood, street, cel, cnpj, size, aboutUs, email, password,
+        name, header, country,
+        cep, state, city, hood, street, cel,
+        cnpj, size, aboutUs, email, password,
       } = values;
       const newObj = {
         user: {
@@ -93,8 +94,10 @@ const CompanyEditForm = () => {
       </div>
 
       <div className="mb-4">
-        <label htmlFor="header">Header</label>
-        <textarea type="text-area" id="header" rows="4" cols="50" onChange={formik.handleChange} value={formik.values.header} />
+        <label htmlFor="header">
+          Header
+          <textarea type="text-area" id="header" rows="4" cols="50" onChange={formik.handleChange} value={formik.values.header} />
+        </label>
         {formik.errors.name ? (
           <div>
             {formik.errors.name}
@@ -103,7 +106,16 @@ const CompanyEditForm = () => {
       </div>
 
       {Object.keys(formValues).map(field => (
-        <Input label={field} key={field} id={field} onChange={formik.handleChange} labelValue={field} value={formik.values[field]} errors={formik.errors[field]} />
+        <Input
+          label={field}
+          key={field}
+          id={field}
+          onChange={formik
+            .handleChange}
+          labelValue={field}
+          value={formik.values[field]}
+          errors={formik.errors[field]}
+        />
       ))}
       <button type="submit">Submit</button>
     </StyledCompanyForm>

@@ -1,15 +1,15 @@
+/* eslint-disable no-console */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import usersActions from '../../actions/users';
 import jobActions from '../../actions/job';
 import { storage } from '../../firebase/firebase';
-import GreenButton from '../common/GreenButton';
 
 const StyledForm = styled.form.attrs({
   className: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4',
@@ -57,17 +57,12 @@ const Form = () => {
     }),
     onSubmit: values => {
       const uploadTask = storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile);
-      // initiates the firebase side uploading
       uploadTask.on('state_changed',
         snapShot => {
-        // takes a snap shot of the process as it is happening
           console.log(snapShot);
         }, err => {
-        // catches the errors
           console.log(err);
         }, () => {
-        // gets the functions from storage refences the image storage in firebase by the children
-        // gets the download url then sets the image from firebase as the value for the imgUrl key:
           storage.ref('images').child(imageAsFile.name).getDownloadURL()
             .then(fireBaseUrl => {
               const { email, name, password } = values;
@@ -93,7 +88,7 @@ const Form = () => {
   const handleImageChange = e => {
     e.persist();
     const image = e.target.files[0];
-    setImageAsFile(imageFile => (image));
+    setImageAsFile(() => (image));
   };
   return (
     <StyledForm onSubmit={formik.handleSubmit}>

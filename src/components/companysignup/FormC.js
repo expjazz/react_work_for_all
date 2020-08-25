@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
@@ -52,37 +54,31 @@ const FormC = () => {
       size: '',
       aboutUs: '',
     },
-    // validationSchema: Yup.object({
-    //   name: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
-    //   email: Yup.string().email('It needs to be a valid email').required('Please Enter your email'),
-    //   password: Yup.string().min(1, 'Needs to be bigger than 2 characters').required('Please Enter your password')
-    //     .matches(
-    //       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-    //       'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character',
-    //     ),
-    //   passwordConfirmation: Yup.string()
-    //     .oneOf([Yup.ref('password'), null], 'Passwords must match'),
-    // }),
+    validationSchema: Yup.object({
+      name: Yup.string().min(1, 'Needs to be bigger than 2 characters').required("it  Can't be empty"),
+      email: Yup.string().email('It needs to be a valid email').required('Please Enter your email'),
+      password: Yup.string().min(1, 'Needs to be bigger than 2 characters').required('Please Enter your password')
+        .matches(
+          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+          'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character',
+        ),
+      passwordConfirmation: Yup.string()
+        .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+    }),
     onSubmit: values => {
-      // Handle image uploading
-
       const uploadTask = storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile);
-      // initiates the firebase side uploading
       uploadTask.on('state_changed',
         snapShot => {
-        // takes a snap shot of the process as it is happening
           console.log(snapShot);
         }, err => {
-        // catches the errors
           console.log(err);
         }, () => {
-        // gets the functions from storage refences the image storage in firebase by the children
-        // gets the download url then sets the image from firebase as the value for the imgUrl key:
           storage.ref('images').child(imageAsFile.name).getDownloadURL()
             .then(fireBaseUrl => {
-              // normal form
               const {
-                name, header, country, cep, state, city, hood, street, cel, cnpj, size, aboutUs, email, password,
+                name, header, country, cep,
+                state, city, hood, street,
+                cel, cnpj, size, aboutUs, email, password,
               } = values;
               const newObj = {
                 user: {
@@ -118,7 +114,7 @@ const FormC = () => {
   const handleImage = e => {
     e.persist();
     const image = e.target.files[0];
-    setImageAsFile(imageFile => (image));
+    setImageAsFile(() => (image));
   };
   return (
     <StyledForm onSubmit={formik.handleSubmit}>
@@ -164,15 +160,34 @@ const FormC = () => {
       </div>
 
       {addressArr.map(field => (
-        <Input label={field} key={field} id={field} onChange={formik.handleChange} labelValue={field} value={formik.values[field]} errors={formik.errors[field]} />
+        <Input
+          label={field}
+          key={field}
+          id={field}
+          onChange={formik.handleChange}
+          labelValue={field}
+          value={formik.values[field]}
+          errors={formik.errors[field]}
+        />
       ))}
 
       {compPersonalArr.map(field => (
-        <Input label={field} key={field} id={field} onChange={formik.handleChange} labelValue={field} value={formik.values[field]} errors={formik.errors[field]} />
+        <Input
+          label={field}
+          key={field}
+          id={field}
+          onChange={formik.handleChange}
+          labelValue={field}
+          value={formik.values[field]}
+          errors={formik.errors[field]}
+        />
       ))}
       <div className="image">
 
-        <label>Image Upload</label>
+        <label>
+          Image Upload
+
+        </label>
         <input type="file" name="image" onChange={handleImage} />
       </div>
       <button type="submit">Submit</button>

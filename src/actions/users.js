@@ -32,7 +32,7 @@ const loginUser = createAsyncThunk('user/login', async (args, thunkAPI) => {
   return data;
 });
 
-const signUpUserCompany = createAsyncThunk('user/signupcompany', async (args, thunkAPI) => {
+const signUpUserCompany = createAsyncThunk('user/signupcompany', async args => {
   const options = {
     method: 'POST',
     url: 'http://localhost:3000/company_details',
@@ -44,7 +44,7 @@ const signUpUserCompany = createAsyncThunk('user/signupcompany', async (args, th
   return data;
 });
 
-const checkLoggedUser = createAsyncThunk('user/checkloggeduser', async thunkAPI => {
+const checkLoggedUser = createAsyncThunk('user/checkloggeduser', async () => {
   const options = {
 
     method: 'GET',
@@ -57,7 +57,7 @@ const checkLoggedUser = createAsyncThunk('user/checkloggeduser', async thunkAPI 
   return data.data;
 });
 
-const addNewJob = createAsyncThunk('user/job/new', async (args, thunkAPI) => {
+const addNewJob = createAsyncThunk('user/job/new', async args => {
   const options = {
     method: 'POST',
     url: 'http://localhost:3000/job_offers',
@@ -91,7 +91,7 @@ const updateInterviewStatus = createAsyncThunk('user/company/interview', async a
   return data;
 });
 
-const signOut = createAsyncThunk('user/signout', async args => {
+const signOut = createAsyncThunk('user/signout', async () => {
   const options = {
     method: 'DELETE',
     url: 'http://localhost:3000/signout',
@@ -103,7 +103,7 @@ const signOut = createAsyncThunk('user/signout', async args => {
   return '';
 });
 
-const updateCompanyInfo = createAsyncThunk('user/company/update', async (args, thunksAPI) => {
+const updateCompanyInfo = createAsyncThunk('user/company/update', async args => {
   const options = {
     method: 'PATCH',
     url: 'http://localhost:3000/companyinfo',
@@ -116,5 +116,13 @@ const updateCompanyInfo = createAsyncThunk('user/company/update', async (args, t
 });
 
 export default {
-  signUpUser, checkLoggedUser, signUpUserCompany, loginUser, addNewJob, setUpInterviewCandidate, updateInterviewStatus, signOut, updateCompanyInfo,
+  signUpUser,
+  checkLoggedUser,
+  signUpUserCompany,
+  loginUser,
+  addNewJob,
+  setUpInterviewCandidate,
+  updateInterviewStatus,
+  signOut,
+  updateCompanyInfo,
 };

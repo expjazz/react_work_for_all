@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import usersActions from './users';
 
-const createCurriculum = createAsyncThunk('curriculum/create', async (args, thunkAPI) => {
+const createCurriculum = createAsyncThunk('curriculum/create', async args => {
   console.log(args);
   const options = {
     method: 'POST',

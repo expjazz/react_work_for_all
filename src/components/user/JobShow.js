@@ -5,9 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
 import selectJobCandidates from '../../selectors/selectCandidateJobOffer';
 import jobActions from '../../actions/job';
-import userActions from '../../actions/users';
 import PopUpInterview from '../interview/PopUpInterview';
-import JobLeftTable from '../job/JobLeftTable';
 import Table from '../common/Table';
 
 const StyledJobShow = styled.div.attrs({
@@ -31,7 +29,6 @@ const JobShow = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [dNone, setdNone] = useState(true);
   const { candidateApplyForJob } = jobActions;
-  const { setUpInterviewCandidate } = userActions;
   const dispatch = useDispatch();
   const { selectJobDetailsToCandidate } = selectJobCandidates;
   const { url } = useRouteMatch();
@@ -39,8 +36,7 @@ const JobShow = () => {
   const id = url.split('/')[list.length - 1];
   const { interviews } = useSelector(state => state.users);
   const job = useSelector(selectJobDetailsToCandidate(id));
-  console.log('jjob');
-  console.log(job);
+
   const handleShowPopup = () => {
     setdNone(false);
     setTimeout(() => setShowPopup(true), 300);
@@ -53,7 +49,6 @@ const JobShow = () => {
   };
   const returnButton = () => {
     const interview = interviews.find(interview => interview.job_offer_id === job.jobId);
-    console.log(job);
     switch (job.status) {
       case 'approved':
         if (!interview) return <button type="button" onClick={handleShowPopup}>Set up a interview</button>;
@@ -70,6 +65,7 @@ const JobShow = () => {
       default:
         return <button type="button" onClick={() => dispatch(candidateApplyForJob({ job_offer_id: job.jobId }))}>Apply for job</button>;
     }
+    return '';
   };
   const iteratorTable = [
     'position', 'requirement', 'companyName',
@@ -95,7 +91,14 @@ const JobShow = () => {
           {curriculum ? returnButton() : '' }
 
         </div>
-        <PopUpInterview show={showPopup} dNone={dNone} hide={hidePopUp} companyId={job.profileId} jobId={job.jobId} />
+        <PopUpInterview
+          show={showPopup}
+          dNone={dNone}
+          hide={hidePopUp}
+          companyId={job
+            .profileId}
+          jobId={job.jobId}
+        />
       </StyledJobShow>
       <div className="rigth col-start-6 mr-8 col-end-12">
         <Table classes="col-start-7 col-end-12" title={job.companyName} user={job} iterator={iteratorTable} />

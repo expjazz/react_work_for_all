@@ -42,7 +42,6 @@ const PopUpInterview = ({
   show, dNone, hide, companyId, jobId, infoToDispatch,
 }) => {
   const dispatch = useDispatch();
-  console.log(infoToDispatch);
   const { setUpInterviewCandidate, updateInterviewStatus } = userActions;
   const date = new Date();
   const today = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
@@ -56,11 +55,13 @@ const PopUpInterview = ({
       const str = `${values.date} / ${values.time}`;
 
       if (infoToDispatch.status) {
-        console.log('here');
         dispatch(updateInterviewStatus({ ...infoToDispatch, time: str }));
       } else {
-        dispatch(setUpInterviewCandidate({ company_id: companyId, job_offer_id: jobId, time: str }));
-        console.log('notHere');
+        dispatch(setUpInterviewCandidate({
+          company_id: companyId,
+          job_offer_id: jobId,
+          time: str,
+        }));
       }
     },
   });
@@ -111,4 +112,3 @@ PopUpInterview.propTypes = {
 PopUpInterview.defaultProps = {
   infoToDispatch: false,
 };
-// onClick={() => dispatch(setUpInterviewCandidate({ company_id: job.profileId, job_offer_id: job.jobId }))}

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import tw from 'tailwind.macro';
 import PropTypes from 'prop-types';
 import theme from '../theme';
 
@@ -12,7 +11,7 @@ const StyledLeft = styled.div.attrs({
   }
 
 `;
-export const Left = ({ message, color }) => (
+const Left = ({ message, color }) => (
   <StyledLeft style={{ backgroundColor: theme[color] }}>
     <div className="title pl-16 pt-16">
       <h3 className="text-3xl">

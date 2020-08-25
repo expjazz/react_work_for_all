@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import tw from 'tailwind.macro';
 import CompanyEditForm from './CompanyEditForm';
 
 const StyledCompanyEdit = styled.div.attrs({

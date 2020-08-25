@@ -47,7 +47,10 @@ export default function InnerJumbotrom() {
         <div className="content">
           <p>
 
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda amet doloremque nulla impedit qui incidunt unde sint aliquam perspiciatis optio et debitis, veniam officiis sit expedita accusantium consequuntur quos! Et.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+            Assumenda amet doloremque nulla impedit qui incidunt unde sint
+            aliquam perspiciatis optio et debitis,
+            veniam officiis sit expedita accusantium consequuntur quos! Et.
           </p>
         </div>
       </div>

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import tw from 'tailwind.macro';
 import Carousel, { consts } from 'react-elastic-carousel';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -66,7 +65,7 @@ outline: none;
 `;
 const CheckApplicants = () => {
   const { selectJobsFromCompany } = jobSelectors;
-  const arrow = ({ type, onClick, isEdge }) => {
+  const arrow = ({ type, onClick }) => {
     const pointer = type === consts.PREV ? (
       <StyledLeftArrow>
         <FontAwesomeIcon icon={faCaretLeft} />
@@ -96,7 +95,7 @@ const CheckApplicants = () => {
         <p className="text-gray-700">Choose a offer to apply</p>
 
       </div>
-      <Carousel renderPagination={({ pages, activePage, onClick }) => <></>} renderArrow={arrow}>
+      <Carousel renderPagination={() => <></>} renderArrow={arrow}>
         {allJobOffersFromUser.map((job, index) => (
           <JobCardCompany key={job.id} job={job} index={index} />
         ))}

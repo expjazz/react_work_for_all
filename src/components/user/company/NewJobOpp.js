@@ -54,7 +54,6 @@ const NewJobOpp = () => {
         },
       };
       dispatch(addNewJob(newObj));
-      console.log(newObj);
     },
   });
   const jobArr = ['requirement', 'salary', 'position'];
@@ -67,7 +66,16 @@ const NewJobOpp = () => {
           </h4>
         </div>
         {jobArr.map(field => (
-          <Input label={field} key={field} id={field} onChange={formik.handleChange} labelValue={field} value={formik.values[field]} errors={formik.errors[field]} />
+          <Input
+            label={field}
+            key={field}
+            id={field}
+            onChange={formik.handleChange}
+            labelValue={field}
+            value={formik
+              .values[field]}
+            errors={formik.errors[field]}
+          />
         ))}
         <button type="submit">Submit</button>
       </OppForm>

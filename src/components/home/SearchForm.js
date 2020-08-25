@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import tw from 'tailwind.macro';
 import { positionQuery } from '../../reducers/filterSlice';
-import searchSelectors from '../../selectors/selectJobsPerQuery';
 
 const StyledForm = styled.form.attrs({
   className: 'w-full text-center',

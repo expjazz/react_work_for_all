@@ -12,6 +12,7 @@ const selectJobsPerQuery = query => createSelector(
         companyImage: job.user.profile.image_url,
       };
     }
+    return '';
   }),
 );
 

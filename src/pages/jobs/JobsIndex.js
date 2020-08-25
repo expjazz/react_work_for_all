@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import tw from 'tailwind.macro';
 import { useSelector } from 'react-redux';
 import Carousel, { consts } from 'react-elastic-carousel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -76,7 +75,7 @@ const JobsIndex = () => {
   };
 
   const { selectAllJobs } = selectJobs;
-  const arrow = ({ type, onClick, isEdge }) => {
+  const arrow = ({ type, onClick }) => {
     const pointer = type === consts.PREV ? (
       <StyledLeftArrow>
         <FontAwesomeIcon icon={faCaretLeft} />
@@ -94,7 +93,6 @@ const JobsIndex = () => {
       </FinalButton>
     );
   };
-  const email = useSelector(state => state.users.currentUser.user.generalInfo.email);
   const allJobs = useSelector(selectAllJobs);
   if (allJobs.length === 0) return <h3 className="col-start-3 col-end-12 border-2 border-gray-300 rounded-lg text-center pt-12 text-3xl w-full">No job oportunity available</h3>;
   return (
@@ -110,7 +108,7 @@ const JobsIndex = () => {
       </div>
       <Carousel
         itemsToShow={rowNumber()}
-        renderPagination={({ pages, activePage, onClick }) => <></>}
+        renderPagination={() => <></>}
         renderArrow={arrow}
       >
         {allJobs.map((job, index) => (

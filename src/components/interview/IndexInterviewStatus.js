@@ -26,7 +26,7 @@ const IndexInterviewStatus = ({
 }) => {
   const dispatch = useDispatch();
   const profileType = useSelector(state => state.users.currentUser.user.generalInfo.profile_type);
-  const { setUpInterviewCandidate, updateInterviewStatus } = userActions;
+  const { updateInterviewStatus } = userActions;
   const [showPopup, setShowPopup] = useState(false);
   const [infoDispatch, setInfoDispatch] = useState(false);
   const [dNone, setdNone] = useState(true);
@@ -145,6 +145,7 @@ const IndexInterviewStatus = ({
         );
       }
     }
+    return '';
   };
 
   return (notimage ? (
@@ -166,7 +167,12 @@ const IndexInterviewStatus = ({
         {handleButtonLogic()}
       </div>
       <img src={image} alt="" className={`${classes.img} `} />
-      <PopUpInterview show={showPopup} dNone={dNone} hide={hidePopUp} infoToDispatch={infoDispatch} />
+      <PopUpInterview
+        show={showPopup}
+        dNone={dNone}
+        hide={hidePopUp}
+        infoToDispatch={infoDispatch}
+      />
 
     </StyledContainer>
   )

@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable import/prefer-default-export */
 import { createSlice } from '@reduxjs/toolkit';
 import curriculumActions from '../actions/curriculum';
@@ -12,10 +13,10 @@ export const curriculumSlice = createSlice({
   },
   reducers: {},
   extraReducers: {
-    [createCurriculum.pending]: (state, action) => { state.status = 'loading'; },
+    [createCurriculum.pending]: state => { state.status = 'loading'; },
     [createCurriculum.fulfilled]: (state, action) => ({ ...state, status: 'fullfiled', current: action.payload }),
 
-    [updateCurriculum.pending]: (state, action) => { state.status = 'loading'; },
+    [updateCurriculum.pending]: state => { state.status = 'loading'; },
     [updateCurriculum.fulfilled]: (state, action) => ({ ...state, status: 'fullfiled', current: action.payload }),
 
   },
