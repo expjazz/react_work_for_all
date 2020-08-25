@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
+import StyledGreenButton from '../common/GreenButton';
 
-const StyledContainer = styled.div.attrs({})`
+const StyledContainer = styled.div.attrs({
+})`
 position: relative;
 
 .text {
@@ -19,8 +21,23 @@ const IndexInterviewStatus = ({
   image, classes, notimage, infoOnHover,
 }) => (notimage ? (
   <StyledContainer>
-    <div className="text transition-all duration-700 ">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, numquam?
+    <div className="text transition-all duration-700 flex flex-col justify-between h-full">
+      <div className="content">
+
+        {Object.keys(infoOnHover).map(val => (
+          <p key={val}>
+            {' '}
+            {val}
+            :
+            {' '}
+            {infoOnHover[val]}
+            {' '}
+          </p>
+        ))}
+      </div>
+      <StyledGreenButton type="button">
+        See More
+      </StyledGreenButton>
     </div>
     <img src={image} alt="" className={`${classes.img} `} />
   </StyledContainer>
