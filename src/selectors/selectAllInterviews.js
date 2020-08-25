@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 const selectCandidateInterviews = createSelector(
   state => state.users.interviews,
   interviews => {
-    if (!interviews[0]) return [];
+    if (!interviews[0] || !interviews[1]) return [];
 
     return interviews.map(interview => ({
       id: interview.id,

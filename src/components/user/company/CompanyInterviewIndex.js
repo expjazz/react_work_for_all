@@ -23,6 +23,15 @@ const CompanyInterviewIndex = () => {
     str += '250px ';
   }
   const color = ['#97bf0f', '#ffb400', '#10bbb5', '#f72967'];
+  if (allInterviews.length === 0) {
+    return (
+      <h5 className="col-start-3
+  col-end-12 border-2 border-gray-300 rounded-lg text-center m-auto text-3xl grid grid-cols-3 gap-0 py-32"
+      >
+        You do not have any interviews yet
+      </h5>
+    );
+  }
   allInterviews.forEach(interview => {
     const random = Math.floor(Math.random() * color.length);
     newArr.push(interview);

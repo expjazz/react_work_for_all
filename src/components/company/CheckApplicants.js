@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretRight, faCaretLeft } from '@fortawesome/free-solid-svg-icons';
 import jobSelectors from '../../selectors/selectJobs';
 import JobCardCompany from './JobCardCompany';
+import JobCarousel from '../common/JobCarousel';
 
 const StyledCheckApplicants = styled.div.attrs({
   className: 'col-start-3 col-end-12 border-2 border-gray-300 rounded-lg mx-10 grid',
@@ -86,20 +87,7 @@ const CheckApplicants = () => {
   const allJobOffersFromUser = useSelector(selectJobsFromCompany);
   return (
     <StyledCheckApplicants>
-      <div className="top text-center pt-24">
-        <h3 className="text-3xl">
-
-          {' '}
-          Latest Job Offers
-        </h3>
-        <p className="text-gray-700">Choose a offer to apply</p>
-
-      </div>
-      <Carousel renderPagination={() => <></>} renderArrow={arrow}>
-        {allJobOffersFromUser.map((job, index) => (
-          <JobCardCompany key={job.id} job={job} index={index} />
-        ))}
-      </Carousel>
+      <JobCarousel allJobs={allJobOffersFromUser} contentIfNone="You do not have any job offer" button />
     </StyledCheckApplicants>
 
   );

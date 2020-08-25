@@ -9,7 +9,7 @@ import {
 import { useDispatch } from 'react-redux';
 
 import { useMediaQuery } from 'react-responsive';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import userActions from '../../actions/users';
@@ -33,7 +33,7 @@ const StyledSideNav = styled.div.attrs({
 const StyledToggler = styled.button.attrs({
   className: 'self-start fixed bg-red-800 z-10 toggler',
 })`
-  background: ${props => props.theme.yellow};
+  background: ${props => props.theme.green};
 
 `;
 
@@ -49,7 +49,7 @@ const SideNav = props => {
       { redirect ? <Redirect to="/" /> : ''}
       {isTablet ? (
         <StyledToggler type="button" className="self-start fixed bg-red-800 z-10 toggler" onClick={handleToggler}>
-          <FontAwesomeIcon icon={faCoffee} />
+          <FontAwesomeIcon icon={faBars} />
 
         </StyledToggler>
       ) : ''}

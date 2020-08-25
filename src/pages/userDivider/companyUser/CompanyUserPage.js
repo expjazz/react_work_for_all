@@ -45,6 +45,12 @@ const CompanyUserPage = ({ users: { currentUser, company } }) => {
       setColThree({ ...colThree, active: false });
       setColFour({ ...colFour, active: true });
       setColFive({ ...colFive, active: false });
+    } else if (url.includes('interviews/index')) {
+      setColTwo({ ...colTwo, active: false });
+      setColOne({ ...colOne, active: false });
+      setColThree({ ...colThree, active: false });
+      setColFour({ ...colFour, active: false });
+      setColFive({ ...colFive, active: true });
     } else {
       setColTwo({ ...colTwo, active: false });
       setColOne({ ...colOne, active: true });

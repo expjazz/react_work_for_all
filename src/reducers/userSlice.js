@@ -52,7 +52,7 @@ export const userSlice = createSlice({
 
     [updateInterviewStatus.pending]: state => { state.status = 'loading'; },
 
-    [updateInterviewStatus.fulfilled]: (state, action) => ({ ...state, status: 'fullfiled', interviews: [...state.interviews, action.payload] }),
+    [updateInterviewStatus.fulfilled]: (state, action) => ({ ...state, status: 'fullfiled', updated: [action.payload] }),
 
     [setUpInterviewCandidate.pending]: state => { state.status = 'loading'; },
 
