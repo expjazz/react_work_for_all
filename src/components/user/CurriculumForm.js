@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
@@ -8,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Input from '../common/Input';
 import PastJobs from './PastJobs';
 import curriculumActions from '../../actions/curriculum';
+import StyledGreenButton from '../common/GreenButton';
 
 const StyledCurriculumForm = styled.form.attrs({
   className: 'bg-white rounded px-8 pt-6 pb-8 mb-4 w-full',
@@ -23,17 +25,13 @@ const StyledCurriculumForm = styled.form.attrs({
     }
   }
 
-  button {
-    ${tw`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
-  }
 `;
 
 const StyledPastJobs = styled.div`
-
-      background: '';
-
+  ${tw`py-8`}
 `;
 const CurriculumForm = () => {
+  console.log('here');
   const { personalArr, addressArr } = useSelector(state => state.users.infoArrays);
   const [firstRender, setFirstRender] = useState(false);
 
@@ -85,7 +83,6 @@ const CurriculumForm = () => {
         tempRefs.push(newRef);
         tempJobs.push(job);
       });
-      console.log(tempJobs);
       setFirstRender(true);
       setAllRefs([...allRefs, ...tempRefs]);
       setPastJobsState([...pastJobsState, ...tempJobs]);
@@ -112,9 +109,10 @@ const CurriculumForm = () => {
 
     }),
     onSubmit: values => {
-      values.jobs = pastJobsState;
+      values[jobs] = pastJobsState;
       const {
-        about_me, country, cep, state, city, hood, street, cel, children, married, cpf, race, nationality, jobs,
+        about_me, country, cep, state,
+        city, hood, street, cel, children, married, cpf, race, nationality, jobs,
       } = values;
       const newCurr = {
         curriculum: {
@@ -143,7 +141,11 @@ const CurriculumForm = () => {
       if (!curriculum) {
         dispatch(createCurriculum(newCurr));
       } else {
-        dispatch(updateCurriculum({ ...newCurr, curriculum_id: curriculum.personal.curriculum_id }));
+        dispatch(updateCurriculum({
+          ...newCurr,
+          curriculum_id: curriculum
+            .personal.curriculum_id,
+        }));
       }
     },
   });
@@ -160,16 +162,6 @@ const CurriculumForm = () => {
         setPastJobsState([...copy]);
       }
     });
-    // if (e.target.name === 'start') {
-    //   const newIn = { ...inputValues, start: e.target.value };
-    //   setInputValues(newIn);
-    // } else if (e.target.name === 'end') {
-    //   const newIn = { ...inputValues, end: e.target.value };
-    //   setInputValues(newIn);
-    // } else {
-    //   const newIn = { ...inputValues, name: e.target.value };
-    //   setInputValues(newIn);
-    // }
   };
 
   return (
@@ -182,8 +174,18 @@ const CurriculumForm = () => {
         </h4>
       </div>
       <div className="mb-4">
-        <label htmlFor="about_me">About Me</label>
-        <textarea type="text-area" id="about_me" rows="4" cols="50" onChange={formik.handleChange} value={formik.values.about_me} />
+        <label htmlFor="about_me">
+          About Me
+          <textarea
+            type="text-area"
+            id="about_me"
+            rows="4"
+            cols="50"
+            onChange={formik
+              .handleChange}
+            value={formik.values.about_me}
+          />
+        </label>
         {formik.errors.name ? (
           <div>
             {formik.errors.name}
@@ -192,14 +194,35 @@ const CurriculumForm = () => {
       </div>
 
       {personalArr.map(field => (
-        <Input label={field} key={field} id={field} onChange={formik.handleChange} labelValue={field} value={formik.values[field]} errors={formik.errors[field]} />
+        <Input
+          label={field}
+          key={field}
+          id={field}
+          onChange={formik
+            .handleChange}
+          labelValue={field}
+          value={formik.values[field]}
+          errors={formik.errors[field]}
+        />
 
       ))}
+      <StyledGreenButton type="button" onClick={addNewJob}>
+        {' '}
+        Add a new past job
 
-      <button type="button" onClick={addNewJob}> Add a new past job</button>
+      </StyledGreenButton>
+
       <StyledPastJobs>
         <h3>Old Jobs</h3>
-        {pastJobsState.map((pJ, index) => <PastJobs onChange={addJobChange} ref={allRefs[index]} key={`input${pJ.name}`} inputs={pJ} />)}
+        {pastJobsState
+          .map((pJ, index) => (
+            <PastJobs
+              onChange={addJobChange}
+              ref={allRefs[index]}
+              key={index}
+              inputs={pJ}
+            />
+          ))}
       </StyledPastJobs>
 
       <div className="title">
@@ -209,10 +232,21 @@ const CurriculumForm = () => {
       </div>
 
       {addressArr.map(field => (
-        <Input label={field} key={field} id={field} onChange={formik.handleChange} labelValue={field} value={formik.values[field]} errors={formik.errors[field]} />
+        <Input
+          label={field}
+          key={field}
+          id={field}
+          onChange={formik
+            .handleChange}
+          labelValue={field}
+          value={formik.values[field]}
+          errors={formik.errors[field]}
+        />
 
       ))}
-      <button type="submit">Submit</button>
+      <StyledGreenButton type="submit">
+        Submit
+      </StyledGreenButton>
 
     </StyledCurriculumForm>
   );

@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import tw from 'tailwind.macro';
-import LeftC from '../components/companysignup/LeftC';
 import RightC from '../components/companysignup/RightC';
+import Left from '../components/common/Left';
 
 const StyledCompanySignUp = styled.div.attrs({
   className: 'w-full grid grid-flow-col grid-cols-2 h-screen',
@@ -12,7 +11,7 @@ const CompanySignUp = () => {
   const a = 12;
   return (
     <StyledCompanySignUp>
-      <LeftC />
+      <Left color="blue" message="Find the bests employees on the market" />
       <RightC />
     </StyledCompanySignUp>
   );
