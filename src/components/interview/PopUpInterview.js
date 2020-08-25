@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import userActions from '../../actions/users';
 
 const StyledPopUpInterview = styled.div.attrs({
-  className: 'absolute transition-all duration-700 ',
+  className: 'absolute transition-all duration-700 z-10',
 })`
   height: 20rem;
   width: 40rem;
@@ -38,10 +39,10 @@ const StyledPopUpInterview = styled.div.attrs({
 
 `;
 const PopUpInterview = ({
-  show, dNone, hide, companyId, jobId,
+  show, dNone, hide, companyId, jobId, infoToDispatch,
 }) => {
   const dispatch = useDispatch();
-  const { setUpInterviewCandidate } = userActions;
+  const { setUpInterviewCandidate, updateInterviewStatus } = userActions;
   const date = new Date();
   const today = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 
@@ -52,8 +53,13 @@ const PopUpInterview = ({
     },
     onSubmit: values => {
       const str = `${values.date} / ${values.time}`;
-
-      dispatch(setUpInterviewCandidate({ company_id: companyId, job_offer_id: jobId, time: str }));
+      if (infoToDispatch) {
+        console.log('here');
+        dispatch(updateInterviewStatus({ ...infoToDispatch, time: str }));
+      } else {
+        dispatch(setUpInterviewCandidate({ company_id: companyId, job_offer_id: jobId, time: str }));
+        console.log('notHere');
+      }
     },
   });
   return (
@@ -87,4 +93,20 @@ const PopUpInterview = ({
 
 export default PopUpInterview;
 
+PopUpInterview.propTypes = {
+  show: PropTypes.bool.isRequired,
+  dNone: PropTypes.bool.isRequired,
+  hide: PropTypes.bool.isRequired,
+  companyId: PropTypes.number,
+  jobId: PropTypes.number,
+  infoToDispatch: PropTypes.oneOfType([
+    PropTypes.objectOf(String), PropTypes.bool,
+  ]),
+};
+
+PopUpInterview.defaultProps = {
+  companyId: -5,
+  jobId: -4,
+  infoToDispatch: false,
+};
 // onClick={() => dispatch(setUpInterviewCandidate({ company_id: job.profileId, job_offer_id: job.jobId }))}
