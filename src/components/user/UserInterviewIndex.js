@@ -39,6 +39,9 @@ const UserInterviewIndex = () => {
           candidate: interview.candidateName,
           position: interview.jobOfferPosition,
           time: interview.time,
+          companyId: interview.companyId,
+          candidateId: interview.candidateId,
+          jobOfferId: interview.jobOfferId,
         } : false;
         return <IndexInterviewStatus key={count} infoOnHover={infoOnHover} image={typeof interview === 'object' ? interview.candidateImage : interview} notimage={index % 2 === 0} classes={{ cont: 'w-full', img: 'w-full h-full' }} />;
       })}
