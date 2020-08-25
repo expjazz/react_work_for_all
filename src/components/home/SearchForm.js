@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
+import { useSelector, useDispatch } from 'react-redux';
 import tw from 'tailwind.macro';
+import { positionQuery } from '../../reducers/filterSlice';
+import searchSelectors from '../../selectors/selectJobsPerQuery';
 
 const StyledForm = styled.form.attrs({
-  className: 'w-full',
+  className: 'w-full text-center',
 })`
   input {
     ${tw`outline-none w-full rounded-sm h-10 text-black`}
@@ -12,12 +15,13 @@ const StyledForm = styled.form.attrs({
 `;
 
 export default function SearchForm() {
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       jobField: '',
     },
     onSubmit: values => {
-      console.log(values);
+      dispatch(positionQuery(values.jobField));
     },
   });
   return (

@@ -5,7 +5,7 @@ import tw from 'tailwind.macro';
 import { useMediaQuery } from 'react-responsive';
 
 const StyledCont = styled.div.attrs({
-  className: 'w-full grid justify-center grid-flow-col',
+  className: 'w-full grid justify-around grid-flow-col',
 })`
   a {
     color: red;
