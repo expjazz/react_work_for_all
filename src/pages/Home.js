@@ -4,7 +4,7 @@ import Jumbotrom from '../components/home/Jumbotron';
 import Navbar from '../components/Navbar';
 
 const StyledContainer = styled.div.attrs({
-  className: 'w-100',
+  className: 'w-full',
 })``;
 
 export default function Home() {

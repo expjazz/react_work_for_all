@@ -35,6 +35,7 @@ const StyledPastJobs = styled.div`
 `;
 const CurriculumForm = () => {
   const { personalArr, addressArr } = useSelector(state => state.users.infoArrays);
+  const [firstRender, setFirstRender] = useState(false);
 
   const curriculum = useSelector(state => state.users.curriculum);
 
@@ -76,7 +77,7 @@ const CurriculumForm = () => {
       header, address, personal, pastJobs,
     } = curriculum;
     formValues = generateInputVals([header, address, personal]);
-    if (pastJobsState.length === 0) {
+    if (pastJobsState.length === 0 && !firstRender) {
       const tempJobs = [];
       const tempRefs = [];
       pastJobs.forEach(job => {
@@ -85,6 +86,7 @@ const CurriculumForm = () => {
         tempJobs.push(job);
       });
       console.log(tempJobs);
+      setFirstRender(true);
       setAllRefs([...allRefs, ...tempRefs]);
       setPastJobsState([...pastJobsState, ...tempJobs]);
     }

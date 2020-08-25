@@ -7,7 +7,7 @@ import SearchForm from './SearchForm';
 import SignButtons from './SignButtons';
 
 const StyledInner = styled.div.attrs({
-  className: 'w-100 grid h-full',
+  className: ' grid h-full sm:w-full md:w-100',
 })`
   .top {
     ${tw`flex justify-between`}
@@ -35,7 +35,12 @@ export default function InnerJumbotrom() {
         <FontAwesomeIcon icon={faCoffee} />
         <FontAwesomeIcon icon={faCoffee} />
       </div>
-      <div className="center">
+      <div className="center md:hidden">
+        <div className="title sm:text-3xl text-2xl">
+          Search for a job now
+        </div>
+      </div>
+      <div className="center hidden md:block">
         <div className="title">
           <h3>Book A Job Interview with The best Companies</h3>
         </div>

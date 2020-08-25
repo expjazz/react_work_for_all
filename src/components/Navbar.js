@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import userSelect from '../selectors/selectUserCandidate';
 
 const StyledNav = styled.nav.attrs({
-  className: 'w-100 px-64 flex justify-between',
+  className: 'w-100 lg:px-64 md:px-42 sm:px-16 px-8 flex justify-between',
 })`
   background: ${props => props.theme.white};
 `;
@@ -16,14 +16,9 @@ export default function Navbar() {
   return (
     <StyledNav>
       <div className="right">
-        <Link to="/">
-          About Us
-        </Link>
-        <Link to="/users/user">
-          Candidate
-        </Link>
+
         <Link to="/companysignup">
-          Company
+          Company Sign Up
         </Link>
       </div>
 
