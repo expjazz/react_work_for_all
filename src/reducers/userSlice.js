@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable import/prefer-default-export */
 import { createSlice } from '@reduxjs/toolkit';
-import usersActions from '../actions/users';
 import curriculumActions from '../actions/curriculum';
+import usersActions from '../actions/users';
 
 const { createCurriculum } = curriculumActions;
 const defaultState = {
@@ -35,7 +35,28 @@ export const userSlice = createSlice({
     },
   },
   reducers: {
-
+    usersUpdateComp: {
+      reducer(state, action) {
+        let job = '';
+        const ind = state.company.jobOffers.findIndex(x => {
+          job = x.candidates.find(y => y.id === action.payload.candidate_id);
+          return job && x.id === action.payload.job_offer_id;
+        });
+        console.log(ind);
+        console.log(job);
+        state.company.jobOffers[ind].approved.push(job);
+      },
+    },
+    updateInterviewStatusSync(state, action) {
+      console.log('object');
+      console.log(state);
+      const { interviews } = state;
+      const index = interviews.findIndex(x => x
+        .candidate_id === action.payload.candidate_id && x
+        .company_id === action.payload.company_id && x
+        .job_offer_id === action.payload.job_offer_id);
+      interviews[index] = action.payload;
+    },
   },
   extraReducers: {
     [addNewJob.pending]: state => { state.status = 'loading'; },
@@ -132,6 +153,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { signUp } = userSlice.actions;
+export const { updateInterviewStatusSync, usersUpdateComp } = userSlice.actions;
 
 export default userSlice.reducer;

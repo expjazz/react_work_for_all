@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import userActions from '../../actions/users';
+import { updateInterviewStatusSync } from '../../reducers/userSlice';
 
 const StyledPopUpInterview = styled.div.attrs({
   className: 'absolute transition-all duration-700 z-10',
@@ -56,6 +57,7 @@ const PopUpInterview = ({
 
       if (infoToDispatch.status) {
         dispatch(updateInterviewStatus({ ...infoToDispatch, time: str }));
+        dispatch(updateInterviewStatusSync({ ...infoToDispatch, time: str }));
       } else {
         dispatch(setUpInterviewCandidate({
           company_id: companyId,
