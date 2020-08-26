@@ -20,7 +20,10 @@ As an candidate, you can apply to a new job. If the company accepts you, you hav
 
 #### Main Menu
 
+##### Front End
 - ![Main page](./screenshot.png)
+
+##### Back End Models
 - ![models](erd.png)
 
 ### FEATURES
