@@ -8,6 +8,8 @@ As a company, you can post job offers, and then after the user respond to it, yo
 
 As an candidate, you can apply to a new job. If the company accepts you, you have the option to schedule a interview. If they accept your time good. If not, then they will suggest a new time, and you can either accept or suggest a new one, until is good for boot pars.
 
+#### Sometimes you might need to refresh to get a updatee on the information. I will work on this as I go foward with action cable on the backend.
+
 ### Next Steps
 
 - I will do action cable on rails, to allow realtime update as soon as it hits the database.
