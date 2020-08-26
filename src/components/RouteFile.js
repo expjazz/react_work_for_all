@@ -11,9 +11,6 @@ export default function RouteFile() {
     <>
       <Switch>
 
-        <Route exact path="/">
-          <Home />
-        </Route>
         <Route exact path="/signup">
           <SignUp />
         </Route>
@@ -25,6 +22,9 @@ export default function RouteFile() {
         </Route>
         <Route exact path="/users/user">
           <UserDivider />
+        </Route>
+        <Route path="/">
+          <Home />
         </Route>
 
       </Switch>
