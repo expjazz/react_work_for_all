@@ -7,13 +7,15 @@ const Input = props => {
   } = props;
   return (
     <div className="mb-4">
-      <label htmlFor={label}>{labelValue}</label>
-      <input type="text" id={id} onChange={onChange} value={value} />
-      {errors ? (
-        <div>
-          {errors}
-        </div>
-      ) : ''}
+      <label htmlFor={label}>
+        {labelValue}
+        <input type="text" id={id} onChange={onChange} value={value} />
+        {errors ? (
+          <div>
+            {errors}
+          </div>
+        ) : ''}
+      </label>
     </div>
   );
 };
@@ -21,9 +23,14 @@ const Input = props => {
 export default Input;
 Input.propTypes = {
   label: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
-  labelValues: PropTypes.string.isRequired,
-  errors: PropTypes.string.isRequired,
+  labelValue: PropTypes.string,
+  errors: PropTypes.string,
+};
+
+Input.defaultProps = {
+  labelValue: '',
+  errors: null,
 };

@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
@@ -114,6 +115,7 @@ const FormC = () => {
               setRedirect(true);
             });
         });
+      return '';
     },
   });
   const handleImage = e => {

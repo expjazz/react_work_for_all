@@ -35,7 +35,6 @@ const JobCard = ({
   const {
     position, requirement, salary, companyName, companyImage, candidates,
   } = job;
-  console.log(job);
   return (
     <StyledJobCard>
 
@@ -121,9 +120,5 @@ JobCard.propTypes = {
   job: PropTypes.objectOf(String).isRequired,
   index: PropTypes.number.isRequired,
   button: PropTypes.bool.isRequired,
-  infoCandidates: PropTypes.bool,
-};
-
-JobCard.defaultProps = {
-  // infoCandidates: false,
+  infoCandidates: PropTypes.bool.isRequired,
 };

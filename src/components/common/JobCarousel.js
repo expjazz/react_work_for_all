@@ -15,7 +15,8 @@ const StyledShowJob = styled.div.attrs({
 const JobCarousel = ({
   allJobs, contentIfNone, button, infoCandidates,
 }) => {
-  console.log(allJobs);
+  let count = Math.floor(Math.random() * 10000);
+  console.log(count);
   const { StyledLeftArrow, StyledRightArrow, FinalButton } = arrows;
   const isTablet = useMediaQuery({ query: '(min-width: 750px' });
   const isLarge = useMediaQuery({ query: '(min-width: 980px' });
@@ -64,9 +65,18 @@ const JobCarousel = ({
         renderPagination={() => <></>}
         renderArrow={arrow}
       >
-        {allJobs.map((job, index) => (job ? (
-          <JobCard key={job.requirement} job={job} index={index} infoCandidates={infoCandidates} button={button} />
-        ) : ''))}
+        {allJobs.map((job, index) => {
+          count += 1;
+          return (job ? (
+            <JobCard
+              key={count}
+              job={job}
+              index={index}
+              infoCandidates={infoCandidates}
+              button={button}
+            />
+          ) : '');
+        })}
       </Carousel>
     </StyledShowJob>
   );
@@ -79,8 +89,4 @@ JobCarousel.propTypes = {
   contentIfNone: PropTypes.string.isRequired,
   button: PropTypes.bool.isRequired,
   infoCandidates: PropTypes.bool.isRequired,
-};
-
-JobCarousel.defaultProps = {
-  // infoCandidates: false,
 };

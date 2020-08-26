@@ -107,6 +107,11 @@ export const userSlice = createSlice({
     [loginUser.rejected]: state => { state.error = 'Error with your info'; state.status = 'wrong'; },
 
     [loginUser.fulfilled]: (state, action) => {
+      if (action.payload.message) {
+        return ({
+          ...state, status: 'wrong', error: action.payload.message,
+        });
+      }
       if (action.payload.companyInfo) {
         return ({
           ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, company: action.payload.companyInfo, interviews: action.payload.interviews,
@@ -114,10 +119,6 @@ export const userSlice = createSlice({
       } if (action.payload.curriculum) {
         return ({
           ...state, status: 'fullfiled', currentUser: { user: action.payload.user }, curriculum: action.payload.curriculum, interviews: action.payload.interviews,
-        });
-      } if (action.payload.message === 'no user logged in') {
-        return ({
-          ...state, status: 'rejected', currentUser: action.payload,
         });
       }
       return ({

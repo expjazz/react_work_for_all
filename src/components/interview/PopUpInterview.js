@@ -102,8 +102,10 @@ PopUpInterview.propTypes = {
   hide: PropTypes.oneOfType([
     PropTypes.func, PropTypes.bool,
   ]).isRequired,
-  companyId: PropTypes.number.isRequired,
-  jobId: PropTypes.number.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  companyId: PropTypes.number,
+  // eslint-disable-next-line react/require-default-props
+  jobId: PropTypes.number,
   infoToDispatch: PropTypes.oneOfType([
     PropTypes.objectOf(String), PropTypes.bool,
   ]),

@@ -16,13 +16,18 @@ const CompanyInterviewIndex = () => {
   const { selectCandidateInterviews } = interviewSelectors;
   const allInterviews = useSelector(selectCandidateInterviews);
   const newArr = [];
+  const color = ['#97bf0f', '#ffb400', '#10bbb5', '#f72967'];
+  allInterviews.forEach(interview => {
+    const random = Math.floor(Math.random() * color.length);
+    newArr.push(interview);
+    newArr.push(color[random]);
+  });
   let numberRows = newArr.length / 3;
   let str = '';
   while (numberRows > 0) {
     numberRows -= 1;
     str += '250px ';
   }
-  const color = ['#97bf0f', '#ffb400', '#10bbb5', '#f72967'];
   if (allInterviews.length === 0) {
     return (
       <h5 className="col-start-3
@@ -32,11 +37,7 @@ const CompanyInterviewIndex = () => {
       </h5>
     );
   }
-  allInterviews.forEach(interview => {
-    const random = Math.floor(Math.random() * color.length);
-    newArr.push(interview);
-    newArr.push(color[random]);
-  });
+
   let count = 0;
   return (
     <StyledCompanyInterviewIndex style={{ gridTemplateRows: str }}>

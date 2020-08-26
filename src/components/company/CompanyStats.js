@@ -36,7 +36,6 @@ span {
 const CompanyStats = () => {
   const allJobOffers = useSelector(state => state.users.company.jobOffers);
   if (!allJobOffers) return '';
-  const jobOffersNum = allJobOffers.length;
   let allCandidates = [];
   let allApproved = [];
   allJobOffers.forEach(vals => {
