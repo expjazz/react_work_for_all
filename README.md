@@ -6,9 +6,8 @@ This is a full-fledge application that allows companies to post jobs, and users 
 
 #### Main Menu
 
-- ![Main page](./screenshotOne.png)
--![President page](./screenshotTwo.png)
-
+- ![Main page](./screenshot.png)
+- ![models](erd.png)
 
 ### FEATURES
 
@@ -16,7 +15,8 @@ It has RubyOnRails on the backend and React on the front end. It features a lot 
 
 ### Live Demo
 
-- [Here](https://leadersofworlddashboard.netlify.app/)
+- [Here](https://workforall.netlify.app/)
+- [Backend](https://github.com/expjazz/final_capstone_backend)
 
 ### BUILT WITH
 
@@ -25,6 +25,7 @@ It has RubyOnRails on the backend and React on the front end. It features a lot 
 - RubyOnRails for the Backend
 - Tailwind CSS
 - Javascript
+- JWT token
 
 
 ### Getting Started
