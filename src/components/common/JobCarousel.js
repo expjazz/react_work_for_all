@@ -16,7 +16,6 @@ const JobCarousel = ({
   allJobs, contentIfNone, button, infoCandidates,
 }) => {
   let count = Math.floor(Math.random() * 10000);
-  console.log(count);
   const { StyledLeftArrow, StyledRightArrow, FinalButton } = arrows;
   const isTablet = useMediaQuery({ query: '(min-width: 750px' });
   const isLarge = useMediaQuery({ query: '(min-width: 980px' });
