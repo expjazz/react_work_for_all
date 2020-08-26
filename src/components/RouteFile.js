@@ -14,16 +14,16 @@ export default function RouteFile() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/signup">
+        <Route exact path="/signup">
           <SignUp />
         </Route>
-        <Route path="/login">
+        <Route exact path="/login">
           <Login />
         </Route>
-        <Route path="/companysignup">
+        <Route exact path="/companysignup">
           <CompanySignUp />
         </Route>
-        <Route path="/users/user">
+        <Route exact path="/users/user">
           <UserDivider />
         </Route>
 
