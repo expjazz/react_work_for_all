@@ -5,6 +5,7 @@ import SignUp from '../pages/SignUp';
 import UserDivider from '../pages/userDivider/UserDivider';
 import CompanySignUp from '../pages/CompanySignUp';
 import Login from '../pages/Login';
+import Error from '../pages/Error';
 
 export default function RouteFile() {
   return (
@@ -26,7 +27,9 @@ export default function RouteFile() {
         <Route path="/users/user">
           <UserDivider />
         </Route>
-
+        <Route>
+          <Error />
+        </Route>
       </Switch>
     </>
   );
