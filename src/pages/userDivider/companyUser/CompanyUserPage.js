@@ -18,7 +18,7 @@ import Candidates from '../../../components/company/jobOffer/Candidates';
 import CompanyInterviewIndex from '../../../components/user/company/CompanyInterviewIndex';
 
 const StyledCompanyUserPage = styled.div.attrs({
-  className: 'grid',
+  className: 'sm:grid flex flex-col',
 
 })``;
 const CompanyUserPage = ({ users: { currentUser, company } }) => {

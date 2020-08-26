@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import CandidateJobStats from './CandidateJobStats';
 
 const StyledUserInfo = styled.div.attrs({
-  className: 'content md:col-start-3 md:col-end-9 col-start-1 col-end-12 mx-8 md:mx-0 pt-10 flex justify-center flex-col text-center bg-gray-200 rounded-lg border shadow-2xl mb-8 mt-8 w-11/12 transition-all duration-200 ease-linear',
+  className: 'content md:col-start-3 md:col-end-9 col-start-1 col-end-12 mx-8 md:mx-0 md:pt-10 flex justify-center flex-col text-center bg-gray-200 rounded-lg border shadow-2xl mb-8 mt-8 w-11/12 transition-all duration-200 ease-linear',
 })`
 justify-self: center;
 overflow-y: hidden;

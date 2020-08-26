@@ -6,7 +6,7 @@ import tw from 'tailwind.macro';
 import jobSelectors from '../../../selectors/selectCandidateJobOffer';
 import jobActions from '../../../actions/job';
 import Table from '../../common/Table';
-import { updateJobSync, usersUpdateComp } from '../../../reducers/userSlice';
+import { usersUpdateComp } from '../../../reducers/userSlice';
 
 const StyledCandidate = styled.div.attrs({
   className: 'content col-start-2 col-end-6 pt-48',
@@ -41,9 +41,8 @@ const Candidates = () => {
       job_offer_id: user.jobId,
 
     };
-    console.log(newObj);
     dispatch(usersUpdateComp(newObj));
-    // dispatch(acceptCandidate(newObj));
+    dispatch(acceptCandidate(newObj));
   };
   const iteratorTable = [
     ...Object.keys(user.address), ...Object.keys(user.personal), 'email',

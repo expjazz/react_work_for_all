@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
 import userActions from '../../actions/users';
 
 const StyledSideNav = styled.div.attrs({
-  className: ' pt-48 min-h-screen content-center md:block h-full border-r-2 border-gray-100 transition-all duration-700',
+  className: ' md:pt-48 pt-8 md:min-h-screen content-center md:block h-full border-r-2 border-gray-100 transition-all duration-700',
 })`
   .linkList {
     ${tw``}
@@ -48,7 +48,7 @@ const SideNav = props => {
     <>
       { redirect ? <Redirect to="/" /> : ''}
       {isTablet ? (
-        <StyledToggler type="button" className="self-start fixed bg-red-800 z-10 toggler" onClick={handleToggler}>
+        <StyledToggler type="button" className="self-start fixed bg-red-800 text-3xl z-10 toggler" onClick={handleToggler}>
           <FontAwesomeIcon icon={faBars} />
 
         </StyledToggler>

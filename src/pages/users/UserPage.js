@@ -18,7 +18,7 @@ import JobCarousel from '../../components/common/JobCarousel';
 import selectJobs from '../../selectors/selectJobs';
 
 const StyledUserPage = styled.div.attrs({
-  className: 'grid',
+  className: 'sm:grid flex flex-col',
 })``;
 const UserPage = ({ users: { currentUser } }) => {
   const location = useLocation();
