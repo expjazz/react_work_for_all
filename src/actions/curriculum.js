@@ -5,7 +5,7 @@ import usersActions from './users';
 const createCurriculum = createAsyncThunk('curriculum/create', async args => {
   const options = {
     method: 'POST',
-    url: 'http://localhost:3000/curriculums',
+    url: 'https://whispering-stream-10328.herokuapp.com/curriculums',
     withCredentials: true,
     data: args,
   };
@@ -19,7 +19,7 @@ const updateCurriculum = createAsyncThunk('curriculum/update', async (args, thun
 
   const options = {
     method: 'PATCH',
-    url: 'http://localhost:3000/curriculums',
+    url: 'https://whispering-stream-10328.herokuapp.com/curriculums',
     withCredentials: true,
     data: args,
   };
