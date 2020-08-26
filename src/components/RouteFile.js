@@ -11,20 +11,20 @@ export default function RouteFile() {
     <>
       <Switch>
 
-        <Route exact path="/signup">
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/signup">
           <SignUp />
         </Route>
-        <Route exact path="/login">
+        <Route path="/login">
           <Login />
         </Route>
-        <Route exact path="/companysignup">
+        <Route path="/companysignup">
           <CompanySignUp />
         </Route>
-        <Route exact path="/users/user">
+        <Route path="/users/user">
           <UserDivider />
-        </Route>
-        <Route path="/">
-          <Home />
         </Route>
 
       </Switch>
