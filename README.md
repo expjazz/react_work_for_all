@@ -4,9 +4,9 @@ This is a full-fledge application that allows companies to post jobs, and users 
 
 ## How to use it
 
-As a company, you can post job offers, and then after the user respond to it, you can accept the application. If you do, then the user needs to suggest a time to do a interview. Afterwards, you can either accept the time the user proposed, or propose a new one.
+As a company, you can post job offers, and then after the user responds to it, you can accept the application. If you do, then the user needs to suggest a time to do an interview. Afterward, you can either accept the time the user proposed, or propose a new one.
 
-As an candidate, you can apply to a new job. If the company accepts you, you have the option to schedule a interview. If they accept your time good. If not, then they will suggest a new time, and you can either accept or suggest a new one, until is good for boot pars.
+As a candidate, you can apply for a new job. If the company accepts you, you have the option to schedule an interview. If they accept your time good. If not, then they will suggest a new time, and you can either accept or suggest a new one until is good for boot pars.
 
 #### Sometimes you might need to refresh to get a updatee on the information. I will work on this as I go foward with action cable on the backend.
 
